@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 
 class Placeholder {
 
-	@Test
-	void placeholder() {
-
-	}
-
+    @Test
+    void placeholder() {
+    }
 }
