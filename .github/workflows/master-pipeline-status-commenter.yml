@@ -31,10 +31,10 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
   checks: read
   statuses: read
-  pull-requests: read
   issues: write
 
 concurrency:
