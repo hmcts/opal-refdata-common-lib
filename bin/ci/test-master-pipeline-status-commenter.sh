@@ -229,7 +229,7 @@ if [[ "\$1 \$2" == "api graphql" ]]; then
   cat "$rollup"
   exit 0
 fi
-if [[ "\$*" == "api repos/hmcts/opal-file-handler-service/pulls --paginate -f state=open -f base=master --jq .[].number" ]]; then
+if [[ "\$*" == "api repos/hmcts/opal-file-handler-service/pulls --method GET --paginate -f state=open -f base=master --jq .[].number" ]]; then
   printf "11\n12\n"
   exit 0
 fi

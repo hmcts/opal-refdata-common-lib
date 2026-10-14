@@ -122,7 +122,7 @@ fetch_master_rollup() {
 
 open_pr_numbers() {
   local repository="$1"
-  gh api "repos/${repository}/pulls" --paginate -f state=open -f base="$BASE_BRANCH" --jq '.[].number'
+  gh api "repos/${repository}/pulls" --method GET --paginate -f state=open -f base="$BASE_BRANCH" --jq '.[].number'
 }
 
 issue_comments() {
