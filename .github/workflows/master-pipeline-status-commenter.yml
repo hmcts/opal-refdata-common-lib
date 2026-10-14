@@ -35,7 +35,6 @@ permissions:
   pull-requests: write
   checks: read
   statuses: read
-  issues: write
 
 concurrency:
   group: master-pipeline-status-commenter
