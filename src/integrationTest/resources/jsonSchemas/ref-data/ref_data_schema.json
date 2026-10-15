@@ -7,7 +7,7 @@
       "type": "object",
       "required": ["data_product"],
       "properties": {
-        "data_product": {"const": "ref_data"}
+        "data_product": {"type": "string", "minLength": 1}
       }
     },
     "payload": {

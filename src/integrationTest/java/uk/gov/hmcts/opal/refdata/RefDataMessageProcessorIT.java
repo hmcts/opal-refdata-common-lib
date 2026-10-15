@@ -1,6 +1,7 @@
 package uk.gov.hmcts.opal.refdata;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +19,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import uk.gov.hmcts.opal.refdata.fixture.RefData;
 import uk.gov.hmcts.opal.refdata.fixture.RefDataRepository;
 import uk.gov.hmcts.opal.refdata.fixture.RefDataTestHandler;
+import uk.gov.hmcts.opal.refdata.framework.JsonSchemaValidationException;
 import uk.gov.hmcts.opal.refdata.framework.MessageProcessor;
 import uk.gov.hmcts.opal.refdata.framework.RefDataHandlerRegistry;
 import uk.gov.hmcts.opal.refdata.framework.RefDataMessageProcessor;
@@ -177,6 +179,68 @@ class RefDataMessageProcessorIT {
         assertThat(repository.findById(2L)).isEmpty();
         assertThat(repository.findById(3L)).isEmpty();
         assertThat(repository.count()).isEqualTo(1L);
+    }
+
+    @Test
+    void processMessage_throwsExceptionWhenMessageFailsValidation() {
+        // The message is valid JSON but omits the required payload.records property.
+        String message = """
+            {
+              "header": {"data_product": "ref_data"},
+              "payload": {}
+            }
+            """;
+
+        assertThatThrownBy(() -> processor.processMessage(message))
+            .isInstanceOf(JsonSchemaValidationException.class)
+            .hasMessageContaining("ref-data/ref_data_schema.json")
+            .hasMessageContaining("records");
+
+        assertThat(repository.count()).isEqualTo(1L);
+        RefData existing = repository.findById(1L).orElseThrow();
+        assertThat(existing.getCode()).isEqualTo("OLD");
+        assertThat(existing.getName()).isEqualTo("Original name");
+        assertThat(existing.getDescription()).isEqualTo("Original description");
+        assertThat(existing.isActive()).isTrue();
+    }
+
+    @Test
+    void processMessage_ignoresMessageWhenNoHandlerIsFound() {
+        assertThat(handlerRegistry.find("unknown_ref_data")).isEmpty();
+
+        String message = """
+            {
+              "header": {"data_product": "unknown_ref_data"},
+              "payload": {
+                "records": [
+                  {
+                    "id": 1,
+                    "code": "UPDATED",
+                    "name": "Updated name",
+                    "description": "Updated description",
+                    "active": false
+                  },
+                  {
+                    "id": 2,
+                    "code": "CREATED",
+                    "name": "New name",
+                    "description": "New description",
+                    "active": true
+                  }
+                ]
+              }
+            }
+            """;
+
+        assertThatCode(() -> processor.processMessage(message)).doesNotThrowAnyException();
+
+        assertThat(repository.count()).isEqualTo(1L);
+        RefData existing = repository.findById(1L).orElseThrow();
+        assertThat(existing.getCode()).isEqualTo("OLD");
+        assertThat(existing.getName()).isEqualTo("Original name");
+        assertThat(existing.getDescription()).isEqualTo("Original description");
+        assertThat(existing.isActive()).isTrue();
+        assertThat(repository.findById(2L)).isEmpty();
     }
 
     @SpringBootConfiguration(proxyBeanMethods = false)
