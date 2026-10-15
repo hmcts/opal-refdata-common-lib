@@ -1,7 +1,9 @@
 package uk.gov.hmcts.opal.refdata;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
@@ -42,8 +44,8 @@ class RefDataMessageProcessorIT {
     @Autowired
     private RefDataHandlerRegistry handlerRegistry;
 
-    @Test
-    void shouldLoadUpdateAndSaveExistingRefData() {
+    @BeforeEach
+    void setUp() {
         assertThat(handlerRegistry.find("ref_data")).containsInstanceOf(RefDataTestHandler.class);
 
         repository.deleteAll();
@@ -54,7 +56,10 @@ class RefDataMessageProcessorIT {
         seed.setDescription("Original description");
         seed.setActive(true);
         repository.save(seed);
+    }
 
+    @Test
+    void shouldLoadUpdateAndSaveExistingRefData() {
         RefData original = repository.findById(1L).orElseThrow();
         assertThat(original.getCode()).isEqualTo("OLD");
         assertThat(original.getName()).isEqualTo("Original name");
@@ -87,6 +92,91 @@ class RefDataMessageProcessorIT {
         assertThat(updated.getName()).isEqualTo("Updated name");
         assertThat(updated.getDescription()).isEqualTo("Updated description");
         assertThat(updated.isActive()).isFalse();
+    }
+
+    @Test
+    void shouldCreateRefDataWhenNotFound() {
+        assertThat(repository.findById(2L)).isEmpty();
+
+        processor.processMessage("""
+            {
+              "header": {"data_product": "ref_data"},
+              "payload": {
+                "records": [
+                  {
+                    "id": 2,
+                    "code": "CREATED",
+                    "name": "New name",
+                    "description": "New description",
+                    "active": true
+                  }
+                ]
+              }
+            }
+            """);
+
+        RefData created = repository.findById(2L).orElseThrow();
+        assertThat(repository.count()).isEqualTo(2L);
+        assertThat(created.getId()).isEqualTo(2L);
+        assertThat(created.getCode()).isEqualTo("CREATED");
+        assertThat(created.getName()).isEqualTo("New name");
+        assertThat(created.getDescription()).isEqualTo("New description");
+        assertThat(created.isActive()).isTrue();
+
+        RefData existing = repository.findById(1L).orElseThrow();
+        assertThat(existing.getCode()).isEqualTo("OLD");
+        assertThat(existing.getName()).isEqualTo("Original name");
+        assertThat(existing.getDescription()).isEqualTo("Original description");
+        assertThat(existing.isActive()).isTrue();
+    }
+
+    @Test
+    void processMessage_rollsBackAllRecordsWhenAnyRecordFails() {
+        // The blank code passes JSON schema validation but fails handler validation after the valid records.
+        String message = """
+            {
+              "header": {"data_product": "ref_data"},
+              "payload": {
+                "records": [
+                  {
+                    "id": 1,
+                    "code": "UPDATED",
+                    "name": "Updated name",
+                    "description": "Updated description",
+                    "active": false
+                  },
+                  {
+                    "id": 2,
+                    "code": "CREATED",
+                    "name": "New name",
+                    "description": "New description",
+                    "active": true
+                  },
+                  {
+                    "id": 3,
+                    "code": "",
+                    "name": "Invalid record",
+                    "description": "Missing code",
+                    "active": true
+                  }
+                ]
+              }
+            }
+            """;
+
+        assertThatThrownBy(() -> processor.processMessage(message))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage("An id and code are required");
+
+        // Reload after the processor transaction has rolled back; the test has no enclosing transaction.
+        RefData existing = repository.findById(1L).orElseThrow();
+        assertThat(existing.getCode()).isEqualTo("OLD");
+        assertThat(existing.getName()).isEqualTo("Original name");
+        assertThat(existing.getDescription()).isEqualTo("Original description");
+        assertThat(existing.isActive()).isTrue();
+        assertThat(repository.findById(2L)).isEmpty();
+        assertThat(repository.findById(3L)).isEmpty();
+        assertThat(repository.count()).isEqualTo(1L);
     }
 
     @SpringBootConfiguration(proxyBeanMethods = false)
