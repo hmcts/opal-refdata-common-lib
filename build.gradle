@@ -29,7 +29,7 @@ def configureSourceSet(String name) {
       runtimeClasspath += sourceSets.main.output + sourceSets.test.output
       srcDir "src/${name}/java"
     }
-    sourceSet.resources.srcDir "src/${name}/resources"
+    sourceSet.resources.setSrcDirs(["src/${name}/resources"])
   }
 }
 
@@ -166,6 +166,7 @@ dependencies {
 
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
   integrationTestRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  integrationTestRuntimeOnly 'com.h2database:h2'
 
 
   implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: '8.0.0'

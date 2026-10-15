@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["header", "payload"],
+  "properties": {
+    "header": {
+      "type": "object",
+      "required": ["data_product"],
+      "properties": {
+        "data_product": {"const": "ref_data"}
+      }
+    },
+    "payload": {
+      "type": "object",
+      "required": ["records"],
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "code", "name", "description", "active"],
+            "properties": {
+              "id": {"type": "integer"},
+              "code": {"type": "string"},
+              "name": {"type": "string"},
+              "description": {"type": "string"},
+              "active": {"type": "boolean"}
+            }
+          }
+        }
+      }
+    }
+  }
+}

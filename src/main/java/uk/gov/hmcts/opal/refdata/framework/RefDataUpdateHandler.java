@@ -13,6 +13,7 @@ public interface RefDataUpdateHandler<T, E> {
 
     Optional<E> findEntity(T dto);
 
+    //This should just instantiate and set the id of the entity
     E createEntity(T dto);
 
     E saveEntity(E entity);
