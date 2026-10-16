@@ -2,7 +2,7 @@ package uk.gov.hmcts.opal.refdata.fixture;
 
 import java.util.List;
 import java.util.Optional;
-import uk.gov.hmcts.opal.refdata.framework.RefDataUpdateHandler;
+import uk.gov.hmcts.opal.refdata.RefDataUpdateHandler;
 
 public class RefDataTestHandler implements RefDataUpdateHandler<RefDataPayload, RefData> {
 

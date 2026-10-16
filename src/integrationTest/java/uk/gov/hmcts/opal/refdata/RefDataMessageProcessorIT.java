@@ -26,11 +26,8 @@ import org.testcontainers.postgresql.PostgreSQLContainer;
 import uk.gov.hmcts.opal.refdata.fixture.RefData;
 import uk.gov.hmcts.opal.refdata.fixture.RefDataRepository;
 import uk.gov.hmcts.opal.refdata.fixture.RefDataTestHandler;
-import uk.gov.hmcts.opal.refdata.framework.schemavalidation.JsonSchemaValidationException;
-import uk.gov.hmcts.opal.refdata.framework.MessageProcessor;
-import uk.gov.hmcts.opal.refdata.framework.RefDataHandlerRegistry;
-import uk.gov.hmcts.opal.refdata.framework.RefDataMessageProcessor;
-import uk.gov.hmcts.opal.refdata.framework.schemavalidation.SchemaValidationService;
+import uk.gov.hmcts.opal.refdata.schemavalidation.JsonSchemaValidationException;
+import uk.gov.hmcts.opal.refdata.schemavalidation.SchemaValidationService;
 
 @SpringBootTest(
     classes = RefDataMessageProcessorIT.TestConfig.class,

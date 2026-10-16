@@ -1,4 +1,4 @@
-package uk.gov.hmcts.opal.refdata.framework;
+package uk.gov.hmcts.opal.refdata;
 
 import java.util.List;
 import java.util.Map;

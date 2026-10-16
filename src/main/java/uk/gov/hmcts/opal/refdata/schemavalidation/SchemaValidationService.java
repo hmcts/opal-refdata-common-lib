@@ -1,4 +1,4 @@
-package uk.gov.hmcts.opal.refdata.framework.schemavalidation;
+package uk.gov.hmcts.opal.refdata.schemavalidation;
 
 import static java.lang.String.format;
 

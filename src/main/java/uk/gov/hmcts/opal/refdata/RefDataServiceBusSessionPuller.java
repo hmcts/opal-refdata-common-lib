@@ -1,4 +1,4 @@
-package uk.gov.hmcts.opal.refdata.framework;
+package uk.gov.hmcts.opal.refdata;
 
 import com.azure.core.util.IterableStream;
 import com.azure.messaging.servicebus.ServiceBusException;
