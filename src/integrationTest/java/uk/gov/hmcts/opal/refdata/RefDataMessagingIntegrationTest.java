@@ -34,6 +34,10 @@ import uk.gov.hmcts.opal.refdata.messaging.RefDataServiceBusSessionPuller;
         "spring.sql.init.schema-locations=classpath:ref-data-schema.sql",
         "spring.jpa.hibernate.ddl-auto=validate",
         "opal.ref-data.service-bus.consumer-enabled=true",
+        "opal.ref-data.service-bus.max-messages-per-session=50",
+        "opal.ref-data.service-bus.initial-delay-seconds=300",
+        "opal.ref-data.service-bus.fixed-delay-seconds=300",
+        "opal.ref-data.service-bus.receive-timeout=3s",
         "opal.ref-data.service-bus.topic-name=topic.refdata",
         "opal.ref-data.service-bus.subscription-name=subscription.refdata"
     }

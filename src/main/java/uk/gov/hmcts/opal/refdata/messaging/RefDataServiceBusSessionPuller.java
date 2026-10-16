@@ -27,8 +27,8 @@ public class RefDataServiceBusSessionPuller {
     private final RefDataServiceBusProperties properties;
 
     @Scheduled(
-        initialDelayString = "${opal.ref-data.service-bus.initial-delay-seconds:300}",
-        fixedDelayString = "${opal.ref-data.service-bus.fixed-delay-seconds:300}",
+        initialDelayString = "${opal.ref-data.service-bus.initial-delay-seconds}",
+        fixedDelayString = "${opal.ref-data.service-bus.fixed-delay-seconds}",
         timeUnit = TimeUnit.SECONDS
     )
     public void pullSessionMessages() {
