@@ -7,6 +7,7 @@ import com.azure.messaging.servicebus.ServiceBusReceivedMessage;
 import com.azure.messaging.servicebus.ServiceBusReceiverClient;
 import com.azure.messaging.servicebus.ServiceBusSessionReceiverClient;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -26,8 +27,9 @@ public class RefDataServiceBusSessionPuller {
     private final RefDataServiceBusProperties properties;
 
     @Scheduled(
-        initialDelayString = "${opal.ref-data.service-bus.initial-delay-milliseconds:300000}",
-        fixedDelayString = "${opal.ref-data.service-bus.fixed-delay-milliseconds:300000}"
+        initialDelayString = "${opal.ref-data.service-bus.initial-delay-seconds:300}",
+        fixedDelayString = "${opal.ref-data.service-bus.fixed-delay-seconds:300}",
+        timeUnit = TimeUnit.SECONDS
     )
     public void pullSessionMessages() {
         try {
