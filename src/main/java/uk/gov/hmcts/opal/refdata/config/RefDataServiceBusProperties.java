@@ -17,27 +17,34 @@ import org.springframework.validation.annotation.Validated;
 @Validated
 @Data
 public class RefDataServiceBusProperties {
-    @NotBlank
-    private String topicName;
-    @NotBlank
-    private String subscriptionName;
-    @NotNull
-    private Boolean consumerEnabled;
+
     private String connectionString;
     private String fullyQualifiedNamespace;
+
+    @NotBlank
+    private String topicName;
+
+    @NotBlank
+    private String subscriptionName;
+
+    @NotNull
+    private Boolean consumerEnabled;
+
     @NotNull
     @Positive
     private Integer maxMessagesPerSession;
+
     @NotNull
     @PositiveOrZero
     private Long initialDelaySeconds;
+
     @NotNull
     @Positive
     private Long fixedDelaySeconds;
+
     @NotNull
-    @DurationMin(nanos = 1)
-    @DurationUnit(ChronoUnit.SECONDS)
-    private Duration receiveTimeout;
+    @Positive
+    private Long receiveTimeoutSeconds;
 
     @AssertTrue(message = "exactly one of connection-string or fully-qualified-namespace must be set")
     public boolean isAuthenticationConfigured() {

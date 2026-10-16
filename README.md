@@ -13,7 +13,7 @@ opal:
       max-messages-per-session: 50
       initial-delay-seconds: 300
       fixed-delay-seconds: 300
-      receive-timeout: 3s
+      receive-timeout-seconds: 3s
 ```
 
 For connection-string authentication, specify `connection-string` instead of `fully-qualified-namespace`.

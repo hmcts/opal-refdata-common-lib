@@ -22,7 +22,7 @@ class RefDataServiceBusPropertiesTest {
         PREFIX + "max-messages-per-session=50",
         PREFIX + "initial-delay-seconds=0",
         PREFIX + "fixed-delay-seconds=300",
-        PREFIX + "receive-timeout=3"
+        PREFIX + "receive-timeout-seconds=3"
     };
 
     private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
@@ -33,8 +33,8 @@ class RefDataServiceBusPropertiesTest {
     void startsWithValidPropertiesAndBindsTimeoutInSeconds() {
         contextRunner.run(context -> {
             assertThat(context).hasNotFailed();
-            assertThat(context.getBean(RefDataServiceBusProperties.class).getReceiveTimeout())
-                .isEqualTo(Duration.ofSeconds(3));
+            assertThat(context.getBean(RefDataServiceBusProperties.class).getReceiveTimeoutSeconds())
+                .isEqualTo(3L);
         });
     }
 
@@ -75,8 +75,8 @@ class RefDataServiceBusPropertiesTest {
         "max-messages-per-session=0",
         "initial-delay-seconds=-1",
         "fixed-delay-seconds=0",
-        "receive-timeout=0s",
-        "receive-timeout=-1s"
+        "receive-timeout-seconds=0s",
+        "receive-timeout-seconds=-1s"
     })
     void failsStartupForInvalidProperties(String property) {
         contextRunner.withPropertyValues("opal.ref-data.service-bus." + property)
@@ -86,7 +86,7 @@ class RefDataServiceBusPropertiesTest {
     @ParameterizedTest
     @ValueSource(strings = {
         "consumer-enabled", "topic-name", "subscription-name", "max-messages-per-session",
-        "initial-delay-seconds", "fixed-delay-seconds", "receive-timeout"
+        "initial-delay-seconds", "fixed-delay-seconds", "receive-timeout-seconds"
     })
     void failsStartupWhenRequiredPropertyIsMissing(String property) {
         String[] remainingProperties = Arrays.stream(VALID_PROPERTIES)

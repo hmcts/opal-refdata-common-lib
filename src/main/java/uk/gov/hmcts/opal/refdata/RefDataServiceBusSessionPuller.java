@@ -6,6 +6,7 @@ import com.azure.messaging.servicebus.ServiceBusFailureReason;
 import com.azure.messaging.servicebus.ServiceBusReceivedMessage;
 import com.azure.messaging.servicebus.ServiceBusReceiverClient;
 import com.azure.messaging.servicebus.ServiceBusSessionReceiverClient;
+import java.time.Duration;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
@@ -62,7 +63,7 @@ public class RefDataServiceBusSessionPuller {
 
         IterableStream<ServiceBusReceivedMessage> messages = sessionWorker.receiveMessages(
             properties.getMaxMessagesPerSession(),
-            properties.getReceiveTimeout()
+            Duration.ofSeconds(properties.getReceiveTimeoutSeconds())
         );
 
         for (ServiceBusReceivedMessage message : messages) {
