@@ -1,9 +1,13 @@
 package uk.gov.hmcts.opal.refdata.fixture;
 
+import java.util.List;
 import java.util.Optional;
 import uk.gov.hmcts.opal.refdata.framework.RefDataUpdateHandler;
 
 public class RefDataTestHandler implements RefDataUpdateHandler<RefDataPayload, RefData> {
+
+    public static final String REF_DATA_CACHE = "refData";
+    public static final String REF_DATA_LOOKUP_CACHE = "refDataLookup";
 
     private final RefDataRepository repository;
 
@@ -14,6 +18,11 @@ public class RefDataTestHandler implements RefDataUpdateHandler<RefDataPayload, 
     @Override
     public String refDataType() {
         return "ref_data";
+    }
+
+    @Override
+    public List<String> cachesToClear() {
+        return List.of(REF_DATA_CACHE, REF_DATA_LOOKUP_CACHE);
     }
 
     @Override

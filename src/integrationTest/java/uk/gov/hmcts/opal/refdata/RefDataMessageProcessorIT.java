@@ -3,7 +3,10 @@ package uk.gov.hmcts.opal.refdata;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static uk.gov.hmcts.opal.refdata.fixture.RefDataTestHandler.REF_DATA_CACHE;
+import static uk.gov.hmcts.opal.refdata.fixture.RefDataTestHandler.REF_DATA_LOOKUP_CACHE;
 
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,10 +57,14 @@ class RefDataMessageProcessorIT {
     @Autowired
     private RefDataHandlerRegistry handlerRegistry;
 
+    @Autowired
+    private CacheManager cacheManager;
+
     @BeforeEach
     void setUp() {
         assertThat(handlerRegistry.find("ref_data")).containsInstanceOf(RefDataTestHandler.class);
 
+        cacheManager.getCacheNames().forEach(name -> cacheManager.getCache(name).clear());
         repository.deleteAll();
         RefData seed = new RefData();
         seed.setId(1L);
@@ -102,6 +109,45 @@ class RefDataMessageProcessorIT {
         assertThat(updated.getName()).isEqualTo("Updated name");
         assertThat(updated.getDescription()).isEqualTo("Updated description");
         assertThat(updated.isActive()).isFalse();
+    }
+
+    @Test
+    void processMessage_clearsAllAssociatedCachesAndPreservesUnrelatedCaches() {
+        for (String cacheName : List.of(REF_DATA_CACHE, REF_DATA_LOOKUP_CACHE)) {
+            var cache = cacheManager.getCache(cacheName);
+            assertThat(cache).isNotNull();
+            cache.put(1L, "Original name");
+            cache.put(2L, "Another cached record");
+            assertThat(cache.get(1L, String.class)).isEqualTo("Original name");
+            assertThat(cache.get(2L, String.class)).isEqualTo("Another cached record");
+        }
+        var unrelatedCache = cacheManager.getCache("unrelated");
+        assertThat(unrelatedCache).isNotNull();
+        unrelatedCache.put("key", "Retained value");
+
+        processor.processMessage("""
+            {
+              "header": {"data_product": "ref_data"},
+              "payload": {
+                "records": [{
+                  "id": 1,
+                  "code": "NEW",
+                  "name": "Updated name",
+                  "description": "Updated description",
+                  "active": false
+                }]
+              }
+            }
+            """);
+
+        assertThat(repository.findById(1L).orElseThrow().getName()).isEqualTo("Updated name");
+        for (String cacheName : List.of(REF_DATA_CACHE, REF_DATA_LOOKUP_CACHE)) {
+            var cache = cacheManager.getCache(cacheName);
+            assertThat(cache).isNotNull();
+            assertThat(cache.get(1L)).isNull();
+            assertThat(cache.get(2L)).isNull();
+        }
+        assertThat(unrelatedCache.get("key", String.class)).isEqualTo("Retained value");
     }
 
     @Test
