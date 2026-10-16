@@ -11,11 +11,15 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.persistence.autoconfigure.EntityScan;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.postgresql.PostgreSQLContainer;
 import uk.gov.hmcts.opal.refdata.fixture.RefData;
 import uk.gov.hmcts.opal.refdata.fixture.RefDataRepository;
 import uk.gov.hmcts.opal.refdata.fixture.RefDataTestHandler;
@@ -29,13 +33,17 @@ import uk.gov.hmcts.opal.refdata.framework.SchemaValidationService;
     classes = RefDataMessageProcessorIT.TestConfig.class,
     webEnvironment = SpringBootTest.WebEnvironment.NONE,
     properties = {
-        "spring.datasource.generate-unique-name=true",
         "spring.sql.init.mode=always",
         "spring.sql.init.schema-locations=classpath:ref-data-schema.sql",
         "spring.jpa.hibernate.ddl-auto=validate"
     }
 )
+@Testcontainers
 class RefDataMessageProcessorIT {
+
+    @Container
+    @ServiceConnection
+    static final PostgreSQLContainer POSTGRES = new PostgreSQLContainer("postgres:17-alpine");
 
     @Autowired
     private MessageProcessor processor;

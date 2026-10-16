@@ -166,7 +166,10 @@ dependencies {
 
   testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
   integrationTestRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-  integrationTestRuntimeOnly 'com.h2database:h2'
+  integrationTestImplementation 'org.springframework.boot:spring-boot-testcontainers'
+  integrationTestImplementation 'org.testcontainers:testcontainers-junit-jupiter'
+  integrationTestImplementation 'org.testcontainers:testcontainers-postgresql'
+  integrationTestRuntimeOnly 'org.postgresql:postgresql'
 
 
   implementation group: 'com.github.hmcts.java-logging', name: 'logging', version: '8.0.0'
