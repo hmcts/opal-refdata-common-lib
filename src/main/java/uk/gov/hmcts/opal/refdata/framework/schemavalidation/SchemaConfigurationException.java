@@ -1,4 +1,4 @@
-package uk.gov.hmcts.opal.refdata.framework;
+package uk.gov.hmcts.opal.refdata.framework.schemavalidation;
 
 public class SchemaConfigurationException extends RuntimeException {
 

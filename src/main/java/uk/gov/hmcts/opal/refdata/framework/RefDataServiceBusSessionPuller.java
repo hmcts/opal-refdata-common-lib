@@ -1,4 +1,4 @@
-package uk.gov.hmcts.opal.refdata.messaging;
+package uk.gov.hmcts.opal.refdata.framework;
 
 import com.azure.core.util.IterableStream;
 import com.azure.messaging.servicebus.ServiceBusException;
@@ -14,7 +14,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import uk.gov.hmcts.opal.refdata.config.RefDataServiceBusProperties;
-import uk.gov.hmcts.opal.refdata.framework.MessageProcessor;
 
 @Slf4j(topic = "opal.RefDataServiceBusSessionPuller")
 @Component

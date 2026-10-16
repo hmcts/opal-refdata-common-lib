@@ -24,7 +24,7 @@ import org.testcontainers.utility.MountableFile;
 import uk.gov.hmcts.opal.refdata.config.RefDataServiceBusSessionReceiverConfig;
 import uk.gov.hmcts.opal.refdata.fixture.RefData;
 import uk.gov.hmcts.opal.refdata.fixture.RefDataRepository;
-import uk.gov.hmcts.opal.refdata.messaging.RefDataServiceBusSessionPuller;
+import uk.gov.hmcts.opal.refdata.framework.RefDataServiceBusSessionPuller;
 
 @SpringBootTest(
     classes = RefDataMessagingIntegrationTest.TestConfig.class,
