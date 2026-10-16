@@ -23,8 +23,10 @@ public class RefDataServiceBusSessionReceiverConfig {
     public ServiceBusSessionReceiverClient refDataServiceBusSessionReceiverClient(
         RefDataServiceBusProperties refDataServiceBusProperties) {
 
-        //PEEK_LOCK — message is received but remains in Service Bus under a lock until completed/abandoned/dead-lettered or the lock expires.
-        //RECEIVE_AND_DELETE — message is removed from Service Bus as soon as Service Bus transfers it to the receiver. There is no lock/redelivery if your processing subsequently fails.
+        //PEEK_LOCK — message is received but remains in Service Bus under a lock until
+        //completed/abandoned/dead-lettered or the lock expires.
+        //RECEIVE_AND_DELETE — message is removed from Service Bus as soon as it is transferred to the receiver.
+        //There is no lock/redelivery if processing subsequently fails.
         //we want peek lock
 
         ServiceBusClientBuilder builder = new ServiceBusClientBuilder();

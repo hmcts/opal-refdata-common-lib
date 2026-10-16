@@ -1,5 +1,6 @@
 package uk.gov.hmcts.opal.refdata.config;
 
+import java.time.Duration;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -11,4 +12,8 @@ public class RefDataServiceBusProperties {
     private boolean consumerEnabled;
     private String connectionString;
     private String fullyQualifiedNamespace;
+    private int maxMessagesPerSession = 50;
+    private long initialDelayMilliseconds = 300_000L;
+    private long fixedDelayMilliseconds = 300_000L;
+    private Duration receiveTimeout = Duration.ofSeconds(3);
 }

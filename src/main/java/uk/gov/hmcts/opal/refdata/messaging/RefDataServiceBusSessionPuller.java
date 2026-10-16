@@ -6,13 +6,13 @@ import com.azure.messaging.servicebus.ServiceBusFailureReason;
 import com.azure.messaging.servicebus.ServiceBusReceivedMessage;
 import com.azure.messaging.servicebus.ServiceBusReceiverClient;
 import com.azure.messaging.servicebus.ServiceBusSessionReceiverClient;
-import java.time.Duration;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import uk.gov.hmcts.opal.refdata.config.RefDataServiceBusProperties;
 import uk.gov.hmcts.opal.refdata.framework.MessageProcessor;
 
 @Slf4j(topic = "opal.RefDataServiceBusSessionPuller")
@@ -21,14 +21,14 @@ import uk.gov.hmcts.opal.refdata.framework.MessageProcessor;
 @ConditionalOnProperty(prefix = "opal.ref-data.service-bus", name = "consumer-enabled", havingValue = "true")
 public class RefDataServiceBusSessionPuller {
 
-    private static final int MAX_MESSAGES_PER_SESSION = 10;
-    private static final long POLL_RATE_MILLISECONDS = 300_000L;
-    private static final Duration RECEIVE_TIMEOUT = Duration.ofSeconds(3);
-
     private final ServiceBusSessionReceiverClient sessionReceiverClient;
     private final MessageProcessor processor;
+    private final RefDataServiceBusProperties properties;
 
-    @Scheduled(initialDelay = POLL_RATE_MILLISECONDS, fixedDelay = POLL_RATE_MILLISECONDS)
+    @Scheduled(
+        initialDelayString = "${opal.ref-data.service-bus.initial-delay-milliseconds:300000}",
+        fixedDelayString = "${opal.ref-data.service-bus.fixed-delay-milliseconds:300000}"
+    )
     public void pullSessionMessages() {
         try {
             Optional<ServiceBusReceiverClient> sessionReceiver = acceptNextSession();
@@ -60,8 +60,8 @@ public class RefDataServiceBusSessionPuller {
         log.info("Acquired ref-data Service Bus session lock. sessionId={}", sessionId);
 
         IterableStream<ServiceBusReceivedMessage> messages = sessionWorker.receiveMessages(
-            MAX_MESSAGES_PER_SESSION,
-            RECEIVE_TIMEOUT
+            properties.getMaxMessagesPerSession(),
+            properties.getReceiveTimeout()
         );
 
         for (ServiceBusReceivedMessage message : messages) {
