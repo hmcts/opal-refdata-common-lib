@@ -30,6 +30,10 @@ public class SchemaValidationService {
         return validate(jsonNode, jsonSchemaFileName).isEmpty();
     }
 
+    public void checkSchemaExists(String jsonSchemaFileName) {
+        getJsonSchema(jsonSchemaFileName);
+    }
+
     public void validateOrError(JsonNode jsonNode, String jsonSchemaFileName) {
         Set<String> errors = validate(jsonNode, jsonSchemaFileName);
         if (!errors.isEmpty()) {

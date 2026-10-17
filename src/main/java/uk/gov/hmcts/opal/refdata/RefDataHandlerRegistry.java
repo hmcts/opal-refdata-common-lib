@@ -5,8 +5,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+@Slf4j(topic = "opal.RefDataHandlerRegistry")
 @Component
 public class RefDataHandlerRegistry {
 
@@ -18,6 +20,11 @@ public class RefDataHandlerRegistry {
                 RefDataUpdateHandler::refDataType,
                 Function.identity()
             ));
+        log.info("Registered {} ref-data handler(s): {}", handlersByType.size(),
+            handlersByType.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .map(entry -> entry.getKey() + " -> " + entry.getValue().getClass().getName())
+                .collect(Collectors.joining(", ")));
     }
 
     public Optional<RefDataUpdateHandler<?, ?>> find(String refDataType) {

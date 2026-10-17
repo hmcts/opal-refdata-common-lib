@@ -1,5 +1,6 @@
 package uk.gov.hmcts.opal.refdata;
 
+import jakarta.annotation.PostConstruct;
 import java.util.List;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,11 @@ public class RefDataMessageProcessor implements MessageProcessor {
         this.schemaValidationService = schemaValidationService;
         this.handlerRegistry = handlerRegistry;
         this.cacheManager = cacheManager;
+    }
+
+    @PostConstruct
+    void validateMessageSchema() {
+        schemaValidationService.checkSchemaExists(REF_DATA_MESSAGE_SCHEMA);
     }
 
     @Transactional
