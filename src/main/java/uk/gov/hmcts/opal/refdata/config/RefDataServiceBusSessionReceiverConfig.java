@@ -16,8 +16,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableConfigurationProperties(RefDataServiceBusProperties.class)
 public class RefDataServiceBusSessionReceiverConfig {
 
-    static final String MISSING_FULLY_QUALIFIED_NAMESPACE_MESSAGE =
-        "opal.ref-data.service-bus.fully-qualified-namespace must be set when connection-string is blank";
+    static final String NO_AUTHENTICATION_PROPERTY_SET = "No authentication property set";
 
     @Bean(name = "refDataServiceBusSessionReceiverClient", destroyMethod = "close")
     public ServiceBusSessionReceiverClient refDataServiceBusSessionReceiverClient(
@@ -30,19 +29,22 @@ public class RefDataServiceBusSessionReceiverConfig {
         //we want peek lock
 
         ServiceBusClientBuilder builder = new ServiceBusClientBuilder();
-        String connectionString = refDataServiceBusProperties.getConnectionString();
 
-        if (connectionString != null && !connectionString.isBlank()) {
-            builder.connectionString(connectionString);
-        } else {
-            String fullyQualifiedNamespace = refDataServiceBusProperties.getFullyQualifiedNamespace();
-            if (fullyQualifiedNamespace == null || fullyQualifiedNamespace.isBlank()) {
-                throw new IllegalStateException(MISSING_FULLY_QUALIFIED_NAMESPACE_MESSAGE);
-            }
+        String connectionString = refDataServiceBusProperties.getConnectionString();
+        String fullyQualifiedNamespace = refDataServiceBusProperties.getFullyQualifiedNamespace();
+
+        //namespace take precedence over connection string
+        if (fullyQualifiedNamespace != null && !fullyQualifiedNamespace.isBlank()) {
             builder.credential(
                 fullyQualifiedNamespace,
                 new DefaultAzureCredentialBuilder().build()
             );
+        } else {
+            if (connectionString != null && !connectionString.isBlank()) {
+                builder.connectionString(connectionString);
+            } else {
+                throw new IllegalStateException(NO_AUTHENTICATION_PROPERTY_SET);
+            }
         }
 
         return builder

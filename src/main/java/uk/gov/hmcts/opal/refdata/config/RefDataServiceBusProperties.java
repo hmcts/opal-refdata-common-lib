@@ -1,7 +1,6 @@
 package uk.gov.hmcts.opal.refdata.config;
 
 import jakarta.validation.constraints.AssertTrue;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -17,34 +16,59 @@ public class RefDataServiceBusProperties {
     private String connectionString;
     private String fullyQualifiedNamespace;
 
-    @NotBlank
     private String topicName;
 
-    @NotBlank
     private String subscriptionName;
 
     @NotNull
     private Boolean consumerEnabled;
 
-    @NotNull
     @Positive
     private Integer maxMessagesPerSession;
 
-    @NotNull
     @PositiveOrZero
     private Long initialDelaySeconds;
 
-    @NotNull
     @Positive
     private Long fixedDelaySeconds;
 
-    @NotNull
     @Positive
     private Long receiveTimeoutSeconds;
 
-    @AssertTrue(message = "exactly one of connection-string or fully-qualified-namespace must be set")
+    @AssertTrue(message = "when consumer enabled, topic-name must be set")
+    public boolean isTopicConfigured() {
+        return !Boolean.TRUE.equals(consumerEnabled) || (topicName != null && !topicName.isBlank());
+    }
+
+    @AssertTrue(message = "when consumer enabled, subscription-name must be set")
+    public boolean isSubscriptionConfigured() {
+        return !Boolean.TRUE.equals(consumerEnabled)
+            || (subscriptionName != null && !subscriptionName.isBlank());
+    }
+
+    @AssertTrue(message = "when consumer enabled, max-messages-per-session must be set")
+    public boolean isMaxMessagesPerSessionConfigured() {
+        return !Boolean.TRUE.equals(consumerEnabled) || maxMessagesPerSession != null;
+    }
+
+    @AssertTrue(message = "when consumer enabled, initial-delay-seconds must be set")
+    public boolean isInitialDelaySecondsConfigured() {
+        return !Boolean.TRUE.equals(consumerEnabled) || initialDelaySeconds != null;
+    }
+
+    @AssertTrue(message = "when consumer enabled, fixed-delay-seconds must be set")
+    public boolean isFixedDelaySecondsConfigured() {
+        return !Boolean.TRUE.equals(consumerEnabled) || fixedDelaySeconds != null;
+    }
+
+    @AssertTrue(message = "when consumer enabled, receive-timeout-seconds must be set")
+    public boolean isReceiveTimeoutSecondsConfigured() {
+        return !Boolean.TRUE.equals(consumerEnabled) || receiveTimeoutSeconds != null;
+    }
+
+    @AssertTrue(message = "when consumer enabled, one (or both) of connection-string or fully-qualified-namespace must be set")
     public boolean isAuthenticationConfigured() {
-        return (connectionString != null && !connectionString.isBlank())
-            ^ (fullyQualifiedNamespace != null && !fullyQualifiedNamespace.isBlank());
+        return !Boolean.TRUE.equals(consumerEnabled) || ((connectionString != null && !connectionString.isBlank())
+            || (fullyQualifiedNamespace != null && !fullyQualifiedNamespace.isBlank()));
     }
 }
