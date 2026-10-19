@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.GenericContainer;
@@ -41,6 +42,7 @@ import uk.gov.hmcts.opal.refdata.fixture.RefDataRepository;
         "opal.ref-data.service-bus.subscription-name=subscription.refdata"
     }
 )
+@ActiveProfiles("integration")
 @Testcontainers
 class RefDataMessagingIntegrationTest {
 
