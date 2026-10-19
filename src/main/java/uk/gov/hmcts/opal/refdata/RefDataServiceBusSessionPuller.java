@@ -56,19 +56,6 @@ public class RefDataServiceBusSessionPuller {
         }
     }
 
-    private boolean isClientTimeout(IllegalStateException ex) {
-        Throwable cause = ex;
-        while (cause != null) {
-            if (cause instanceof TimeoutException
-                && cause.getMessage() != null
-                && cause.getMessage().contains("com.microsoft:timeout")) {
-                return true;
-            }
-            cause = cause.getCause();
-        }
-        return false;
-    }
-
     private void processSessionMessages(ServiceBusReceiverClient sessionWorker) {
         String sessionId = sessionWorker.getSessionId();
         log.info("Acquired ref-data Service Bus session lock. sessionId={}", sessionId);
@@ -87,41 +74,34 @@ public class RefDataServiceBusSessionPuller {
         try {
             processor.processMessage(message.getBody().toString());
         } catch (RuntimeException ex) {
-            log.warn(
-                "Unable to process ref-data Service Bus message. messageId={}, sessionId={}",
-                message.getMessageId(),
-                message.getSessionId(),
-                ex
-            );
-            abandonMessage(sessionWorker, message, ex);
+            log.warn("Process failed for messageId={}", message.getMessageId(), ex);
+            try {
+                sessionWorker.abandon(message);
+            } catch (RuntimeException abandonException) {
+                ex.addSuppressed(abandonException);
+                log.warn("Abandon failed for messageId={}", message.getMessageId(), ex);
+            }
             throw ex;
         }
 
         try {
             sessionWorker.complete(message);
         } catch (RuntimeException ex) {
-            log.warn(
-                "Unable to complete ref-data Service Bus message. messageId={}, sessionId={}",
-                message.getMessageId(),
-                message.getSessionId(),
-                ex
-            );
+            log.warn("Complete failed for messageId={}", message.getMessageId(), ex);
             throw ex;
         }
     }
 
-    private void abandonMessage(
-        ServiceBusReceiverClient sessionWorker, ServiceBusReceivedMessage message, RuntimeException processingException) {
-        try {
-            sessionWorker.abandon(message);
-        } catch (RuntimeException abandonException) {
-            processingException.addSuppressed(abandonException);
-            log.warn(
-                "Unable to abandon ref-data Service Bus message. messageId={}, sessionId={}",
-                message.getMessageId(),
-                message.getSessionId(),
-                abandonException
-            );
+    private boolean isClientTimeout(IllegalStateException ex) {
+        Throwable cause = ex;
+        while (cause != null) {
+            if (cause instanceof TimeoutException
+                && cause.getMessage() != null
+                && cause.getMessage().contains("com.microsoft:timeout")) {
+                return true;
+            }
+            cause = cause.getCause();
         }
+        return false;
     }
 }
