@@ -1,0 +1,28 @@
+package uk.gov.hmcts.opal.refdata;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface RefDataUpdateHandler<T, E> {
+    String refDataType();
+
+    Class<T> payloadType();
+
+    // Implementations should throw RuntimeExceptions for validation errors.
+    void validateDto(T dto);
+
+    Optional<E> findEntity(T dto);
+
+    //This should just instantiate and set the id of the entity
+    E createEntity(T dto);
+
+    E saveEntity(E entity);
+
+    void updateEntityFromDto(T dto, E entity);
+
+    default List<String> cachesToClear() {
+        return List.of();
+    }
+
+    String getBusinessKey(T dto);
+}
