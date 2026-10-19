@@ -2,13 +2,12 @@ package uk.gov.hmcts.opal.refdata;
 
 import com.azure.core.util.IterableStream;
 import com.azure.messaging.servicebus.ServiceBusException;
-import com.azure.messaging.servicebus.ServiceBusFailureReason;
 import com.azure.messaging.servicebus.ServiceBusReceivedMessage;
 import com.azure.messaging.servicebus.ServiceBusReceiverClient;
 import com.azure.messaging.servicebus.ServiceBusSessionReceiverClient;
 import java.time.Duration;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -34,38 +33,40 @@ public class RefDataServiceBusSessionPuller {
     public void pullSessionMessages() {
         log.info("Pulling ref-data Service Bus session messages");
         try {
-            Optional<ServiceBusReceiverClient> sessionReceiver = acceptNextSession();
-            if (sessionReceiver.isEmpty()) {
+            ServiceBusReceiverClient sessionReceiver = sessionReceiverClient.acceptNextSession();
+            if (sessionReceiver == null) {
+                //should not occur in normal running, so defensive coding here
+                log.debug("No active ref-data Service Bus message sessions found");
                 return;
             }
-            try (ServiceBusReceiverClient sessionWorker = sessionReceiver.get()) {
-                processSessionMessages(sessionWorker);
+            try (sessionReceiver) {
+                processSessionMessages(sessionReceiver);
             }
-        }
-        catch (IllegalStateException e) {
-            // Check if the underlying cause is an AMQP/Service Bus timeout
-            if (e.getMessage() != null && e.getMessage().contains("com.microsoft:timeout")) {
-                log.info("No available sessions found on the queue. Will retry on next schedule cycle.");
+        } catch (ServiceBusException ex) {
+            log.info("ServiceBusException reason={}", ex.getReason(), ex);
+        } catch (IllegalStateException ex) {
+            if (isClientTimeout(ex)) {
+                //Cannot distinguish empty queue from queue not accessible (!)
+                log.debug("No session available or ASB is not reachable", ex);
             } else {
-                // Rethrow if it's a completely different IllegalStateException
-                throw e;
+                log.error("Unexpected state while pulling ref-data messages", ex);
             }
-        }
-        catch (RuntimeException ex) {
-            log.warn("Unable to pull ref-data Service Bus session messages", ex);
+        } catch (RuntimeException ex) {
+            log.error("Unexpected failure while pulling ref-data Service Bus messages", ex);
         }
     }
 
-    private Optional<ServiceBusReceiverClient> acceptNextSession() {
-        try {
-            return Optional.of(sessionReceiverClient.acceptNextSession());
-        } catch (ServiceBusException ex) {
-            if (isNoAvailableSession(ex)) {
-                log.debug("No active ref-data Service Bus message sessions found");
-                return Optional.empty();
+    private boolean isClientTimeout(IllegalStateException ex) {
+        Throwable cause = ex;
+        while (cause != null) {
+            if (cause instanceof TimeoutException
+                && cause.getMessage() != null
+                && cause.getMessage().contains("com.microsoft:timeout")) {
+                return true;
             }
-            throw ex;
+            cause = cause.getCause();
         }
+        return false;
     }
 
     private void processSessionMessages(ServiceBusReceiverClient sessionWorker) {
@@ -85,31 +86,42 @@ public class RefDataServiceBusSessionPuller {
     private void processMessage(ServiceBusReceiverClient sessionWorker, ServiceBusReceivedMessage message) {
         try {
             processor.processMessage(message.getBody().toString());
+        } catch (RuntimeException ex) {
+            log.warn(
+                "Unable to process ref-data Service Bus message. messageId={}, sessionId={}",
+                message.getMessageId(),
+                message.getSessionId(),
+                ex
+            );
+            abandonMessage(sessionWorker, message, ex);
+            return;
+        }
+
+        try {
             sessionWorker.complete(message);
         } catch (RuntimeException ex) {
-            abandonMessage(sessionWorker, message, ex);
+            log.warn(
+                "Unable to complete ref-data Service Bus message. messageId={}, sessionId={}",
+                message.getMessageId(),
+                message.getSessionId(),
+                ex
+            );
             throw ex;
         }
     }
 
     private void abandonMessage(
-        ServiceBusReceiverClient sessionWorker, ServiceBusReceivedMessage message, RuntimeException ex) {
-
-        log.warn(
-            "Unable to process ref-data Service Bus message. messageId={}, sessionId={}",
-            message.getMessageId(),
-            message.getSessionId(),
-            ex
-        );
+        ServiceBusReceiverClient sessionWorker, ServiceBusReceivedMessage message, RuntimeException processingException) {
         try {
             sessionWorker.abandon(message);
         } catch (RuntimeException abandonException) {
-            ex.addSuppressed(abandonException);
+            processingException.addSuppressed(abandonException);
+            log.warn(
+                "Unable to abandon ref-data Service Bus message. messageId={}, sessionId={}",
+                message.getMessageId(),
+                message.getSessionId(),
+                abandonException
+            );
         }
-    }
-
-    private boolean isNoAvailableSession(ServiceBusException ex) {
-        return ServiceBusFailureReason.SERVICE_TIMEOUT.equals(ex.getReason())
-            || ServiceBusFailureReason.SESSION_CANNOT_BE_LOCKED.equals(ex.getReason());
     }
 }
