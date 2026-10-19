@@ -94,7 +94,7 @@ public class RefDataServiceBusSessionPuller {
                 ex
             );
             abandonMessage(sessionWorker, message, ex);
-            return;
+            throw ex;
         }
 
         try {
