@@ -43,7 +43,7 @@ public class RefDataServiceBusSessionPuller {
                 processSessionMessages(sessionReceiver);
             }
         } catch (ServiceBusException ex) {
-            log.info("ServiceBusException reason={}", ex.getReason(), ex);
+            log.info("ServiceBusException reason={} isTransient={}", ex.getReason(), ex.isTransient(), ex);
         } catch (IllegalStateException ex) {
             if (isClientTimeout(ex)) {
                 //Cannot distinguish empty queue from queue not accessible (!)
