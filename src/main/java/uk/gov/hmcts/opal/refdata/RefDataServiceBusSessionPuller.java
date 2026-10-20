@@ -46,9 +46,9 @@ public class RefDataServiceBusSessionPuller {
         } catch (ServiceBusException ex) {
             log.info("ServiceBusException reason={} isTransient={}", ex.getReason(), ex.isTransient(), ex);
         } catch (IllegalStateException ex) {
-            if (isClientTimeout(ex)) {
-                //Cannot distinguish empty queue from queue not accessible (!)
-                log.debug("No session available or ASB is not reachable", ex);
+            if (ex.getMessage() != null && ex.getMessage().contains("com.microsoft:timeout")) {
+                //Cannot distinguish empty queue from queue not accessible (!), waits for receive-timeout-seconds
+                log.debug("Empty queue or ASB is not reachable.");
             } else {
                 log.error("Unexpected state while pulling ref-data messages", ex);
             }
@@ -108,18 +108,5 @@ public class RefDataServiceBusSessionPuller {
             throw ex;
         }
 
-    }
-
-    private boolean isClientTimeout(IllegalStateException ex) {
-        Throwable cause = ex;
-        while (cause != null) {
-            if (cause instanceof TimeoutException
-                && cause.getMessage() != null
-                && cause.getMessage().contains("com.microsoft:timeout")) {
-                return true;
-            }
-            cause = cause.getCause();
-        }
-        return false;
     }
 }
