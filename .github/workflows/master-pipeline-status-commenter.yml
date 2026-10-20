@@ -7,9 +7,6 @@ on:
       - master
     types:
       - opened
-      - reopened
-      - synchronize
-      - ready_for_review
   status: {}
   check_run:
     types:
@@ -28,7 +25,6 @@ on:
       - requested
       - in_progress
       - completed
-  workflow_dispatch: {}
 
 permissions:
   contents: read
@@ -44,8 +40,6 @@ jobs:
   comment:
     if: >-
       github.event_name == 'pull_request_target' ||
-      github.event_name == 'workflow_dispatch' ||
-      github.event_name == 'schedule' ||
       (github.event_name == 'status' && contains(github.event.branches.*.name, 'master')) ||
       (github.event_name == 'check_run' && github.event.check_run.check_suite.head_branch == 'master') ||
       (github.event_name == 'check_suite' && github.event.check_suite.head_branch == 'master') ||
