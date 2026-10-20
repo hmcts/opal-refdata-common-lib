@@ -45,7 +45,7 @@ public class RefDataServiceBusSessionPuller {
         } catch (ServiceBusException ex) {
             log.info("ServiceBusException reason={} isTransient={}", ex.getReason(), ex.isTransient(), ex);
         } catch (IllegalStateException ex) {
-            if (ex.getMessage() != null && ex.getMessage().contains("com.microsoft:timeout")) {
+            if (ex.getCause() instanceof java.util.concurrent.TimeoutException) {
                 //Cannot distinguish empty queue from queue not accessible (!), waits for receive-timeout-seconds
                 log.debug("Empty queue or ASB is not reachable.");
             } else {
