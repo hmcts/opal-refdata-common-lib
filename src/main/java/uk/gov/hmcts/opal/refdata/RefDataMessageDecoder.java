@@ -32,10 +32,11 @@ public class RefDataMessageDecoder {
     public Optional<RefDataMessage<?, ?>> decode(String messagePayload) {
         JsonNode messageNode = readMessageNode(messagePayload);
         schemaValidationService.validateOrError(messageNode, REF_DATA_MESSAGE_SCHEMA);
-        String messageId = messageNode.path("header").path("message_id").asText(null);
-        String dataProduct = messageNode.path("header").path("data_product").asText(null);
+        JsonNode headerNode = messageNode.path("header");
+        String messageId = headerNode.path("message_id").asText(null);
         JsonNode payloadNode = messageNode.path("payload");
-        JsonNode releasePackageIdNode = payloadNode.path("header").path("release_package_id");
+        String dataProduct = headerNode.path("data_product").asText(null);
+        JsonNode releasePackageIdNode = headerNode.path("release_package_id");
         Integer releasePackageId = releasePackageIdNode.isIntegralNumber()
             ? releasePackageIdNode.intValue() : null;
         var handler = handlerRegistry.find(dataProduct);

@@ -5,26 +5,20 @@
   "properties": {
     "header": {
       "type": "object",
-      "required": ["message_id", "data_product"],
+      "required": ["message_id", "data_product", "release_package_id"],
       "properties": {
         "message_id": {
           "type": "string",
           "format": "uuid"
         },
-        "data_product": {"type": "string", "minLength": 1}
+        "data_product": {"type": "string", "minLength": 1},
+        "release_package_id": {"type": "integer"}
       }
     },
     "payload": {
       "type": "object",
-      "required": ["header", "records"],
+      "required": ["records"],
       "properties": {
-        "header": {
-          "type": "object",
-          "required": ["release_package_id"],
-          "properties": {
-            "release_package_id": {"type": "integer"}
-          }
-        },
         "records": {
           "type": "array",
           "items": {

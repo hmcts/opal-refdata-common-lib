@@ -74,18 +74,18 @@ public class RefDataServiceBusSessionPuller {
     private void processMessage(ServiceBusReceiverClient sessionWorker, ServiceBusReceivedMessage message) {
         try {
             decoder.decode(message.getBody().toString()).ifPresent(refDataMessage -> {
-                log.info("Starting to process messageId={} type={} releasePackageId={}",
+                log.info("Starting to process messageId={} type={} releasePackageId={} azureMessageId={}",
                     refDataMessage.messageId(), refDataMessage.refDataType(),
-                    refDataMessage.releasePackageId());
+                    refDataMessage.releasePackageId(), message.getMessageId());
                 processor.processMessage(refDataMessage);
             });
         } catch (RuntimeException ex) {
-            log.warn("Process failed for messageId={}", message.getMessageId(), ex);
+            log.warn("Process failed for azureMessageId={}", message.getMessageId(), ex);
             try {
                 sessionWorker.abandon(message);
             } catch (RuntimeException abandonException) {
                 ex.addSuppressed(abandonException);
-                log.warn("Abandon failed for messageId={}", message.getMessageId(), ex);
+                log.warn("Abandon failed for azureMessageId={}", message.getMessageId(), ex);
             }
             throw ex;
         }

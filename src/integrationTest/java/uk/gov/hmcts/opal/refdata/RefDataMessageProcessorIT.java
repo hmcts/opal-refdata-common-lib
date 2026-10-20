@@ -85,9 +85,8 @@ class RefDataMessageProcessorIT {
 
         process("""
             {
-              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data", "release_package_id": 1},
               "payload": {
-                "header": {"release_package_id": 1},
                 "records": [
                   {
                     "id": 1,
@@ -128,9 +127,8 @@ class RefDataMessageProcessorIT {
 
         process("""
             {
-              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data", "release_package_id": 1},
               "payload": {
-                "header": {"release_package_id": 1},
                 "records": [{
                   "id": 1,
                   "code": "NEW",
@@ -158,9 +156,8 @@ class RefDataMessageProcessorIT {
 
         process("""
             {
-              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data", "release_package_id": 1},
               "payload": {
-                "header": {"release_package_id": 1},
                 "records": [
                   {
                     "id": 2,
@@ -194,9 +191,8 @@ class RefDataMessageProcessorIT {
         // The blank code passes JSON schema validation but fails handler validation after the valid records.
         String message = """
             {
-              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data", "release_package_id": 1},
               "payload": {
-                "header": {"release_package_id": 1},
                 "records": [
                   {
                     "id": 1,
@@ -268,9 +264,8 @@ class RefDataMessageProcessorIT {
 
         String message = """
             {
-              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "unknown_ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "unknown_ref_data", "release_package_id": 1},
               "payload": {
-                "header": {"release_package_id": 1},
                 "records": [
                   {
                     "id": 1,

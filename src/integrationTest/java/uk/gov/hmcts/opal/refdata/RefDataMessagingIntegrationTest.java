@@ -198,9 +198,8 @@ class RefDataMessagingIntegrationTest {
     private static String message(long id, String dataProduct, String name) {
         return """
             {
-              "header": {"message_id": "00000000-0000-0000-0000-%012d", "data_product": "%s"},
+              "header": {"message_id": "00000000-0000-0000-0000-%012d", "data_product": "%s", "release_package_id": 1},
               "payload": {
-                "header": {"release_package_id": 1},
                 "records": [{
                   "id": %d,
                   "code": "NEW",
