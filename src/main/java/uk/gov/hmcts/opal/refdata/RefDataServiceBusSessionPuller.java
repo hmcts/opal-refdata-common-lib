@@ -92,9 +92,9 @@ public class RefDataServiceBusSessionPuller {
 
         try {
             sessionWorker.complete(message);
-            log.info("Finished processing messageId={}", message.getMessageId());
+            log.info("Finished processing azureMessageId={}", message.getMessageId());
         } catch (RuntimeException ex) {
-            log.warn("Complete failed for messageId={}", message.getMessageId(), ex);
+            log.warn("Complete failed for azureMessageId={}", message.getMessageId(), ex);
             throw ex;
         }
 
