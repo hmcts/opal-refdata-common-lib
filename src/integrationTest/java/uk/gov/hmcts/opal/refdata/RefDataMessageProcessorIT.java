@@ -49,6 +49,9 @@ class RefDataMessageProcessorIT {
     private MessageProcessor processor;
 
     @Autowired
+    private RefDataMessageDecoder decoder;
+
+    @Autowired
     private RefDataRepository repository;
 
     @Autowired
@@ -80,10 +83,11 @@ class RefDataMessageProcessorIT {
         assertThat(original.getDescription()).isEqualTo("Original description");
         assertThat(original.isActive()).isTrue();
 
-        processor.processMessage("""
+        process("""
             {
               "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
               "payload": {
+                "header": {"release_package_id": 1},
                 "records": [
                   {
                     "id": 1,
@@ -122,10 +126,11 @@ class RefDataMessageProcessorIT {
         assertThat(unrelatedCache).isNotNull();
         unrelatedCache.put("key", "Retained value");
 
-        processor.processMessage("""
+        process("""
             {
               "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
               "payload": {
+                "header": {"release_package_id": 1},
                 "records": [{
                   "id": 1,
                   "code": "NEW",
@@ -151,10 +156,11 @@ class RefDataMessageProcessorIT {
     void shouldCreateRefDataWhenNotFound() {
         assertThat(repository.findById(2L)).isEmpty();
 
-        processor.processMessage("""
+        process("""
             {
               "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
               "payload": {
+                "header": {"release_package_id": 1},
                 "records": [
                   {
                     "id": 2,
@@ -190,6 +196,7 @@ class RefDataMessageProcessorIT {
             {
               "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
               "payload": {
+                "header": {"release_package_id": 1},
                 "records": [
                   {
                     "id": 1,
@@ -217,7 +224,7 @@ class RefDataMessageProcessorIT {
             }
             """;
 
-        assertThatThrownBy(() -> processor.processMessage(message))
+        assertThatThrownBy(() -> process(message))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("An id and code are required");
 
@@ -242,7 +249,7 @@ class RefDataMessageProcessorIT {
             }
             """;
 
-        assertThatThrownBy(() -> processor.processMessage(message))
+        assertThatThrownBy(() -> process(message))
             .isInstanceOf(JsonSchemaValidationException.class)
             .hasMessageContaining("ref-data/ref_data_schema.json")
             .hasMessageContaining("records");
@@ -263,6 +270,7 @@ class RefDataMessageProcessorIT {
             {
               "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "unknown_ref_data"},
               "payload": {
+                "header": {"release_package_id": 1},
                 "records": [
                   {
                     "id": 1,
@@ -283,7 +291,7 @@ class RefDataMessageProcessorIT {
             }
             """;
 
-        assertThatCode(() -> processor.processMessage(message)).doesNotThrowAnyException();
+        assertThatCode(() -> process(message)).doesNotThrowAnyException();
 
         assertThat(repository.count()).isEqualTo(1L);
         RefData existing = repository.findById(1L).orElseThrow();
@@ -294,11 +302,15 @@ class RefDataMessageProcessorIT {
         assertThat(repository.findById(2L)).isEmpty();
     }
 
+    private void process(String payload) {
+        processor.processMessage(decoder.decode(payload));
+    }
+
     @SpringBootConfiguration(proxyBeanMethods = false)
     @EnableAutoConfiguration
     @EntityScan(basePackageClasses = RefData.class)
     @EnableJpaRepositories(basePackageClasses = RefDataRepository.class)
-    @Import({RefDataMessageProcessor.class, RefDataHandlerRegistry.class,
+    @Import({RefDataMessageProcessor.class, RefDataMessageDecoder.class, RefDataHandlerRegistry.class,
         SchemaValidationService.class, RefDataTestHandler.class})
     static class TestConfig {
 

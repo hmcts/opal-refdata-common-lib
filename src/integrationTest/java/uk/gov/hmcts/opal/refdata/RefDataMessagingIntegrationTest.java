@@ -183,6 +183,7 @@ class RefDataMessagingIntegrationTest {
             {
               "header": {"message_id": "00000000-0000-0000-0000-%012d", "data_product": "ref_data"},
               "payload": {
+                "header": {"release_package_id": 1},
                 "records": [{
                   "id": %d,
                   "code": "NEW",
