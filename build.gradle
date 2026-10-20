@@ -144,7 +144,7 @@ ext {
 
 dependencyManagement {
   imports {
-    mavenBom "tools.jackson:jackson-bom:3.2.3"
+    mavenBom "tools.jackson:jackson-bom:3.2.4"
     mavenBom 'org.springframework.boot:spring-boot-dependencies:4.1.1'
     mavenBom 'org.springframework.cloud:spring-cloud-dependencies:2025.1.3'
     mavenBom "io.netty:netty-bom:4.2.19.Final"
