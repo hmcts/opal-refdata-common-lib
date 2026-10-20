@@ -56,28 +56,28 @@ public class RefDataServiceBusSessionPuller {
         }
     }
 
-    private void processSessionMessages(ServiceBusReceiverClient sessionWorker) {
-        String sessionId = sessionWorker.getSessionId();
+    private void processSessionMessages(ServiceBusReceiverClient sessionReceiver) {
+        String sessionId = sessionReceiver.getSessionId();
         log.info("Acquired ref-data Service Bus session lock. sessionId={}", sessionId);
 
-        IterableStream<ServiceBusReceivedMessage> messages = sessionWorker.receiveMessages(
+        IterableStream<ServiceBusReceivedMessage> messages = sessionReceiver.receiveMessages(
             properties.getMaxMessagesPerSession(),
             Duration.ofSeconds(properties.getReceiveTimeoutSeconds())
         );
 
         for (ServiceBusReceivedMessage message : messages) {
-            processMessage(sessionWorker, message);
+            processMessage(sessionReceiver, message);
         }
     }
 
-    private void processMessage(ServiceBusReceiverClient sessionWorker, ServiceBusReceivedMessage message) {
+    private void processMessage(ServiceBusReceiverClient sessionReceiver, ServiceBusReceivedMessage message) {
 
         RefDataMessage<?, ?> refDataMessage;
         try {
             refDataMessage = decoder.decode(message.getBody().toString());
         } catch (RuntimeException ex) {
             log.info("Could not decode message " + message.getMessageId(), ex);
-            abandonMessage(sessionWorker, message, ex, "unknown");
+            abandonMessage(sessionReceiver, message, ex, "unknown");
             throw ex;
         }
 
@@ -89,18 +89,18 @@ public class RefDataServiceBusSessionPuller {
                 processor.processMessage(refDataMessage);
             } catch (RuntimeException ex) {
                 log.warn("Process failed for messageId={}", refDataMessage.messageId(), ex);
-                abandonMessage(sessionWorker, message, ex, refDataMessage.messageId());
+                abandonMessage(sessionReceiver, message, ex, refDataMessage.messageId());
                 throw ex;
             }
         }
 
-        completeMessage(sessionWorker, message, refDataMessage);
+        completeMessage(sessionReceiver, message, refDataMessage);
     }
 
-    private static void completeMessage(ServiceBusReceiverClient sessionWorker, ServiceBusReceivedMessage message,
+    private static void completeMessage(ServiceBusReceiverClient sessionReceiver, ServiceBusReceivedMessage message,
         RefDataMessage<?, ?> refDataMessage) {
         try {
-            sessionWorker.complete(message);
+            sessionReceiver.complete(message);
             log.info("Complete succeeded for messageId={} ", refDataMessage.messageId());
         } catch (RuntimeException ex) {
             log.warn("Complete failed for messageId={}", refDataMessage.messageId(), ex);
@@ -108,10 +108,10 @@ public class RefDataServiceBusSessionPuller {
         }
     }
 
-    private static void abandonMessage(ServiceBusReceiverClient sessionWorker, ServiceBusReceivedMessage message,
+    private static void abandonMessage(ServiceBusReceiverClient sessionReceiver, ServiceBusReceivedMessage message,
         RuntimeException ex, String messageId) {
         try {
-            sessionWorker.abandon(message);
+            sessionReceiver.abandon(message);
             log.info("Abandon succeeded for messageId={} ", messageId);
         } catch (RuntimeException abandonException) {
             ex.addSuppressed(abandonException);
