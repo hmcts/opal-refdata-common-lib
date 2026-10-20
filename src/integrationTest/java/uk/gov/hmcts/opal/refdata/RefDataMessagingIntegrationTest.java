@@ -181,7 +181,7 @@ class RefDataMessagingIntegrationTest {
     private static String message(long id, String name) {
         return """
             {
-              "header": {"data_product": "ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-%012d", "data_product": "ref_data"},
               "payload": {
                 "records": [{
                   "id": %d,
@@ -192,7 +192,7 @@ class RefDataMessagingIntegrationTest {
                 }]
               }
             }
-            """.formatted(id, name);
+        """.formatted(id, id, name);
     }
 
     @Import({RefDataMessageProcessorIT.TestConfig.class, RefDataServiceBusSessionReceiverConfig.class,

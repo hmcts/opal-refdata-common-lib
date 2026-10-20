@@ -82,7 +82,7 @@ class RefDataMessageProcessorIT {
 
         processor.processMessage("""
             {
-              "header": {"data_product": "ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
               "payload": {
                 "records": [
                   {
@@ -124,7 +124,7 @@ class RefDataMessageProcessorIT {
 
         processor.processMessage("""
             {
-              "header": {"data_product": "ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
               "payload": {
                 "records": [{
                   "id": 1,
@@ -153,7 +153,7 @@ class RefDataMessageProcessorIT {
 
         processor.processMessage("""
             {
-              "header": {"data_product": "ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
               "payload": {
                 "records": [
                   {
@@ -188,7 +188,7 @@ class RefDataMessageProcessorIT {
         // The blank code passes JSON schema validation but fails handler validation after the valid records.
         String message = """
             {
-              "header": {"data_product": "ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
               "payload": {
                 "records": [
                   {
@@ -237,7 +237,7 @@ class RefDataMessageProcessorIT {
         // The message is valid JSON but omits the required payload.records property.
         String message = """
             {
-              "header": {"data_product": "ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "ref_data"},
               "payload": {}
             }
             """;
@@ -261,7 +261,7 @@ class RefDataMessageProcessorIT {
 
         String message = """
             {
-              "header": {"data_product": "unknown_ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-000000000001", "data_product": "unknown_ref_data"},
               "payload": {
                 "records": [
                   {

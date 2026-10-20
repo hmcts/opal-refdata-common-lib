@@ -5,8 +5,12 @@
   "properties": {
     "header": {
       "type": "object",
-      "required": ["data_product"],
+      "required": ["message_id", "data_product"],
       "properties": {
+        "message_id": {
+          "type": "string",
+          "format": "uuid"
+        },
         "data_product": {"type": "string", "minLength": 1}
       }
     },

@@ -44,6 +44,8 @@ public class RefDataMessageProcessor implements MessageProcessor {
 
         JsonNode messageNode = readMessageNode(messagePayload);
 
+        String messageId = messageNode.path("header").path("message_id").asText(null);
+        log.info("messageId:{} header={}", messageId, messageNode.path("header"));
         schemaValidationService.validateOrError(messageNode, REF_DATA_MESSAGE_SCHEMA);
 
         String dataProduct = extractDataProduct(messageNode);
@@ -62,7 +64,7 @@ public class RefDataMessageProcessor implements MessageProcessor {
             return;
         }
 
-        recordsNode.forEach(recordNode -> applyUpdate(handler, recordNode));
+        recordsNode.forEach(recordNode -> applyUpdate(handler, recordNode, messageId));
 
         List<String> associatedCaches = handler.cachesToClear();
         associatedCaches.forEach(
@@ -83,14 +85,14 @@ public class RefDataMessageProcessor implements MessageProcessor {
     }
 
     @SuppressWarnings("unchecked")
-    private <T, E> void applyUpdate(RefDataUpdateHandler<T, E> handler, Object payload) {
+    private <T, E> void applyUpdate(RefDataUpdateHandler<T, E> handler, Object payload, String messageId) {
         T dto;
         try {
             dto = objectMapper.convertValue(payload, handler.payloadType());
         } catch (RuntimeException ex) {
             throw new IllegalArgumentException("Unable to convert ref data payload", ex);
         }
-        log.info("Processing ref data record: {}:{}", handler.refDataType(), handler.getBusinessKey(dto));
+        log.info("messageId:{} businessKey={}", messageId, handler.getBusinessKey(dto));
         handler.validateDto(dto);
         E entity = handler.findEntity(dto)
             .orElseGet(() -> handler.createEntity(dto));
