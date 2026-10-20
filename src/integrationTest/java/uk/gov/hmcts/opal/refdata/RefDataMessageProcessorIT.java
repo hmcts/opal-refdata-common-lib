@@ -303,7 +303,7 @@ class RefDataMessageProcessorIT {
     }
 
     private void process(String payload) {
-        processor.processMessage(decoder.decode(payload));
+        decoder.decode(payload).ifPresent(processor::processMessage);
     }
 
     @SpringBootConfiguration(proxyBeanMethods = false)

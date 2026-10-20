@@ -141,6 +141,19 @@ class RefDataMessagingIntegrationTest {
     }
 
     @Test
+    void processMessage_completesMessageWhenNoHandlerExistsForDataProduct() {
+        String payload = message(1L, "unknown_ref_data", "Ignored name");
+        publishAndWait(payload);
+
+        puller.pullSessionMessages();
+
+        assertThat(repository.findById(1L).orElseThrow().getName()).isEqualTo("Original name");
+        assertThat(repository.count()).isEqualTo(1L);
+        assertThat(emulator.peekQueueMessages()).isEmpty();
+        assertThat(emulator.peekDlqMessages()).isEmpty();
+    }
+
+    @Test
     void processMessage_leavesInvalidPayloadOnQueueAndNotInDlq() {
         String payload = "{xx}";
         publishAndWait(payload);
@@ -179,9 +192,13 @@ class RefDataMessagingIntegrationTest {
     }
 
     private static String message(long id, String name) {
+        return message(id, "ref_data", name);
+    }
+
+    private static String message(long id, String dataProduct, String name) {
         return """
             {
-              "header": {"message_id": "00000000-0000-0000-0000-%012d", "data_product": "ref_data"},
+              "header": {"message_id": "00000000-0000-0000-0000-%012d", "data_product": "%s"},
               "payload": {
                 "header": {"release_package_id": 1},
                 "records": [{
@@ -193,7 +210,7 @@ class RefDataMessagingIntegrationTest {
                 }]
               }
             }
-        """.formatted(id, id, name);
+        """.formatted(id, dataProduct, id, name);
     }
 
     @Import({RefDataMessageProcessorIT.TestConfig.class, RefDataServiceBusSessionReceiverConfig.class,

@@ -1,7 +1,7 @@
 package uk.gov.hmcts.opal.refdata;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class RefDataMessageDecoder {
         schemaValidationService.checkSchemaExists(REF_DATA_MESSAGE_SCHEMA);
     }
 
-    public RefDataMessage<?, ?> decode(String messagePayload) {
+    public Optional<RefDataMessage<?, ?>> decode(String messagePayload) {
         JsonNode messageNode = readMessageNode(messagePayload);
         schemaValidationService.validateOrError(messageNode, REF_DATA_MESSAGE_SCHEMA);
         String messageId = messageNode.path("header").path("message_id").asText(null);
@@ -41,10 +41,11 @@ public class RefDataMessageDecoder {
         var handler = handlerRegistry.find(dataProduct);
         if (handler.isEmpty()) {
             log.debug("Ignoring ref-data message with no registered handler for type: {}", dataProduct);
-            return new RefDataMessage<>(messageId, null, dataProduct, releasePackageId, List.of());
+            return Optional.empty();
         }
         JsonNode recordsNode = payloadNode.path("records");
-        return decodeKnownMessage(messageId, dataProduct, releasePackageId, handler.get(), recordsNode);
+        return Optional.of(decodeKnownMessage(messageId, dataProduct, releasePackageId,
+            handler.get(), recordsNode));
     }
 
     private <T, E> RefDataMessage<T, E> decodeKnownMessage(String messageId, String refDataType,

@@ -72,12 +72,13 @@ public class RefDataServiceBusSessionPuller {
     }
 
     private void processMessage(ServiceBusReceiverClient sessionWorker, ServiceBusReceivedMessage message) {
-        RefDataMessage<?, ?> refDataMessage;
         try {
-            refDataMessage = decoder.decode(message.getBody().toString());
-            log.info("Starting to process messageId={} type={} releasePackageId={}",
-                refDataMessage.messageId(), refDataMessage.refDataType(), refDataMessage.releasePackageId());
-            processor.processMessage(refDataMessage);
+            decoder.decode(message.getBody().toString()).ifPresent(refDataMessage -> {
+                log.info("Starting to process messageId={} type={} releasePackageId={}",
+                    refDataMessage.messageId(), refDataMessage.refDataType(),
+                    refDataMessage.releasePackageId());
+                processor.processMessage(refDataMessage);
+            });
         } catch (RuntimeException ex) {
             log.warn("Process failed for messageId={}", message.getMessageId(), ex);
             try {
@@ -91,11 +92,12 @@ public class RefDataServiceBusSessionPuller {
 
         try {
             sessionWorker.complete(message);
+            log.info("Finished processing messageId={}", message.getMessageId());
         } catch (RuntimeException ex) {
             log.warn("Complete failed for messageId={}", message.getMessageId(), ex);
             throw ex;
         }
-        log.info("Finished processing messageId={}", refDataMessage.messageId());
+
     }
 
     private boolean isClientTimeout(IllegalStateException ex) {
