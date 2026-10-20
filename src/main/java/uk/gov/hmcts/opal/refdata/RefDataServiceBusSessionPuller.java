@@ -83,7 +83,7 @@ public class RefDataServiceBusSessionPuller {
 
         if (refDataMessage.handler() != null) {
             try {
-                log.info("Starting to process messageId={} type={} releasePackageId={} serviceBusMessageId={}",
+                log.info("Processing message: messageId={} type={} releasePackageId={} serviceBusMessageId={}",
                     refDataMessage.messageId(), refDataMessage.refDataType(),
                     refDataMessage.releasePackageId(), message.getMessageId());
                 processor.processMessage(refDataMessage);

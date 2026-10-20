@@ -21,7 +21,7 @@ public class RefDataMessageProcessor implements MessageProcessor {
     public <T, E> void processMessage(RefDataMessage<T, E> message) {
         RefDataUpdateHandler<T, E> handler = message.handler();
         message.records().forEach(dto -> {
-            log.info("Processing record messageId={} type={} businessKey={}",
+            log.info("Processing record: messageId={} type={} businessKey={}",
                 message.messageId() ,message.refDataType(), handler.getBusinessKey(dto));
             applyUpdate(handler, dto);
         }
