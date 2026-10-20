@@ -7,7 +7,6 @@ import com.azure.messaging.servicebus.ServiceBusReceiverClient;
 import com.azure.messaging.servicebus.ServiceBusSessionReceiverClient;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -78,6 +77,7 @@ public class RefDataServiceBusSessionPuller {
             refDataMessage = decoder.decode(message.getBody().toString());
         } catch (RuntimeException ex) {
             log.info("Could not decode message " + message.getMessageId(), ex);
+            abandonMessage(sessionWorker, message, ex, "unknown");
             throw ex;
         }
 
@@ -89,17 +89,16 @@ public class RefDataServiceBusSessionPuller {
                 processor.processMessage(refDataMessage);
             } catch (RuntimeException ex) {
                 log.warn("Process failed for messageId={}", refDataMessage.messageId(), ex);
-                try {
-                    sessionWorker.abandon(message);
-                    log.info("Abandon succeeded for messageId={} ", refDataMessage.messageId());
-                } catch (RuntimeException abandonException) {
-                    ex.addSuppressed(abandonException);
-                    log.warn("Abandon failed for messageId={}", refDataMessage.messageId(), ex);
-                }
+                abandonMessage(sessionWorker, message, ex, refDataMessage.messageId());
                 throw ex;
             }
         }
 
+        completeMessage(sessionWorker, message, refDataMessage);
+    }
+
+    private static void completeMessage(ServiceBusReceiverClient sessionWorker, ServiceBusReceivedMessage message,
+        RefDataMessage<?, ?> refDataMessage) {
         try {
             sessionWorker.complete(message);
             log.info("Complete succeeded for messageId={} ", refDataMessage.messageId());
@@ -107,6 +106,16 @@ public class RefDataServiceBusSessionPuller {
             log.warn("Complete failed for messageId={}", refDataMessage.messageId(), ex);
             throw ex;
         }
+    }
 
+    private static void abandonMessage(ServiceBusReceiverClient sessionWorker, ServiceBusReceivedMessage message,
+        RuntimeException ex, String messageId) {
+        try {
+            sessionWorker.abandon(message);
+            log.info("Abandon succeeded for messageId={} ", messageId);
+        } catch (RuntimeException abandonException) {
+            ex.addSuppressed(abandonException);
+            log.warn("Abandon failed for messageId={}", messageId, ex);
+        }
     }
 }

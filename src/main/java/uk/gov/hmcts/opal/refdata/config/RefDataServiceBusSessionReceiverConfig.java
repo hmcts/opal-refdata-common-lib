@@ -50,7 +50,7 @@ public class RefDataServiceBusSessionReceiverConfig {
             }
         }
 
-        //how long to wait, eg, if no messages on queue.
+        //It sets the timeout for an individual AMQP operation, such as receiving, completing, abandoning, or renewing a message. It is also used when acceptNextSession() waits for an available session.
         AmqpRetryOptions retryOptions = new AmqpRetryOptions()
             .setTryTimeout(Duration.ofSeconds(5)); // Reduces the wait from 60s to 5s
         builder.retryOptions(retryOptions);
