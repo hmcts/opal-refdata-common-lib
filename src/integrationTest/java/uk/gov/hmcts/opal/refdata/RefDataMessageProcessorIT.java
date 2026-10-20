@@ -298,7 +298,10 @@ class RefDataMessageProcessorIT {
     }
 
     private void process(String payload) {
-        decoder.decode(payload).ifPresent(processor::processMessage);
+        RefDataMessage<?, ?> message = decoder.decode(payload);
+        if (message.handler() != null) {
+            processor.processMessage(message);
+        }
     }
 
     @SpringBootConfiguration(proxyBeanMethods = false)

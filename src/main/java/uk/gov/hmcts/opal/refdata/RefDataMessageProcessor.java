@@ -26,7 +26,7 @@ public class RefDataMessageProcessor implements MessageProcessor {
             applyUpdate(handler, dto);
         }
         );
-        message.handler().cachesToClear().stream().distinct().forEach(this::clearCache);
+        handler.cachesToClear().stream().distinct().forEach(this::clearCache);
     }
 
     private <T, E> void applyUpdate(RefDataUpdateHandler<T, E> handler, T dto) {

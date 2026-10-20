@@ -29,7 +29,7 @@ public class RefDataMessageDecoder {
         schemaValidationService.checkSchemaExists(REF_DATA_MESSAGE_SCHEMA);
     }
 
-    public Optional<RefDataMessage<?, ?>> decode(String messagePayload) {
+    public RefDataMessage<?, ?> decode(String messagePayload) {
         JsonNode messageNode = readMessageNode(messagePayload);
         schemaValidationService.validateOrError(messageNode, REF_DATA_MESSAGE_SCHEMA);
         JsonNode headerNode = messageNode.path("header");
@@ -41,12 +41,12 @@ public class RefDataMessageDecoder {
             ? releasePackageIdNode.intValue() : null;
         var handler = handlerRegistry.find(dataProduct);
         if (handler.isEmpty()) {
-            log.debug("Ignoring ref-data message with no registered handler for type: {}", dataProduct);
-            return Optional.empty();
+            log.info("No handler registered for type: {}", dataProduct);
+            return new RefDataMessage<>(messageId, null, dataProduct, releasePackageId,
+                java.util.List.of());
         }
         JsonNode recordsNode = payloadNode.path("records");
-        return Optional.of(decodeKnownMessage(messageId, dataProduct, releasePackageId,
-            handler.get(), recordsNode));
+        return decodeKnownMessage(messageId, dataProduct, releasePackageId, handler.get(), recordsNode);
     }
 
     private <T, E> RefDataMessage<T, E> decodeKnownMessage(String messageId, String refDataType,
