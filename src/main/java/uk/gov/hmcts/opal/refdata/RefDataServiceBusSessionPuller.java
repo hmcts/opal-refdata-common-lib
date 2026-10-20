@@ -53,6 +53,7 @@ public class RefDataServiceBusSessionPuller {
             }
         } catch (RuntimeException ex) {
             log.error("Unexpected failure while pulling ref-data Service Bus messages", ex);
+            throw ex;
         }
     }
 
@@ -76,7 +77,7 @@ public class RefDataServiceBusSessionPuller {
         try {
             refDataMessage = decoder.decode(message.getBody().toString());
         } catch (RuntimeException ex) {
-            log.info("Could not decode message " + message.getMessageId(), ex);
+            log.info("Could not decode message {}", message.getMessageId(), ex);
             abandonMessage(sessionReceiver, message, ex, "unknown");
             throw ex;
         }

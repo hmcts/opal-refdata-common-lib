@@ -1,6 +1,7 @@
 package uk.gov.hmcts.opal.refdata;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.awaitility.Awaitility.await;
 
 import java.time.Duration;
@@ -158,7 +159,8 @@ class RefDataMessagingIntegrationTest {
         String payload = "{xx}";
         publishAndWait(payload);
 
-        puller.pullSessionMessages();
+        assertThatThrownBy(puller::pullSessionMessages)
+            .isInstanceOf(IllegalArgumentException.class);
 
         assertThat(emulator.peekQueueMessages()).containsExactly(payload);
         assertThat(emulator.peekDlqMessages()).isEmpty();
@@ -173,7 +175,8 @@ class RefDataMessagingIntegrationTest {
         String unprocessedPayload = message(2L, "Unprocessed name");
         publishAndWait(processedPayload, invalidPayload, unprocessedPayload);
 
-        puller.pullSessionMessages();
+        assertThatThrownBy(puller::pullSessionMessages)
+            .isInstanceOf(IllegalArgumentException.class);
 
         assertThat(repository.findById(1L).orElseThrow().getName())
             .isEqualTo("Updated before invalid payload");
