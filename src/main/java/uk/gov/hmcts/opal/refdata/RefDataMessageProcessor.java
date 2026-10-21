@@ -32,10 +32,9 @@ public class RefDataMessageProcessor implements MessageProcessor {
             .ifPresent(handler -> processDecodedMessage(message, handler));
     }
 
+    // Type-safety bridge between the dynamically selected handler and Java’s generic type system
     @SuppressWarnings({"rawtypes", "unchecked"})
     private void processDecodedMessage(RefDataMessage<?> message, RefDataUpdateHandler<?, ?> handler) {
-        // The registry matches the handler to the message's refDataType. That is the
-        // one point where the message's wildcard type can safely be paired with it.
         processDecodedMessageWithHandler((RefDataMessage) message, (RefDataUpdateHandler) handler);
     }
 
