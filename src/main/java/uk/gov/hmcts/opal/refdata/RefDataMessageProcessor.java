@@ -12,24 +12,35 @@ public class RefDataMessageProcessor implements MessageProcessor {
 
     private final CacheManager cacheManager;
     private final RefDataMessageDecoder decoder;
+    private final RefDataHandlerRegistry handlerRegistry;
 
-    public RefDataMessageProcessor(CacheManager cacheManager, RefDataMessageDecoder decoder) {
+    public RefDataMessageProcessor(CacheManager cacheManager, RefDataMessageDecoder decoder,
+        RefDataHandlerRegistry handlerRegistry) {
         this.cacheManager = cacheManager;
         this.decoder = decoder;
+        this.handlerRegistry = handlerRegistry;
     }
 
     @Transactional
     @Override
     public void processMessage(String messagePayload) {
-        RefDataMessage<?, ?> message = decoder.decode(messagePayload);
-        if (message.handler() == null) {
+        RefDataMessage<?> message = decoder.decode(messagePayload);
+        if (message == null) {
             return;
         }
-        processDecodedMessage(message);
+        handlerRegistry.find(message.refDataType())
+            .ifPresent(handler -> processDecodedMessage(message, handler));
     }
 
-    private <T, E> void processDecodedMessage(RefDataMessage<T, E> message) {
-        RefDataUpdateHandler<T, E> handler = message.handler();
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private void processDecodedMessage(RefDataMessage<?> message, RefDataUpdateHandler<?, ?> handler) {
+        // The registry matches the handler to the message's refDataType. That is the
+        // one point where the message's wildcard type can safely be paired with it.
+        processDecodedMessageWithHandler((RefDataMessage) message, (RefDataUpdateHandler) handler);
+    }
+
+    private <T, E> void processDecodedMessageWithHandler(RefDataMessage<T> message,
+        RefDataUpdateHandler<T, E> handler) {
         message.records().forEach(dto -> {
             log.info("Processing record: messageId={} type={} businessKey={}",
                 message.messageId() ,message.refDataType(), handler.getBusinessKey(dto));

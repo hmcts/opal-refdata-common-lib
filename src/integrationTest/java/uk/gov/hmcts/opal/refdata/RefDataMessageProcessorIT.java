@@ -49,7 +49,6 @@ class RefDataMessageProcessorIT {
     private MessageProcessor processor;
 
     @Autowired
-    @Autowired
     private RefDataRepository repository;
 
     @Autowired

@@ -35,7 +35,7 @@ public class RefDataMessageDecoder {
         schemaValidationService.checkSchemaExists(REF_DATA_MESSAGE_SCHEMA);
     }
 
-    public RefDataMessage<?, ?> decode(String messagePayload) {
+    public RefDataMessage<?> decode(String messagePayload) {
         JsonNode messageNode;
         try {
             messageNode = objectMapper.readTree(messagePayload);
@@ -53,8 +53,7 @@ public class RefDataMessageDecoder {
         var maybeHandler = handlerRegistry.find(dataProduct);
         if (maybeHandler.isEmpty()) {
             log.info("No handler registered for type: {}", dataProduct);
-            return new RefDataMessage<>(messageId, null, dataProduct, releasePackageId,
-                List.of());
+            return null;
         }
         return decodeKnownMessage(
             messageId,
@@ -65,7 +64,7 @@ public class RefDataMessageDecoder {
         );
     }
 
-    private <T, E> RefDataMessage<T, E> decodeKnownMessage(
+    private <T, E> RefDataMessage<T> decodeKnownMessage(
         String messageId,
         String dataProduct,
         Integer releasePackageId,
@@ -73,7 +72,7 @@ public class RefDataMessageDecoder {
         JsonNode recordsNode
     ) {
         var records = decodeRecords(handler, recordsNode);
-        return new RefDataMessage<>(messageId, handler, dataProduct, releasePackageId, records);
+        return new RefDataMessage<>(messageId, dataProduct, releasePackageId, records);
     }
 
     private <T, E> List<T> decodeRecords(RefDataUpdateHandler<T, E> handler, JsonNode recordsNode) {
