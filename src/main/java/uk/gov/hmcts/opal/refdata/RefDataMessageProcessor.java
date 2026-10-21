@@ -28,8 +28,12 @@ public class RefDataMessageProcessor implements MessageProcessor {
         if (message == null) {
             return;
         }
-        handlerRegistry.find(message.refDataType())
-            .ifPresent(handler -> processDecodedMessage(message, handler));
+        RefDataUpdateHandler<?, ?> handler = handlerRegistry.find(message.refDataType())
+            .orElseThrow(
+                () -> new IllegalStateException("No handler found for refDataType: " + message.refDataType())
+            );
+
+        processDecodedMessage(message, handler);
     }
 
     // Type-safety bridge between the dynamically selected handler and Java’s generic type system
