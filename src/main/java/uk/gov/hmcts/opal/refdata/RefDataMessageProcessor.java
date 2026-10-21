@@ -11,14 +11,24 @@ import org.springframework.transaction.annotation.Transactional;
 public class RefDataMessageProcessor implements MessageProcessor {
 
     private final CacheManager cacheManager;
+    private final RefDataMessageDecoder decoder;
 
-    public RefDataMessageProcessor(CacheManager cacheManager) {
+    public RefDataMessageProcessor(CacheManager cacheManager, RefDataMessageDecoder decoder) {
         this.cacheManager = cacheManager;
+        this.decoder = decoder;
     }
 
     @Transactional
     @Override
-    public <T, E> void processMessage(RefDataMessage<T, E> message) {
+    public void processMessage(String messagePayload) {
+        RefDataMessage<?, ?> message = decoder.decode(messagePayload);
+        if (message.handler() == null) {
+            return;
+        }
+        processDecodedMessage(message);
+    }
+
+    private <T, E> void processDecodedMessage(RefDataMessage<T, E> message) {
         RefDataUpdateHandler<T, E> handler = message.handler();
         message.records().forEach(dto -> {
             log.info("Processing record: messageId={} type={} businessKey={}",

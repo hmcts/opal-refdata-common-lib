@@ -22,7 +22,6 @@ public class RefDataServiceBusSessionPuller {
 
     private final ServiceBusSessionReceiverClient sessionReceiverClient;
     private final MessageProcessor processor;
-    private final RefDataMessageDecoder decoder;
     private final RefDataServiceBusProperties properties;
 
     @Scheduled(
@@ -73,38 +72,24 @@ public class RefDataServiceBusSessionPuller {
 
     private void processMessage(ServiceBusReceiverClient sessionReceiver, ServiceBusReceivedMessage message) {
 
-        RefDataMessage<?, ?> refDataMessage;
         try {
-            refDataMessage = decoder.decode(message.getBody().toString());
+            log.info("Processing Service Bus message: serviceBusMessageId={}", message.getMessageId());
+            processor.processMessage(message.getBody().toString());
         } catch (RuntimeException ex) {
-            log.info("Could not decode message {}", message.getMessageId(), ex);
-            abandonMessage(sessionReceiver, message, ex, "unknown");
+            log.warn("Process failed for serviceBusMessageId={}", message.getMessageId(), ex);
+            abandonMessage(sessionReceiver, message, ex, message.getMessageId());
             throw ex;
         }
 
-        if (refDataMessage.handler() != null) {
-            try {
-                log.info("Processing message: messageId={} type={} releasePackageId={} serviceBusMessageId={}",
-                    refDataMessage.messageId(), refDataMessage.refDataType(),
-                    refDataMessage.releasePackageId(), message.getMessageId());
-                processor.processMessage(refDataMessage);
-            } catch (RuntimeException ex) {
-                log.warn("Process failed for messageId={}", refDataMessage.messageId(), ex);
-                abandonMessage(sessionReceiver, message, ex, refDataMessage.messageId());
-                throw ex;
-            }
-        }
-
-        completeMessage(sessionReceiver, message, refDataMessage);
+        completeMessage(sessionReceiver, message);
     }
 
-    private static void completeMessage(ServiceBusReceiverClient sessionReceiver, ServiceBusReceivedMessage message,
-        RefDataMessage<?, ?> refDataMessage) {
+    private static void completeMessage(ServiceBusReceiverClient sessionReceiver, ServiceBusReceivedMessage message) {
         try {
             sessionReceiver.complete(message);
-            log.info("Complete succeeded for messageId={} ", refDataMessage.messageId());
+            log.info("Complete succeeded for serviceBusMessageId={}", message.getMessageId());
         } catch (RuntimeException ex) {
-            log.warn("Complete failed for messageId={}", refDataMessage.messageId(), ex);
+            log.warn("Complete failed for serviceBusMessageId={}", message.getMessageId(), ex);
             throw ex;
         }
     }

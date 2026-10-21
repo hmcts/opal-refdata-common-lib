@@ -49,8 +49,6 @@ class RefDataMessageProcessorIT {
     private MessageProcessor processor;
 
     @Autowired
-    private RefDataMessageDecoder decoder;
-
     @Autowired
     private RefDataRepository repository;
 
@@ -298,10 +296,7 @@ class RefDataMessageProcessorIT {
     }
 
     private void process(String payload) {
-        RefDataMessage<?, ?> message = decoder.decode(payload);
-        if (message.handler() != null) {
-            processor.processMessage(message);
-        }
+        processor.processMessage(payload);
     }
 
     @SpringBootConfiguration(proxyBeanMethods = false)
