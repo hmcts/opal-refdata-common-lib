@@ -55,23 +55,7 @@ public class RefDataMessageDecoder {
             log.info("No handler registered for type: {}", dataProduct);
             return null;
         }
-        return decodeKnownMessage(
-            messageId,
-            dataProduct,
-            releasePackageId,
-            maybeHandler.get(),
-            payloadNode.path(RECORDS)
-        );
-    }
-
-    private <T, E> RefDataMessage<T> decodeKnownMessage(
-        String messageId,
-        String dataProduct,
-        Integer releasePackageId,
-        RefDataUpdateHandler<T, E> handler,
-        JsonNode recordsNode
-    ) {
-        var records = decodeRecords(handler, recordsNode);
+        var records = decodeRecords(maybeHandler.get(), payloadNode.path(RECORDS));
         return new RefDataMessage<>(messageId, dataProduct, releasePackageId, records);
     }
 
