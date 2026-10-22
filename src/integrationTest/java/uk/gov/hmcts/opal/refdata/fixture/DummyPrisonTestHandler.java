@@ -3,8 +3,9 @@ package uk.gov.hmcts.opal.refdata.fixture;
 import java.util.List;
 import java.util.Optional;
 import uk.gov.hmcts.opal.refdata.RefDataUpdateHandler;
+import uk.gov.hmcts.opal.refdata.dto.PrisonRecord;
 
-public class DummyPrisonTestHandler implements RefDataUpdateHandler<DummyPrisonPayload, DummyPrison> {
+public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord, DummyPrison> {
     public static final String PRISON_CACHE = "prison";
     public static final String PRISON_LOOKUP_CACHE = "prisonLookup";
 
@@ -22,32 +23,32 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<DummyPrisonP
         return List.of(PRISON_CACHE, PRISON_LOOKUP_CACHE);
     }
 
-    public String getBusinessKey(DummyPrisonPayload dto) {
+    public String getBusinessKey(PrisonRecord dto) {
         return dto.description();
     }
 
-    public Class<DummyPrisonPayload> payloadType() {
-        return DummyPrisonPayload.class;
+    public Class<PrisonRecord> payloadType() {
+        return PrisonRecord.class;
     }
 
-    public void validateDto(DummyPrisonPayload dto) {
+    public void validateDto(PrisonRecord dto) {
         if (dto.description().contains("X")) {
             throw new IllegalArgumentException("A prison name cannot contain the letter X");
         }
     }
 
-    public Optional<DummyPrison> findEntity(DummyPrisonPayload dto) {
+    public Optional<DummyPrison> findEntity(PrisonRecord dto) {
         return repository.findByName(dto.description());
     }
 
-    public DummyPrison createEntity(DummyPrisonPayload dto) {
+    public DummyPrison createEntity(PrisonRecord dto) {
         DummyPrison entity = new DummyPrison();
         entity.setId(prisonId(dto));
         return entity;
     }
 
-    public void updateEntityFromDto(DummyPrisonPayload dto, DummyPrison e) {
-        DummyPrisonPayload.Address address = dto.addresses().get(0);
+    public void updateEntityFromDto(PrisonRecord dto, DummyPrison e) {
+        var address = dto.addresses().get(0);
         e.setName(dto.description());
         e.setAddressLine1(address.addressLine1());
         e.setAddressLine2(address.addressLine2());
@@ -61,7 +62,7 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<DummyPrisonP
         return repository.save(entity);
     }
 
-    private Long prisonId(DummyPrisonPayload dto) {
+    private Long prisonId(PrisonRecord dto) {
         return (long) Math.abs(dto.description().hashCode());
     }
 }
