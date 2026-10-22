@@ -411,7 +411,9 @@ class RefDataMessageProcessorIT {
         assertThat(repository.count()).isEqualTo(1);
     }
 
-    private void process(String message) { processor.processMessage(message); }
+    private void process(String message) {
+        processor.processMessage(message);
+    }
 
     @SpringBootConfiguration(proxyBeanMethods = false)
     @EnableAutoConfiguration
@@ -420,6 +422,9 @@ class RefDataMessageProcessorIT {
     @Import({RefDataMessageProcessor.class, RefDataMessageDecoder.class, RefDataHandlerRegistry.class,
         SchemaValidationService.class, DummyPrisonTestHandler.class})
     static class TestConfig {
-        @Bean CacheManager cacheManager() { return new ConcurrentMapCacheManager(); }
+        @Bean
+        CacheManager cacheManager() {
+            return new ConcurrentMapCacheManager();
+        }
     }
 }

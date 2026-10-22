@@ -2,6 +2,7 @@ package uk.gov.hmcts.opal.refdata.fixture;
 
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 public record DummyPrisonPayload(
     String description,
     @JsonProperty("business_unit") String businessUnit,
