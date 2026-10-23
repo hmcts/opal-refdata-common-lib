@@ -11,13 +11,21 @@ class RefDataHandlerRegistryTest {
 
     @Test
     void shouldFindHandlerByRefDataType() {
+        // Given
         RefDataUpdateHandler<?, ?> handler = mock(RefDataUpdateHandler.class);
         when(handler.refDataType()).thenReturn("Prison");
         var registry = new RefDataHandlerRegistry(List.of(handler));
 
-        assertThat(registry.find("Prison")).containsSame(handler);
-        assertThat(registry.find("Court")).isEmpty();
-        assertThat(registry.find(" ")).isEmpty();
-        assertThat(registry.find(null)).isEmpty();
+        // When
+        var prisonHandler = registry.find("Prison");
+        var courtHandler = registry.find("Court");
+        var blankHandler = registry.find(" ");
+        var nullHandler = registry.find(null);
+
+        // Then
+        assertThat(prisonHandler).containsSame(handler);
+        assertThat(courtHandler).isEmpty();
+        assertThat(blankHandler).isEmpty();
+        assertThat(nullHandler).isEmpty();
     }
 }
