@@ -24,7 +24,7 @@ public class RefDataMessageProcessor implements MessageProcessor {
     @Transactional
     @Override
     public void processMessage(String messagePayload) {
-        RefDataMessage<?> message = decoder.decode(messagePayload);
+        RefDataMessage<Object> message = decoder.decode(messagePayload);
         if (message == null) {
             //no handler found
             return;

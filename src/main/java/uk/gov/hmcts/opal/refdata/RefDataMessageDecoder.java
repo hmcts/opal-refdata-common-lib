@@ -34,7 +34,7 @@ public class RefDataMessageDecoder {
         schemaValidationService.checkSchemaExists(REF_DATA_MESSAGE_SCHEMA);
     }
 
-    public RefDataMessage<?> decode(String messagePayload) {
+    public RefDataMessage<Object> decode(String messagePayload) {
         JsonNode messageNode;
         try {
             messageNode = objectMapper.readTree(messagePayload);
@@ -58,8 +58,8 @@ public class RefDataMessageDecoder {
         return new RefDataMessage<>(messageId, dataProduct, releasePackageId, records);
     }
 
-    private <T, E> List<T> decodeRecords(RefDataUpdateHandler<T, E> handler, JsonNode recordsNode) {
-        var records = new ArrayList<T>();
+    private List<Object> decodeRecords(RefDataUpdateHandler<?, ?> handler, JsonNode recordsNode) {
+        var records = new ArrayList<Object>();
         recordsNode.forEach(recordNode -> {
             try {
                 records.add(objectMapper.convertValue(recordNode, handler.payloadType()));
