@@ -21,14 +21,21 @@ class SchemaValidationServiceTest {
 
     @Test
     void shouldValidateJsonAgainstSchema() throws Exception {
+        // Given
         var json = objectMapper.readTree("{}");
 
-        assertThat(schemaValidationService.isValid(json, SCHEMA_FILE)).isFalse();
-        assertThat(schemaValidationService.validate(json, SCHEMA_FILE)).isNotEmpty();
+        // When
+        var valid = schemaValidationService.isValid(json, SCHEMA_FILE);
+        var errors = schemaValidationService.validate(json, SCHEMA_FILE);
+
+        // Then
+        assertThat(valid).isFalse();
+        assertThat(errors).isNotEmpty();
     }
 
     @Test
     void shouldValidateValidPrisonsPayload() throws Exception {
+        // Given
         var json = objectMapper.readTree("""
             {
               "header": {
@@ -53,12 +60,18 @@ class SchemaValidationServiceTest {
             }
             """);
 
-        assertThat(schemaValidationService.isValid(json, SCHEMA_FILE)).isTrue();
-        assertThat(schemaValidationService.validate(json, SCHEMA_FILE)).isEmpty();
+        // When
+        var valid = schemaValidationService.isValid(json, SCHEMA_FILE);
+        var errors = schemaValidationService.validate(json, SCHEMA_FILE);
+
+        // Then
+        assertThat(valid).isTrue();
+        assertThat(errors).isEmpty();
     }
 
     @Test
     void shouldReturnValidationErrorForInvalidPrisonPostcode() throws Exception {
+        // Given
         var json = objectMapper.readTree("""
             {
               "header": {
@@ -88,20 +101,36 @@ class SchemaValidationServiceTest {
             }
             """);
 
-        assertThat(schemaValidationService.validate(json, SCHEMA_FILE))
+        // When
+        var errors = schemaValidationService.validate(json, SCHEMA_FILE);
+
+        // Then
+        assertThat(errors)
             .anyMatch(error -> error.contains("post_code") && error.contains("pattern"));
     }
 
     @Test
     void shouldAllowExistingSchemaToBeChecked() {
-        schemaValidationService.checkSchemaExists(SCHEMA_FILE);
+        // Given
+        var schemaFile = SCHEMA_FILE;
+
+        // When
+        schemaValidationService.checkSchemaExists(schemaFile);
+
+        // Then
+        // No exception is thrown.
     }
 
     @Test
     void shouldThrowWhenJsonDoesNotMatchSchema() throws Exception {
+        // Given
         var json = objectMapper.readTree("{}");
 
-        assertThatThrownBy(() -> schemaValidationService.validateOrError(json, SCHEMA_FILE))
+        // When
+        var exception = assertThatThrownBy(() -> schemaValidationService.validateOrError(json, SCHEMA_FILE));
+
+        // Then
+        exception
             .isInstanceOf(JsonSchemaValidationException.class)
             .hasMessageContaining("Validating against JSON schema 'ref-data/ref_data_schema.json'")
             .hasMessageContaining("validation errors:");
@@ -109,9 +138,14 @@ class SchemaValidationServiceTest {
 
     @Test
     void shouldRejectBlankSchemaFilename() throws Exception {
+        // Given
         var json = objectMapper.readTree("{}");
 
-        assertThatThrownBy(() -> schemaValidationService.isValid(json, " "))
+        // When
+        var exception = assertThatThrownBy(() -> schemaValidationService.isValid(json, " "));
+
+        // Then
+        exception
             .isInstanceOf(SchemaConfigurationException.class)
             .hasMessage("A schema filename is required to validate a JSON document.");
     }
