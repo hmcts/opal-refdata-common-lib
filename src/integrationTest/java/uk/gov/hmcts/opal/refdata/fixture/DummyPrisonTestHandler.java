@@ -2,6 +2,7 @@ package uk.gov.hmcts.opal.refdata.fixture;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import uk.gov.hmcts.opal.refdata.RefDataUpdateHandler;
 import uk.gov.hmcts.opal.refdata.dto.PrisonRecord;
 
@@ -15,38 +16,47 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord
         this.repository = repository;
     }
 
+    @Override
     public String refDataType() {
         return "Prison";
     }
 
+    @Override
     public List<String> cachesToClear() {
         return List.of(PRISON_CACHE, PRISON_LOOKUP_CACHE);
     }
 
+    @Override
     public String getBusinessKey(PrisonRecord dto) {
         return dto.description();
     }
 
+    @Override
     public Class<PrisonRecord> payloadType() {
         return PrisonRecord.class;
     }
 
+    @Override
     public void validateDto(PrisonRecord dto) {
         if (dto.description().contains("X")) {
             throw new IllegalArgumentException("A prison name cannot contain the letter X");
         }
     }
 
+    @Override
     public Optional<DummyPrison> findEntity(PrisonRecord dto) {
         return repository.findByName(dto.description());
     }
 
+    @Override
     public DummyPrison createEntity(PrisonRecord dto) {
+        Long newPrisonId = UUID.nameUUIDFromBytes(dto.description().getBytes()).getMostSignificantBits();
         DummyPrison entity = new DummyPrison();
-        entity.setId(prisonId(dto));
+        entity.setId(newPrisonId);
         return entity;
     }
 
+    @Override
     public void updateEntityFromDto(PrisonRecord dto, DummyPrison e) {
         var address = dto.addresses().get(0);
         e.setName(dto.description());
@@ -58,11 +68,8 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord
         e.setAddressLine5(address.addressLine5());
     }
 
+    @Override
     public DummyPrison saveEntity(DummyPrison entity) {
         return repository.save(entity);
-    }
-
-    private Long prisonId(PrisonRecord dto) {
-        return (long) Math.abs(dto.description().hashCode());
     }
 }
