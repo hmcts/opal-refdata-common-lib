@@ -16,6 +16,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class RefDataHandlerRegistry {
 
+    /**
+     * Handlers indexed by their incoming message data-product type. The
+     * wildcard type parameters allow this registry to hold handlers for
+     * different DTO and entity types; the concrete types are used by each
+     * handler when processing its own ref-data records.
+     */
     private final Map<String, RefDataUpdateHandler<?, ?>> handlersByType;
 
     public RefDataHandlerRegistry(List<RefDataUpdateHandler<?, ?>> handlers) {
