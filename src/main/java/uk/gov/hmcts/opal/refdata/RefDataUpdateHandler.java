@@ -75,6 +75,14 @@ public interface RefDataUpdateHandler<T, E> {
     E saveEntity(E entity);
 
     /**
+     * Deletes an entity from the consuming service's database.
+     * Only used by a test support endpoint.
+     *
+     * @param entity the entity to delete
+     */
+    void deleteEntity(E entity);
+
+    /**
      * Lists Spring caches by name whose contents can be affected by updates from this
      * handler. They are cleared after the surrounding transaction commits.
      *

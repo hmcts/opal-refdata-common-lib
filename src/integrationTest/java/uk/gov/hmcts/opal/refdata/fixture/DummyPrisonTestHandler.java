@@ -73,4 +73,9 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord
     public DummyPrison saveEntity(DummyPrison entity) {
         return repository.save(entity);
     }
+
+    @Override
+    public void deleteEntity(DummyPrison entity) {
+        throw new UnsupportedOperationException("delete method not needed to test message processor");
+    }
 }
