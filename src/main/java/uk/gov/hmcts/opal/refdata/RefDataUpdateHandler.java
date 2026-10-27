@@ -76,7 +76,7 @@ public interface RefDataUpdateHandler<T, E> {
     void updateEntityFromDto(T dto, E entity);
 
     /**
-     * Lists caches whose contents can be affected by updates from this
+     * Lists Spring caches by name whose contents can be affected by updates from this
      * handler. They are cleared after the surrounding transaction commits.
      *
      * @return cache names to clear, or an empty list when no cache is affected

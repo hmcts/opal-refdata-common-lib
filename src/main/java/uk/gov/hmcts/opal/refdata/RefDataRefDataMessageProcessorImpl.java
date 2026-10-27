@@ -62,6 +62,7 @@ public class RefDataRefDataMessageProcessorImpl implements RefDataMessageProcess
         handler.saveEntity(entity); //this could be a newly created entity
     }
 
+    // Clears Spring cache by name that holds ref data
     private void clearCache(String cacheName) {
         Cache cache = cacheManager.getCache(cacheName);
         if (cache == null) {
