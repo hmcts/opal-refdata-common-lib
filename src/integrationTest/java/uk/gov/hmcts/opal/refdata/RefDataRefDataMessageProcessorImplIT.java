@@ -57,37 +57,7 @@ class RefDataRefDataMessageProcessorImplIT {
 
     @Test
     void shouldLoadUpdateAndSaveExistingRefData() {
-        process("""
-            {
-              "header": {
-                "message_id": "00000000-0000-0000-0000-000000000001",
-                "message_type": "ReferenceData",
-                "data_product": "Prison",
-                "operation": "PUBLISH",
-                "source_system": "Semarchy",
-                "created_date_time": "2026-01-01T00:00:00Z",
-                "release_package_id": 1,
-                "record_count": 1
-              },
-              "payload": {
-                "records": [
-                  {
-                    "description": "Bristol Prison",
-                    "business_unit": "1234",
-                    "start_date": "2026-01-01",
-                    "publishing_status": "Active",
-                    "addresses": [
-                      {
-                        "address_type": "PRIS",
-                        "address_line_1": "2 Court Road",
-                        "post_code": "BS22BB"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-            """);
+        process(message(prisonRecord("Bristol Prison", "2 Court Road", "BS22BB")));
         DummyPrison updated = repository.findById(1234L).orElseThrow();
         assertThat(updated.getId()).isEqualTo(1234L);
         assertThat(updated.getName()).isEqualTo("Bristol Prison");
@@ -103,37 +73,7 @@ class RefDataRefDataMessageProcessorImplIT {
         var unrelated = cacheManager.getCache("unrelated");
         unrelated.put("key", "Retained value");
 
-        process("""
-            {
-              "header": {
-                "message_id": "00000000-0000-0000-0000-000000000001",
-                "message_type": "ReferenceData",
-                "data_product": "Prison",
-                "operation": "PUBLISH",
-                "source_system": "Semarchy",
-                "created_date_time": "2026-01-01T00:00:00Z",
-                "release_package_id": 1,
-                "record_count": 1
-              },
-              "payload": {
-                "records": [
-                  {
-                    "description": "Bristol Prison",
-                    "business_unit": "1234",
-                    "start_date": "2026-01-01",
-                    "publishing_status": "Active",
-                    "addresses": [
-                      {
-                        "address_type": "PRIS",
-                        "address_line_1": "1 Court Road",
-                        "post_code": "BS11AA"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-            """);
+        process(message(prisonRecord("Bristol Prison", "1 Court Road", "BS11AA")));
 
         assertThat(cacheManager.getCache(PRISON_CACHE).get(1234L)).isNull();
         assertThat(cacheManager.getCache(PRISON_LOOKUP_CACHE).get(9999L)).isNull();
@@ -143,37 +83,7 @@ class RefDataRefDataMessageProcessorImplIT {
     @Test
     void shouldCreateDummyPrisonWhenNotFound() {
         repository.deleteAll();
-        process("""
-            {
-              "header": {
-                "message_id": "00000000-0000-0000-0000-000000000001",
-                "message_type": "ReferenceData",
-                "data_product": "Prison",
-                "operation": "PUBLISH",
-                "source_system": "Semarchy",
-                "created_date_time": "2026-01-01T00:00:00Z",
-                "release_package_id": 1,
-                "record_count": 1
-              },
-              "payload": {
-                "records": [
-                  {
-                    "description": "New Prison",
-                    "business_unit": "1234",
-                    "start_date": "2026-01-01",
-                    "publishing_status": "Active",
-                    "addresses": [
-                      {
-                        "address_type": "PRIS",
-                        "address_line_1": "2 Court Road",
-                        "post_code": "BS22BB"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-            """);
+        process(message(prisonRecord("New Prison", "2 Court Road", "BS22BB")));
         DummyPrison created = repository.findByName("New Prison").orElseThrow();
         assertThat(repository.count()).isEqualTo(1);
         assertThat(created.getName()).isEqualTo("New Prison");
@@ -182,50 +92,9 @@ class RefDataRefDataMessageProcessorImplIT {
 
     @Test
     void processMessage_rollsBackAllRecordsWhenAnyRecordFails() {
-        String message = """
-            {
-              "header": {
-                "message_id": "00000000-0000-0000-0000-000000000001",
-                "message_type": "ReferenceData",
-                "data_product": "Prison",
-                "operation": "PUBLISH",
-                "source_system": "Semarchy",
-                "created_date_time": "2026-01-01T00:00:00Z",
-                "release_package_id": 1,
-                "record_count": 2
-              },
-              "payload": {
-                "records": [
-                  {
-                    "description": "Bristol Prison",
-                    "business_unit": "1234",
-                    "start_date": "2026-01-01",
-                    "publishing_status": "Active",
-                    "addresses": [
-                      {
-                        "address_type": "PRIS",
-                        "address_line_1": "1 Court Road",
-                        "post_code": "BS11AA"
-                      }
-                    ]
-                  },
-                  {
-                    "description": "X Prison",
-                    "business_unit": "1234",
-                    "start_date": "2026-01-01",
-                    "publishing_status": "Active",
-                    "addresses": [
-                      {
-                        "address_type": "PRIS",
-                        "address_line_1": "1 High Street",
-                        "post_code": "BS11AA"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-            """;
+        String message = message(
+            prisonRecord("Bristol Prison", "1 Court Road", "BS11AA"),
+            prisonRecord("X Prison", "1 High Street", "BS11AA"));
         assertThatThrownBy(() -> process(message)).isInstanceOf(IllegalArgumentException.class)
             .hasMessage("A prison name cannot contain the letter X");
         assertThat(repository.findByName("Bristol Prison").orElseThrow().getName()).isEqualTo("Bristol Prison");
@@ -249,37 +118,8 @@ class RefDataRefDataMessageProcessorImplIT {
 
     @Test
     void processMessage_reportsInvalidPrisonPostcodeValidationError() {
-        assertThatThrownBy(() -> process("""
-            {
-              "header": {
-                "message_id": "00000000-0000-0000-0000-000000000001",
-                "message_type": "ReferenceData",
-                "data_product": "Prison",
-                "operation": "PUBLISH",
-                "source_system": "Semarchy",
-                "created_date_time": "2026-01-01T00:00:00Z",
-                "release_package_id": 1,
-                "record_count": 1
-              },
-              "payload": {
-                "records": [
-                  {
-                    "description": "Invalid Postcode Prison",
-                    "business_unit": "1234",
-                    "start_date": "2026-01-01",
-                    "publishing_status": "Active",
-                    "addresses": [
-                      {
-                        "address_type": "PRIS",
-                        "address_line_1": "1 Court Road",
-                        "post_code": "INVALID"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-            """))
+        assertThatThrownBy(() -> process(message(
+            prisonRecord("Invalid Postcode Prison", "1 Court Road", "INVALID"))))
             .isInstanceOf(JsonSchemaValidationException.class)
             .hasMessageContaining("$.payload.records[0].addresses[0].post_code")
             .hasMessageContaining("does not match the regex pattern");
@@ -293,37 +133,8 @@ class RefDataRefDataMessageProcessorImplIT {
 
     @Test
     void processMessage_rejectsPrisonNameContainingX() {
-        assertThatThrownBy(() -> process("""
-            {
-              "header": {
-                "message_id": "00000000-0000-0000-0000-000000000001",
-                "message_type": "ReferenceData",
-                "data_product": "Prison",
-                "operation": "PUBLISH",
-                "source_system": "Semarchy",
-                "created_date_time": "2026-01-01T00:00:00Z",
-                "release_package_id": 1,
-                "record_count": 1
-              },
-              "payload": {
-                "records": [
-                  {
-                    "description": "X Prison",
-                    "business_unit": "1234",
-                    "start_date": "2026-01-01",
-                    "publishing_status": "Active",
-                    "addresses": [
-                      {
-                        "address_type": "PRIS",
-                        "address_line_1": "1 Court Road",
-                        "post_code": "BS11AA"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-            """))
+        assertThatThrownBy(() -> process(message(
+            prisonRecord("X Prison", "1 Court Road", "BS11AA"))))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("A prison name cannot contain the letter X");
         assertThat(repository.findByName("X Prison")).isEmpty();
@@ -356,50 +167,9 @@ class RefDataRefDataMessageProcessorImplIT {
 
     @Test
     void processMessage_updatesAndCreatesMultipleRecordsSuccessfully() {
-        process("""
-            {
-              "header": {
-                "message_id": "00000000-0000-0000-0000-000000000001",
-                "message_type": "ReferenceData",
-                "data_product": "Prison",
-                "operation": "PUBLISH",
-                "source_system": "Semarchy",
-                "created_date_time": "2026-01-01T00:00:00Z",
-                "release_package_id": 1,
-                "record_count": 2
-              },
-              "payload": {
-                "records": [
-                  {
-                    "description": "Bristol Prison",
-                    "business_unit": "1234",
-                    "start_date": "2026-01-01",
-                    "publishing_status": "Active",
-                    "addresses": [
-                      {
-                        "address_type": "PRIS",
-                        "address_line_1": "3 Court Road",
-                        "post_code": "BS22BB"
-                      }
-                    ]
-                  },
-                  {
-                    "description": "Created Prison",
-                    "business_unit": "1234",
-                    "start_date": "2026-01-01",
-                    "publishing_status": "Active",
-                    "addresses": [
-                      {
-                        "address_type": "PRIS",
-                        "address_line_1": "4 Court Road",
-                        "post_code": "BS22BB"
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-            """);
+        process(message(
+            prisonRecord("Bristol Prison", "3 Court Road", "BS22BB"),
+            prisonRecord("Created Prison", "4 Court Road", "BS22BB")));
 
         assertThat(repository.count()).isEqualTo(2);
         assertThat(repository.findByName("Bristol Prison").orElseThrow().getName()).isEqualTo("Bristol Prison");
@@ -414,6 +184,44 @@ class RefDataRefDataMessageProcessorImplIT {
 
     private void process(String message) {
         processor.processMessage(message);
+    }
+
+    private String message(String... records) {
+        return """
+            {
+              "header": {
+                "message_id": "00000000-0000-0000-0000-000000000001",
+                "message_type": "ReferenceData",
+                "data_product": "Prison",
+                "operation": "PUBLISH",
+                "source_system": "Semarchy",
+                "created_date_time": "2026-01-01T00:00:00Z",
+                "release_package_id": 1,
+                "record_count": %d
+              },
+              "payload": {
+                "records": [%s]
+              }
+            }
+            """.formatted(records.length, String.join(",", records));
+    }
+
+    private String prisonRecord(String description, String addressLine1, String postcode) {
+        return """
+            {
+              "description": "%s",
+              "business_unit": "1234",
+              "start_date": "2026-01-01",
+              "publishing_status": "Active",
+              "addresses": [
+                {
+                  "address_type": "PRIS",
+                  "address_line_1": "%s",
+                  "post_code": "%s"
+                }
+              ]
+            }
+            """.formatted(description, addressLine1, postcode);
     }
 
     @SpringBootConfiguration(proxyBeanMethods = false)
