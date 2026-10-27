@@ -79,8 +79,7 @@ public class SchemaValidationService {
             JsonSchemaFactory factory = JsonSchemaFactory.getInstance(VersionFlag.V202012);
             return factory.getSchema(classPathResource.getURI());
         } catch (IOException e) {
-            throw new SchemaConfigurationException(
-                format("Problem reading JSON Schema from '%s'", filePath), e);
+            throw new SchemaConfigurationException(format("Problem reading JSON Schema from '%s'", filePath));
         }
     }
 }

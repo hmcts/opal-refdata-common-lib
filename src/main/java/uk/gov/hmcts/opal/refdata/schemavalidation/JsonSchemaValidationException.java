@@ -1,8 +1,10 @@
 package uk.gov.hmcts.opal.refdata.schemavalidation;
 
-public class JsonSchemaValidationException extends RuntimeException {
+import uk.gov.hmcts.common.exceptions.standard.InternalServerErrorException;
+
+public class JsonSchemaValidationException extends InternalServerErrorException {
 
     public JsonSchemaValidationException(String msg) {
-        super(msg);
+        super("JSON schema validation failed", msg);
     }
 }

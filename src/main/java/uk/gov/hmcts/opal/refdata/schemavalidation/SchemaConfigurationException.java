@@ -1,13 +1,10 @@
 package uk.gov.hmcts.opal.refdata.schemavalidation;
 
-public class SchemaConfigurationException extends RuntimeException {
+import uk.gov.hmcts.common.exceptions.standard.InternalServerErrorException;
+
+public class SchemaConfigurationException extends InternalServerErrorException {
 
     public SchemaConfigurationException(String msg) {
-        super(msg);
+        super("Schema configuration error", msg);
     }
-
-    public SchemaConfigurationException(String message, Throwable t) {
-        super(message, t);
-    }
-
 }
