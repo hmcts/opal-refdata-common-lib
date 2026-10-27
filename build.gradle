@@ -12,8 +12,6 @@ plugins {
   id 'uk.gov.hmcts.java' version '0.12.70'
 }
 
-import groovy.json.JsonSlurper
-
 group = 'uk.gov.hmcts'
 version = '0.0.1'
 
@@ -22,90 +20,6 @@ java {
     languageVersion = JavaLanguageVersion.of(21)
   }
   withSourcesJar()   // generates sources JAR
-}
-
-def generatedRefDataDtoDir = layout.buildDirectory.dir('generated/sources/refDataDtos/main').get().asFile
-
-tasks.register('generateRefDataDtos') {
-  inputs.file('src/main/resources/jsonSchemas/ref-data/ref_data_schema.json')
-  outputs.dir(generatedRefDataDtoDir)
-
-  doLast {
-    def schema = new JsonSlurper().parse(file('src/main/resources/jsonSchemas/ref-data/ref_data_schema.json'))
-    def definitions = schema['$defs'] as Map
-    def packageName = 'uk.gov.hmcts.opal.refdata.generated'
-    def packagePath = new File(generatedRefDataDtoDir, packageName.replace('.', '/'))
-    packagePath.mkdirs()
-
-    def typeName = { String name ->
-      name.split(/[_-]/).collect { it ? it[0].toUpperCase() + it.substring(1) : '' }.join('')
-    }
-    def fieldName = { String name ->
-      def camelCase = name.split('_').toList().withIndex().collect { part, index ->
-        index == 0 ? part : part[0].toUpperCase() + part.substring(1)
-      }.join('')
-      ['class', 'default', 'enum', 'record', 'var'].contains(camelCase) ? camelCase + 'Value' : camelCase
-    }
-    def javaType
-    javaType = { Map definition ->
-      if (definition['$ref']) {
-        return typeName(definition['$ref'].toString().tokenize('/').last())
-      }
-      if (definition.type instanceof List) {
-        def nonNullType = definition.type.find { it != 'null' }
-        if (nonNullType == 'array') {
-          return javaType([type: 'array', items: definition.items])
-        }
-        return javaType([type: nonNullType])
-      }
-      if (definition.type == 'array') {
-        def itemType = definition.items ? javaType(definition.items as Map) : 'Object'
-        return "List<${itemType}>"
-      }
-      switch (definition.type) {
-        case 'integer': return 'Integer'
-        case 'number': return 'BigDecimal'
-        case 'boolean': return 'Boolean'
-        case 'object': return 'Object'
-        default: return 'String'
-      }
-    }
-
-    definitions.each { definitionName, definition ->
-      def className = typeName(definitionName.toString())
-      def properties = (definition.properties ?: [:]) as Map
-      def source = new StringBuilder()
-      source << "package ${packageName};\n\n"
-      source << 'import java.math.BigDecimal;\n'
-      source << 'import java.util.List;\n'
-      source << 'import com.fasterxml.jackson.annotation.JsonProperty;\n\n'
-      source << "public record ${className}(\n"
-      def propertyEntries = properties.entrySet().toList()
-      propertyEntries.eachWithIndex { entry, index ->
-        def jsonName = entry.key.toString()
-        def javaFieldName = fieldName(jsonName)
-        if (jsonName != javaFieldName) {
-          source << "    @JsonProperty(\"${jsonName}\") "
-        } else {
-          source << '    '
-        }
-        source << "${javaType(entry.value as Map)} ${javaFieldName}"
-        source << (index == propertyEntries.size() - 1 ? '\n' : ',\n')
-      }
-      source << ') {\n}\n'
-      new File(packagePath, "${className}.java").text = source.toString()
-    }
-  }
-}
-
-sourceSets {
-  main {
-    java.srcDir(generatedRefDataDtoDir)
-  }
-}
-
-tasks.named('compileJava') {
-  dependsOn(tasks.named('generateRefDataDtos'))
 }
 
 tasks.named('checkstyleMain') {

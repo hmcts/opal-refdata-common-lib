@@ -27,12 +27,12 @@ import uk.gov.hmcts.opal.refdata.fixture.DummyPrisonTestHandler;
 import uk.gov.hmcts.opal.refdata.schemavalidation.SchemaValidationService;
 import uk.gov.hmcts.opal.refdata.schemavalidation.JsonSchemaValidationException;
 
-@SpringBootTest(classes = RefDataRefDataMessageProcessorImplIT.TestConfig.class,
+@SpringBootTest(classes = RefDataMessageProcessorImplIT.TestConfig.class,
     webEnvironment = SpringBootTest.WebEnvironment.NONE,
     properties = {"spring.sql.init.mode=always", "spring.sql.init.schema-locations=classpath:ref-data-schema.sql",
         "spring.jpa.hibernate.ddl-auto=validate"})
 @Testcontainers
-class RefDataRefDataMessageProcessorImplIT {
+class RefDataMessageProcessorImplIT {
     @Container @ServiceConnection
     static final PostgreSQLContainer POSTGRES = new PostgreSQLContainer("postgres:17-alpine");
 
