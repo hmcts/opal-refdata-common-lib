@@ -50,9 +50,8 @@ public interface RefDataUpdateHandler<T, E> {
     Optional<E> findEntity(T dto);
 
     /**
-     * Creates a new entity for a DTO that has no existing match. This should
-     * only instantiate the entity and set its identifier or natural key;
-     * field updates belong in {@link #updateEntityFromDto(Object, Object)}.
+     * Creates a new entity for a DTO that has no existing match.
+     * It should copy the DTO values onto the new entity.
      *
      * @param dto the decoded ref-data record
      * @return a new entity ready to receive the DTO values
@@ -60,7 +59,7 @@ public interface RefDataUpdateHandler<T, E> {
     E createEntityFromDto(T dto);
 
     /**
-     * Copies the DTO values onto the existing or newly created entity.
+     * Copies the DTO values onto the entity.
      *
      * @param dto the decoded ref-data record
      * @param entity the entity to update
