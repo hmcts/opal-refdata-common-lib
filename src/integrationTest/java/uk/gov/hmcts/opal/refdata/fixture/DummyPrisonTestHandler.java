@@ -49,10 +49,11 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord
     }
 
     @Override
-    public DummyPrison createEntity(PrisonRecord dto) {
+    public DummyPrison createEntityFromDto(PrisonRecord dto) {
         Long newPrisonId = UUID.nameUUIDFromBytes(dto.description().getBytes()).getMostSignificantBits();
         DummyPrison entity = new DummyPrison();
         entity.setId(newPrisonId);
+        updateEntityFromDto(dto, entity);
         return entity;
     }
 

@@ -50,7 +50,7 @@ class RefDataRefDataMessageProcessorImplTest {
         verify(handler).validateDto(dto);
         verify(handler).findEntity(dto);
         verify(handler).updateEntityFromDto(dto, entity);
-        verify(handler).saveEntity(entity);
+        verify(handler, never()).saveEntity(entity);
         verify(cache).clear();
     }
 
@@ -66,14 +66,14 @@ class RefDataRefDataMessageProcessorImplTest {
             .thenReturn(Optional.<RefDataUpdateHandler<?, ?>>of(handler));
         when(handler.getBusinessKey(dto)).thenReturn("Example");
         when(handler.findEntity(dto)).thenReturn(Optional.empty());
-        when(handler.createEntity(dto)).thenReturn(entity);
+        when(handler.createEntityFromDto(dto)).thenReturn(entity);
 
         // When
         processor.processMessage("payload");
 
         // Then
-        verify(handler).createEntity(dto);
-        verify(handler).updateEntityFromDto(dto, entity);
+        verify(handler).createEntityFromDto(dto);
+        verify(handler, never()).updateEntityFromDto(dto, entity);
         verify(handler).saveEntity(entity);
     }
 

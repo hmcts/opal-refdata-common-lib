@@ -57,15 +57,7 @@ public interface RefDataUpdateHandler<T, E> {
      * @param dto the decoded ref-data record
      * @return a new entity ready to receive the DTO values
      */
-    E createEntity(T dto);
-
-    /**
-     * Persists the updated entity.
-     *
-     * @param entity the entity to save
-     * @return the saved entity
-     */
-    E saveEntity(E entity);
+    E createEntityFromDto(T dto);
 
     /**
      * Copies the DTO values onto the existing or newly created entity.
@@ -74,6 +66,14 @@ public interface RefDataUpdateHandler<T, E> {
      * @param entity the entity to update
      */
     void updateEntityFromDto(T dto, E entity);
+
+    /**
+     * Persists the updated entity.
+     *
+     * @param entity the entity to save
+     * @return the saved entity
+     */
+    E saveEntity(E entity);
 
     /**
      * Lists Spring caches by name whose contents can be affected by updates from this

@@ -56,10 +56,10 @@ public class RefDataRefDataMessageProcessorImpl implements RefDataMessageProcess
 
     private <T, E> void applyUpdate(RefDataUpdateHandler<T, E> handler, T dto) {
         handler.validateDto(dto);
-        E entity = handler.findEntity(dto)
-            .orElseGet(() -> handler.createEntity(dto));
-        handler.updateEntityFromDto(dto, entity);
-        handler.saveEntity(entity); //this could be a newly created entity
+        handler.findEntity(dto).ifPresentOrElse(
+            entity -> handler.updateEntityFromDto(dto, entity),
+            () -> handler.saveEntity(handler.createEntityFromDto(dto))
+        );
     }
 
     // Clears Spring cache by name that holds ref data
