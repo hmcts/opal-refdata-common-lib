@@ -15,17 +15,17 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
 @SuppressWarnings("unchecked")
-class RefDataMessageProcessorTest {
+class RefDataRefDataMessageProcessorImplTest {
 
     private final CacheManager cacheManager = mock(CacheManager.class);
     private final RefDataMessageDecoder decoder = mock(RefDataMessageDecoder.class);
     private final RefDataHandlerRegistry handlerRegistry = mock(RefDataHandlerRegistry.class);
     private final Cache cache = mock(Cache.class);
-    private RefDataMessageProcessor processor;
+    private RefDataRefDataMessageProcessorImpl processor;
 
     @BeforeEach
     void setUp() {
-        processor = new RefDataMessageProcessor(cacheManager, decoder, handlerRegistry);
+        processor = new RefDataRefDataMessageProcessorImpl(cacheManager, decoder, handlerRegistry);
     }
 
     @Test

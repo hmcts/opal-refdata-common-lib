@@ -27,16 +27,17 @@ import uk.gov.hmcts.opal.refdata.fixture.DummyPrisonTestHandler;
 import uk.gov.hmcts.opal.refdata.schemavalidation.SchemaValidationService;
 import uk.gov.hmcts.opal.refdata.schemavalidation.JsonSchemaValidationException;
 
-@SpringBootTest(classes = RefDataMessageProcessorIT.TestConfig.class,
+@SpringBootTest(classes = RefDataRefDataMessageProcessorImplIT.TestConfig.class,
     webEnvironment = SpringBootTest.WebEnvironment.NONE,
     properties = {"spring.sql.init.mode=always", "spring.sql.init.schema-locations=classpath:ref-data-schema.sql",
         "spring.jpa.hibernate.ddl-auto=validate"})
 @Testcontainers
-class RefDataMessageProcessorIT {
+class RefDataRefDataMessageProcessorImplIT {
     @Container @ServiceConnection
     static final PostgreSQLContainer POSTGRES = new PostgreSQLContainer("postgres:17-alpine");
 
-    @Autowired MessageProcessor processor;
+    @Autowired
+    RefDataMessageProcessor processor;
     @Autowired DummyPrisonRepository repository;
     @Autowired RefDataHandlerRegistry handlerRegistry;
     @Autowired CacheManager cacheManager;
@@ -419,7 +420,7 @@ class RefDataMessageProcessorIT {
     @EnableAutoConfiguration
     @EntityScan(basePackageClasses = DummyPrison.class)
     @EnableJpaRepositories(basePackageClasses = DummyPrisonRepository.class)
-    @Import({RefDataMessageProcessor.class, RefDataMessageDecoder.class, RefDataHandlerRegistry.class,
+    @Import({RefDataRefDataMessageProcessorImpl.class, RefDataMessageDecoder.class, RefDataHandlerRegistry.class,
         SchemaValidationService.class, DummyPrisonTestHandler.class})
     static class TestConfig {
         @Bean
