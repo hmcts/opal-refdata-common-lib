@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.0/records/prisonRecord.json",
+  "$id": "v2.5/1.5.1/records/prisonRecord.json",
   "title": "Prison record",
   "type": "object",
   "properties": {

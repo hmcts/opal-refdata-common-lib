@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.0/records/ljaRecord.json",
+  "$id": "v2.5/1.5.1/records/ljaRecord.json",
   "title": "LJA record",
   "type": "object",
   "properties": {
@@ -507,17 +507,6 @@
           "YCT",
           "SCSCRT",
           "SJCRT",
-          "CRWCRT"
-        ]
-      }
-    },
-    {
-      "name": "CourtLocationCodeUniqueKey",
-      "key": [
-        "lja_location_code"
-      ],
-      "when": {
-        "lja_type": [
           "CRWCRT"
         ]
       }

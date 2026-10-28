@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.0/records/courtRecord.json",
+  "$id": "v2.5/1.5.1/records/courtRecord.json",
   "title": "Court record",
   "type": "object",
   "properties": {
@@ -433,14 +433,6 @@
           }
         }
       }
-    }
-  ],
-  "x-unique-keys": [
-    {
-      "name": "CourtLocationCodeUniqueKey",
-      "key": [
-        "court_location_code"
-      ]
     }
   ]
 }

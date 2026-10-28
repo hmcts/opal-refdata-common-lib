@@ -5001,14 +5001,6 @@
             }
           }
         }
-      ],
-      "x-unique-keys": [
-        {
-          "name": "CourtLocationCodeUniqueKey",
-          "key": [
-            "court_location_code"
-          ]
-        }
       ]
     },
     "ljaRecord": {
@@ -5518,17 +5510,6 @@
               "YCT",
               "SCSCRT",
               "SJCRT",
-              "CRWCRT"
-            ]
-          }
-        },
-        {
-          "name": "CourtLocationCodeUniqueKey",
-          "key": [
-            "lja_location_code"
-          ],
-          "when": {
-            "lja_type": [
               "CRWCRT"
             ]
           }
