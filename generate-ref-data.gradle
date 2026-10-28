@@ -75,13 +75,3 @@ tasks.register('generateRefDataDtos') {
     }
   }
 }
-
-sourceSets {
-  main {
-    java.srcDir(generatedRefDataDtoDir)
-  }
-}
-
-tasks.named('compileJava') {
-  dependsOn(generateRefDataDtos)
-}
