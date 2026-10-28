@@ -1,4 +1,4 @@
-package uk.gov.hmcts.opal.refdata.dto;
+package uk.gov.hmcts.opal.refdata.fixture;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

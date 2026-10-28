@@ -12,8 +12,6 @@ plugins {
   id 'uk.gov.hmcts.java' version '0.12.70'
 }
 
-apply from: 'generate-ref-data.gradle'
-
 group = 'uk.gov.hmcts'
 version = '0.0.1'
 

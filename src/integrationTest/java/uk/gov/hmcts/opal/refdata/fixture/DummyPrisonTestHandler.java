@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import uk.gov.hmcts.opal.refdata.RefDataUpdateHandler;
-import uk.gov.hmcts.opal.refdata.dto.PrisonRecord;
 
 public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord, DummyPrison> {
     public static final String PRISON_CACHE = "prison";
