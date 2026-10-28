@@ -22,10 +22,6 @@ java {
   withSourcesJar()   // generates sources JAR
 }
 
-tasks.named('sourcesJar') {
-  dependsOn(tasks.named('generateRefDataDtos'))
-}
-
 tasks.named('checkstyleMain') {
   exclude('**/generated/**')
 }
