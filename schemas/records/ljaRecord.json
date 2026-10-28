@@ -1,46 +1,19 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.1/records/ljaRecord.json",
+  "$id": "v2.5/1.5.2/records/ljaRecord.json",
   "title": "LJA record",
   "type": "object",
   "properties": {
-    "lja_location_code": {
+    "lja_code": {
       "type": [
         "string",
         "null"
       ],
-      "maxLength": 10
+      "maxLength": 4
     },
-    "pss_common_platform_court_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "common_platform_uuid": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "uuid"
-    },
-    "draft_final_exists_indicator": {
-      "type": "boolean"
-    },
-    "revision_type": {
+    "lja_name": {
       "type": "string",
-      "enum": [
-        "Initial",
-        "New",
-        "Edit"
-      ],
-      "maxLength": 7
-    },
-    "scottish_district_court_indicator": {
-      "type": [
-        "boolean",
-        "null"
-      ]
+      "maxLength": 100
     },
     "court_short_name": {
       "type": [
@@ -49,51 +22,12 @@
       ],
       "maxLength": 200
     },
-    "northern_ireland_court_indicator": {
-      "type": [
-        "boolean",
-        "null"
-      ]
-    },
-    "current_record_indicator": {
-      "type": "boolean"
-    },
-    "cloned_from": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "maxLength": 128
-    },
-    "authoring_status": {
-      "type": "string",
-      "enum": [
-        "Draft",
-        "Final",
-        "Published",
-        "Not Draft"
-      ],
-      "maxLength": 128
-    },
     "lja_welsh_name": {
       "type": [
         "string",
         "null"
       ],
       "maxLength": 100
-    },
-    "lja_code": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "maxLength": 4
-    },
-    "pss_common_platform_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
     },
     "lja_type": {
       "type": "string",
@@ -108,54 +42,23 @@
       ],
       "maxLength": 6
     },
-    "pss_central_finance_location_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "welsh_indicator": {
-      "type": "string",
-      "enum": [
-        "true",
-        "false"
-      ],
-      "maxLength": 5
-    },
-    "crown_court_indicator": {
-      "type": [
-        "boolean",
-        "null"
-      ]
-    },
-    "pss_change_set_header_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "notes": {
+    "lja_location_code": {
       "type": [
         "string",
         "null"
       ],
-      "maxLength": 4000
+      "maxLength": 10
     },
-    "magistrates_court_indicator": {
-      "type": [
-        "boolean",
-        "null"
-      ]
-    },
-    "scottish_sheriff_court_indicator": {
-      "type": [
-        "boolean",
-        "null"
-      ]
-    },
-    "lja_name": {
+    "start_date": {
       "type": "string",
-      "maxLength": 100
+      "format": "date"
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
     },
     "cja_code": {
       "type": [
@@ -209,92 +112,6 @@
       ],
       "maxLength": 2
     },
-    "psscmaid": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "scottish_justice_of_peace_court_indicator": {
-      "type": [
-        "boolean",
-        "null"
-      ]
-    },
-    "pss_welsh_link_address_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "default_duration": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "maxLength": 10,
-      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
-    },
-    "default_start_time": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "maxLength": 10,
-      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
-    },
-    "revision_number": {
-      "type": "integer"
-    },
-    "court_hearing_operation_area_indicator": {
-      "type": [
-        "boolean",
-        "null"
-      ]
-    },
-    "pss_petty_sessional_area_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "youth_court_indicator": {
-      "type": [
-        "boolean",
-        "null"
-      ]
-    },
-    "revision_date_to": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date"
-    },
-    "pss_welsh_address_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "revision_date_from": {
-      "type": "string",
-      "format": "date"
-    },
-    "publishing_status": {
-      "type": "string",
-      "enum": [
-        "Superseded",
-        "Future",
-        "Active",
-        "Inactive",
-        "Submitted",
-        "Not Published",
-        "Added to Release Package",
-        "Error"
-      ],
-      "maxLength": 128
-    },
     "division_code": {
       "type": [
         "string",
@@ -312,55 +129,51 @@
       ],
       "maxLength": 20
     },
-    "pss_location_id": {
+    "default_start_time": {
       "type": [
-        "integer",
+        "string",
         "null"
-      ]
+      ],
+      "maxLength": 10,
+      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
     },
-    "cluster_information_code": {
+    "default_duration": {
       "type": [
-        "integer",
+        "string",
         "null"
-      ]
+      ],
+      "maxLength": 10,
+      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
     },
-    "court_lja_header_code": {
+    "common_platform_uuid": {
       "type": [
-        "integer",
+        "string",
         "null"
-      ]
+      ],
+      "format": "uuid"
     },
-    "venue_code": {
+    "notes": {
       "type": [
-        "integer",
+        "string",
         "null"
-      ]
+      ],
+      "maxLength": 4000
     },
-    "enforcement_area_code": {
-      "type": [
-        "integer",
-        "null"
-      ]
+    "publishing_status": {
+      "type": "string",
+      "enum": [
+        "Superseded",
+        "Future",
+        "Active",
+        "Inactive",
+        "Submitted",
+        "Not Published",
+        "Added to Release Package",
+        "Error"
+      ],
+      "maxLength": 128
     },
-    "court_code": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "release_package_code": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "region_code": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "address": {
+    "addresses": {
       "type": [
         "array",
         "null"
@@ -382,45 +195,13 @@
     }
   },
   "required": [
-    "draft_final_exists_indicator",
-    "revision_type",
-    "current_record_indicator",
-    "authoring_status",
     "lja_type",
-    "welsh_indicator",
     "lja_name",
-    "revision_number",
-    "revision_date_from",
+    "start_date",
     "publishing_status"
   ],
   "additionalProperties": false,
   "allOf": [
-    {
-      "if": {
-        "properties": {
-          "welsh_indicator": {
-            "enum": [
-              "true"
-            ]
-          }
-        },
-        "required": [
-          "welsh_indicator"
-        ]
-      },
-      "then": {
-        "required": [
-          "lja_welsh_name"
-        ],
-        "properties": {
-          "lja_welsh_name": {
-            "not": {
-              "type": "null"
-            }
-          }
-        }
-      }
-    },
     {
       "if": {
         "properties": {
@@ -492,6 +273,273 @@
           }
         }
       }
+    },
+    {
+      "$comment": "Court:Court.CourtAddressCountValidation | FinancialOfficeAddressCountValidation | WelshCourtAddressCountValidation",
+      "if": {
+        "properties": {
+          "lja_type": {
+            "enum": [
+              "PSA",
+              "YCT"
+            ]
+          }
+        },
+        "required": [
+          "lja_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "addresses": {
+            "minItems": 2,
+            "allOf": [
+              {
+                "contains": {
+                  "properties": {
+                    "address_type": {
+                      "const": "Financial Office Address"
+                    }
+                  },
+                  "required": [
+                    "address_type"
+                  ]
+                },
+                "minContains": 1,
+                "maxContains": 1
+              },
+              {
+                "contains": {
+                  "properties": {
+                    "address_type": {
+                      "const": "Court Address"
+                    }
+                  },
+                  "required": [
+                    "address_type"
+                  ]
+                },
+                "minContains": 1,
+                "maxContains": 1
+              }
+            ],
+            "not": {
+              "type": "null"
+            }
+          }
+        },
+        "required": [
+          "addresses"
+        ],
+        "allOf": [
+          {
+            "$comment": "Court:Court.WelshCourtAddressCountValidation",
+            "if": {
+              "required": [
+                "lja_welsh_name"
+              ],
+              "properties": {
+                "lja_welsh_name": {
+                  "not": {
+                    "type": "null"
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "addresses": {
+                  "contains": {
+                    "properties": {
+                      "address_type": {
+                        "const": "Welsh Court Address"
+                      }
+                    },
+                    "required": [
+                      "address_type"
+                    ]
+                  },
+                  "minContains": 1,
+                  "maxContains": 1,
+                  "not": {
+                    "type": "null"
+                  }
+                }
+              },
+              "required": [
+                "addresses"
+              ]
+            },
+            "else": {
+              "properties": {
+                "addresses": {
+                  "contains": {
+                    "properties": {
+                      "address_type": {
+                        "const": "Welsh Court Address"
+                      }
+                    },
+                    "required": [
+                      "address_type"
+                    ]
+                  },
+                  "minContains": 0,
+                  "maxContains": 0
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$comment": "Court:Court.CourtAddressCountValidation | FinancialOfficeAddressCountValidation | WelshCourtAddressCountValidation",
+      "if": {
+        "properties": {
+          "lja_type": {
+            "enum": [
+              "NICRT",
+              "SCSCRT",
+              "SJCRT"
+            ]
+          }
+        },
+        "required": [
+          "lja_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "addresses": {
+            "minItems": 1,
+            "allOf": [
+              {
+                "contains": {
+                  "properties": {
+                    "address_type": {
+                      "const": "Court Address"
+                    }
+                  },
+                  "required": [
+                    "address_type"
+                  ]
+                },
+                "minContains": 1,
+                "maxContains": 1
+              }
+            ],
+            "not": {
+              "type": "null"
+            }
+          }
+        },
+        "required": [
+          "addresses"
+        ]
+      }
+    },
+    {
+      "$comment": "Court:Court.CourtAddressCountValidation | FinancialOfficeAddressCountValidation | WelshCourtAddressCountValidation",
+      "if": {
+        "properties": {
+          "lja_type": {
+            "enum": [
+              "CRWCRT"
+            ]
+          }
+        },
+        "required": [
+          "lja_type"
+        ]
+      },
+      "then": {
+        "properties": {
+          "addresses": {
+            "minItems": 1,
+            "allOf": [
+              {
+                "contains": {
+                  "properties": {
+                    "address_type": {
+                      "const": "Court Address"
+                    }
+                  },
+                  "required": [
+                    "address_type"
+                  ]
+                },
+                "minContains": 1,
+                "maxContains": 1
+              }
+            ],
+            "not": {
+              "type": "null"
+            }
+          }
+        },
+        "required": [
+          "addresses"
+        ],
+        "allOf": [
+          {
+            "$comment": "Court:Court.WelshCourtAddressCountValidation",
+            "if": {
+              "required": [
+                "lja_welsh_name"
+              ],
+              "properties": {
+                "lja_welsh_name": {
+                  "not": {
+                    "type": "null"
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "addresses": {
+                  "contains": {
+                    "properties": {
+                      "address_type": {
+                        "const": "Welsh Court Address"
+                      }
+                    },
+                    "required": [
+                      "address_type"
+                    ]
+                  },
+                  "minContains": 1,
+                  "maxContains": 1,
+                  "not": {
+                    "type": "null"
+                  }
+                }
+              },
+              "required": [
+                "addresses"
+              ]
+            },
+            "else": {
+              "properties": {
+                "addresses": {
+                  "contains": {
+                    "properties": {
+                      "address_type": {
+                        "const": "Welsh Court Address"
+                      }
+                    },
+                    "required": [
+                      "address_type"
+                    ]
+                  },
+                  "minContains": 0,
+                  "maxContains": 0
+                }
+              }
+            }
+          }
+        ]
+      }
     }
   ],
   "x-unique-keys": [
@@ -500,6 +548,36 @@
       "key": [
         "lja_code"
       ],
+      "when": {
+        "lja_type": [
+          "PSA",
+          "NICRT",
+          "YCT",
+          "SCSCRT",
+          "SJCRT",
+          "CRWCRT"
+        ]
+      }
+    },
+    {
+      "name": "CourtLocationCodeUniqueKey",
+      "key": [
+        "lja_location_code"
+      ],
+      "when": {
+        "lja_type": [
+          "CRWCRT"
+        ]
+      }
+    }
+  ],
+  "x-rules": [
+    {
+      "name": "EndDateNotEarlierThanStartDate",
+      "left": "end_date",
+      "op": ">=",
+      "right": "start_date",
+      "compare_as": "date",
       "when": {
         "lja_type": [
           "PSA",

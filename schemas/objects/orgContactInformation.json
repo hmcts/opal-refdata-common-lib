@@ -1,19 +1,19 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.1/objects/orgContactInformation.json",
+  "$id": "v2.5/1.5.2/objects/orgContactInformation.json",
   "title": "Contact information (Organisation)",
   "type": "object",
   "properties": {
-    "end_date": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date"
-    },
-    "contact_value": {
+    "contact_type": {
       "type": "string",
-      "maxLength": 256
+      "enum": [
+        "Telephone",
+        "Email Address",
+        "Mobile",
+        "Fax",
+        "Destination ID"
+      ],
+      "maxLength": 30
     },
     "contact_sub_type": {
       "type": [
@@ -56,23 +56,9 @@
       ],
       "maxLength": 100
     },
-    "contact_type": {
+    "contact_value": {
       "type": "string",
-      "enum": [
-        "Telephone",
-        "Email Address",
-        "Mobile",
-        "Fax",
-        "Destination ID"
-      ],
-      "maxLength": 30
-    },
-    "start_date": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date"
+      "maxLength": 256
     }
   },
   "required": [

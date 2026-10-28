@@ -1,99 +1,36 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.1/records/enforcerRecord.json",
+  "$id": "v2.5/1.5.2/records/enforcerRecord.json",
   "title": "Enforcer record",
   "type": "object",
   "properties": {
-    "pss_address_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "authoring_status": {
-      "type": "string",
-      "enum": [
-        "Published",
-        "Draft",
-        "Final",
-        "Not Draft"
-      ],
-      "maxLength": 128
-    },
-    "sequence_number": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "pss_change_set_header_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "pss_email_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "pss_destination_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "second_language_name": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "maxLength": 35
-    },
-    "cloned_from": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "maxLength": 128
-    },
-    "draft_final_exists_indicator": {
-      "type": "boolean"
-    },
-    "revision_date_from": {
-      "type": "string",
-      "format": "date"
-    },
-    "description": {
-      "type": "string",
-      "maxLength": 35
-    },
-    "pss_change_set_item_id": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "maxLength": 500
-    },
     "enforcer_code": {
       "type": [
         "integer",
         "null"
       ]
     },
-    "organisation_type": {
+    "name": {
       "type": "string",
-      "enum": [
-        "ENF"
-      ],
-      "maxLength": 20
+      "maxLength": 35
     },
-    "pss_organisation_id": {
+    "welsh_name": {
       "type": [
-        "integer",
+        "string",
         "null"
-      ]
+      ],
+      "maxLength": 35
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
     },
     "publishing_status": {
       "type": "string",
@@ -109,58 +46,15 @@
       ],
       "maxLength": 128
     },
-    "revision_number": {
-      "type": "integer"
-    },
-    "revision_type": {
-      "type": "string",
-      "enum": [
-        "Edit",
-        "Initial",
-        "New"
+    "addresses": {
+      "type": [
+        "array",
+        "null"
       ],
-      "maxLength": 7
-    },
-    "pss_telephone_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "current_record_indicator": {
-      "type": "boolean"
-    },
-    "organisation_address": {
-      "anyOf": [
-        {
-          "$ref": "../objects/orgAddress.json"
-        },
-        {
-          "type": "null"
-        }
-      ]
-    },
-    "organisation_welsh_address": {
-      "anyOf": [
-        {
-          "$ref": "../objects/orgAddress.json"
-        },
-        {
-          "type": "null"
-        }
-      ]
-    },
-    "release_package_code": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "organisation_header_code": {
-      "type": [
-        "integer",
-        "null"
-      ]
+      "minItems": 0,
+      "items": {
+        "$ref": "../objects/orgAddress.json"
+      }
     },
     "contact_information": {
       "type": [
@@ -171,28 +65,12 @@
       "items": {
         "$ref": "../objects/orgContactInformation.json"
       }
-    },
-    "address": {
-      "type": [
-        "array",
-        "null"
-      ],
-      "minItems": 0,
-      "items": {
-        "$ref": "../objects/orgAddress.json"
-      }
     }
   },
   "required": [
-    "authoring_status",
-    "draft_final_exists_indicator",
-    "revision_date_from",
-    "description",
-    "organisation_type",
+    "name",
     "publishing_status",
-    "revision_number",
-    "revision_type",
-    "current_record_indicator"
+    "start_date"
   ],
   "additionalProperties": false,
   "x-unique-keys": [
@@ -205,8 +83,17 @@
     {
       "name": "NationalProbationServicesUniqueKey",
       "key": [
-        "description"
+        "name"
       ]
+    }
+  ],
+  "x-rules": [
+    {
+      "name": "EndDateNotEarlierThanStartDateValidation",
+      "left": "end_date",
+      "op": ">=",
+      "right": "start_date",
+      "compare_as": "date"
     }
   ]
 }

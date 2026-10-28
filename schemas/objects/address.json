@@ -1,40 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.1/objects/address.json",
+  "$id": "v2.5/1.5.2/objects/address.json",
   "title": "Address",
   "type": "object",
   "properties": {
-    "pss_link_address_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "end_date": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date"
-    },
-    "start_date": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date"
-    },
-    "pss_address_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "post_code": {
-      "type": "string",
-      "maxLength": 8,
-      "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
-    },
     "address_type": {
       "type": "string",
       "enum": [
@@ -75,10 +44,15 @@
         "null"
       ],
       "maxLength": 35
+    },
+    "postcode": {
+      "type": "string",
+      "maxLength": 8,
+      "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
     }
   },
   "required": [
-    "post_code",
+    "postcode",
     "address_type",
     "address_line_1"
   ],
