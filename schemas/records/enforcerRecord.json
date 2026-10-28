@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.2/records/enforcerRecord.json",
+  "$id": "v2.6/records/enforcerRecord.json",
   "title": "Enforcer record",
   "type": "object",
   "properties": {
@@ -8,11 +8,21 @@
       "type": [
         "integer",
         "null"
+      ],
+      "x-unique-keys": [
+        {
+          "name": "EnforcersUniqueKey"
+        }
       ]
     },
     "name": {
       "type": "string",
-      "maxLength": 35
+      "maxLength": 35,
+      "x-unique-keys": [
+        {
+          "name": "NationalProbationServicesUniqueKey"
+        }
+      ]
     },
     "welsh_name": {
       "type": [
@@ -30,7 +40,15 @@
         "string",
         "null"
       ],
-      "format": "date"
+      "format": "date",
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDateValidation",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
+        }
+      ]
     },
     "publishing_status": {
       "type": "string",
@@ -43,15 +61,13 @@
         "Active",
         "Not Published",
         "Added to Release Package"
-      ],
-      "maxLength": 128
+      ]
     },
     "addresses": {
       "type": [
         "array",
         "null"
       ],
-      "minItems": 0,
       "items": {
         "$ref": "../objects/orgAddress.json"
       }
@@ -61,7 +77,6 @@
         "array",
         "null"
       ],
-      "minItems": 0,
       "items": {
         "$ref": "../objects/orgContactInformation.json"
       }
@@ -72,28 +87,5 @@
     "publishing_status",
     "start_date"
   ],
-  "additionalProperties": false,
-  "x-unique-keys": [
-    {
-      "name": "EnforcersUniqueKey",
-      "key": [
-        "enforcer_code"
-      ]
-    },
-    {
-      "name": "NationalProbationServicesUniqueKey",
-      "key": [
-        "name"
-      ]
-    }
-  ],
-  "x-rules": [
-    {
-      "name": "EndDateNotEarlierThanStartDateValidation",
-      "left": "end_date",
-      "op": ">=",
-      "right": "start_date",
-      "compare_as": "date"
-    }
-  ]
+  "additionalProperties": false
 }

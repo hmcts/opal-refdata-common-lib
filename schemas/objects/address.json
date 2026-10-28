@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.2/objects/address.json",
+  "$id": "v2.6/objects/address.json",
   "title": "Address",
   "type": "object",
   "properties": {
@@ -10,8 +10,7 @@
         "Court Address",
         "Financial Office Address",
         "Welsh Court Address"
-      ],
-      "maxLength": 100
+      ]
     },
     "address_line_1": {
       "type": "string",

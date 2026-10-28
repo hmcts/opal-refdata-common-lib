@@ -1,12 +1,17 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.2/records/centralAuthorityRecord.json",
+  "$id": "v2.6/records/centralAuthorityRecord.json",
   "title": "Central authority record",
   "type": "object",
   "properties": {
     "name": {
       "type": "string",
-      "maxLength": 4000
+      "maxLength": 4000,
+      "x-unique-keys": [
+        {
+          "name": "CentralAuthoritiesUniqueKey"
+        }
+      ]
     },
     "welsh_name": {
       "type": [
@@ -24,7 +29,15 @@
         "string",
         "null"
       ],
-      "format": "date"
+      "format": "date",
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDateValidation",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
+        }
+      ]
     },
     "publishing_status": {
       "type": "string",
@@ -37,15 +50,13 @@
         "Active",
         "Not Published",
         "Added to Release Package"
-      ],
-      "maxLength": 128
+      ]
     },
     "addresses": {
       "type": [
         "array",
         "null"
       ],
-      "minItems": 0,
       "items": {
         "$ref": "../objects/orgAddress.json"
       }
@@ -55,7 +66,6 @@
         "array",
         "null"
       ],
-      "minItems": 0,
       "items": {
         "$ref": "../objects/orgContactInformation.json"
       }
@@ -66,22 +76,5 @@
     "publishing_status",
     "start_date"
   ],
-  "additionalProperties": false,
-  "x-unique-keys": [
-    {
-      "name": "CentralAuthoritiesUniqueKey",
-      "key": [
-        "name"
-      ]
-    }
-  ],
-  "x-rules": [
-    {
-      "name": "EndDateNotEarlierThanStartDateValidation",
-      "left": "end_date",
-      "op": ">=",
-      "right": "start_date",
-      "compare_as": "date"
-    }
-  ]
+  "additionalProperties": false
 }

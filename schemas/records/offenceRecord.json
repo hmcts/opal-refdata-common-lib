@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.2/records/offenceRecord.json",
+  "$id": "v2.6/records/offenceRecord.json",
   "title": "Offence record",
   "type": "object",
   "properties": {
@@ -9,7 +9,12 @@
       "maxLength": 8,
       "not": {
         "pattern": "[^A-Za-z0-9]"
-      }
+      },
+      "x-unique-keys": [
+        {
+          "name": "CJSCodeUniqueKey"
+        }
+      ]
     },
     "cjs_title": {
       "type": "string",
@@ -45,31 +50,36 @@
         "string",
         "null"
       ],
-      "format": "date"
+      "format": "date",
+      "x-rules": [
+        {
+          "name": "DateUsedToGEDateUsedFromValidation",
+          "op": ">=",
+          "right": "date_used_from",
+          "compare_as": "date"
+        }
+      ]
     },
     "recordable": {
       "type": "string",
       "enum": [
         "Yes",
         "No"
-      ],
-      "maxLength": 128
+      ]
     },
     "reportable": {
       "type": "string",
       "enum": [
         "Yes",
         "No"
-      ],
-      "maxLength": 128
+      ]
     },
     "standard_list": {
       "type": "string",
       "enum": [
         "Yes",
         "No"
-      ],
-      "maxLength": 128
+      ]
     },
     "traffic_control": {
       "type": [
@@ -193,8 +203,7 @@
         "N",
         "Y",
         null
-      ],
-      "maxLength": 128
+      ]
     },
     "pnld_location_flag": {
       "type": [
@@ -205,8 +214,7 @@
         "N",
         "Y",
         null
-      ],
-      "maxLength": 128
+      ]
     },
     "pnld_principal_offence_category": {
       "type": [
@@ -265,8 +273,7 @@
         "N",
         "Y",
         null
-      ],
-      "maxLength": 128
+      ]
     },
     "second_language_offence_statement_of_facts_text": {
       "type": [
@@ -324,8 +331,7 @@
         "Future",
         "Superseded",
         null
-      ],
-      "maxLength": 128
+      ]
     },
     "offence_source": {
       "type": "string",
@@ -334,8 +340,7 @@
         "PNLD",
         "APPS",
         "MOJ"
-      ],
-      "maxLength": 10
+      ]
     },
     "mis_classification": {
       "type": [
@@ -359,8 +364,7 @@
         "ROB",
         "BUR",
         null
-      ],
-      "maxLength": 4
+      ]
     },
     "offence_class": {
       "type": "string",
@@ -369,8 +373,7 @@
         "3",
         "2",
         "S"
-      ],
-      "maxLength": 1
+      ]
     },
     "can_be_bulk": {
       "type": [
@@ -404,8 +407,7 @@
         "Applicant",
         "APPLICANT",
         null
-      ],
-      "maxLength": 10
+      ]
     },
     "exparte": {
       "type": [
@@ -423,8 +425,7 @@
         "CROWN",
         "MAGISTRATES",
         null
-      ],
-      "maxLength": 128
+      ]
     },
     "appeal_flag": {
       "type": [
@@ -444,8 +445,7 @@
         "GENERIC_APPLICATION",
         "NOT_APPLICABLE",
         null
-      ],
-      "maxLength": 128
+      ]
     },
     "link_type": {
       "type": [
@@ -458,8 +458,7 @@
         "SJP",
         "LINKED",
         null
-      ],
-      "maxLength": 128
+      ]
     },
     "hearing_code": {
       "type": [
@@ -477,8 +476,7 @@
         "Appellant",
         "Applicant",
         null
-      ],
-      "maxLength": 128
+      ]
     },
     "plea_applicable_flag": {
       "type": [
@@ -496,8 +494,7 @@
         "OFFENCE",
         "COURT_ORDER",
         null
-      ],
-      "maxLength": 128
+      ]
     },
     "commissioner_of_oath": {
       "type": [
@@ -515,8 +512,7 @@
         "NOT_APPLICABLE",
         "GENERIC_BREACH",
         null
-      ],
-      "maxLength": 128
+      ]
     },
     "court_of_appeal_flag": {
       "type": [
@@ -540,15 +536,14 @@
         "TRUE",
         "NOT_APPLICABLE",
         null
-      ],
-      "maxLength": 128
+      ]
     },
     "boxwork_notification_template": {
       "type": [
         "string",
         "null"
       ],
-      "maxLength": 10
+      "maxLength": 19
     },
     "prosecutor_as_third_party_flag": {
       "type": [
@@ -575,16 +570,14 @@
       "enum": [
         "N",
         "Y"
-      ],
-      "maxLength": 128
+      ]
     },
     "custodial_indicator": {
       "type": "string",
       "enum": [
         "Yes",
         "No"
-      ],
-      "maxLength": 128
+      ]
     }
   },
   "required": [
@@ -600,14 +593,6 @@
     "date_used_from"
   ],
   "additionalProperties": false,
-  "x-unique-keys": [
-    {
-      "name": "CJSCodeUniqueKey",
-      "key": [
-        "cjs_code"
-      ]
-    }
-  ],
   "allOf": [
     {
       "$comment": "Offence:OffenceRevision.CivilAppDataMandatoryFieldValidation",
@@ -616,10 +601,7 @@
           "offence_source": {
             "const": "APPS"
           }
-        },
-        "required": [
-          "offence_source"
-        ]
+        }
       },
       "then": {
         "required": [
@@ -663,15 +645,6 @@
           }
         }
       }
-    }
-  ],
-  "x-rules": [
-    {
-      "name": "DateUsedToGEDateUsedFromValidation",
-      "left": "date_used_to",
-      "op": ">=",
-      "right": "date_used_from",
-      "compare_as": "date"
     }
   ]
 }

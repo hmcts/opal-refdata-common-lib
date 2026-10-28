@@ -1,15 +1,30 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.2/records/ljaRecord.json",
+  "$id": "v2.6/records/ljaRecord.json",
   "title": "LJA record",
   "type": "object",
   "properties": {
     "lja_code": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "maxLength": 4
+      "type": "string",
+      "maxLength": 4,
+      "$comment": "Court:Court.CourtCodeValidation",
+      "pattern": "^[0-9]+$",
+      "minLength": 4,
+      "x-unique-keys": [
+        {
+          "name": "CourtCodeUniqueKey",
+          "when": {
+            "lja_type": [
+              "PSA",
+              "NICRT",
+              "YCT",
+              "SCSCRT",
+              "SJCRT",
+              "CRWCRT"
+            ]
+          }
+        }
+      ]
     },
     "lja_name": {
       "type": "string",
@@ -39,15 +54,24 @@
         "SCSCRT",
         "SJCRT",
         "CRWCRT"
-      ],
-      "maxLength": 6
+      ]
     },
     "lja_location_code": {
       "type": [
         "string",
         "null"
       ],
-      "maxLength": 10
+      "maxLength": 10,
+      "x-unique-keys": [
+        {
+          "name": "CourtLocationCodeUniqueKey",
+          "when": {
+            "lja_type": [
+              "CRWCRT"
+            ]
+          }
+        }
+      ]
     },
     "start_date": {
       "type": "string",
@@ -58,7 +82,25 @@
         "string",
         "null"
       ],
-      "format": "date"
+      "format": "date",
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDate",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date",
+          "when": {
+            "lja_type": [
+              "PSA",
+              "NICRT",
+              "YCT",
+              "SCSCRT",
+              "SJCRT",
+              "CRWCRT"
+            ]
+          }
+        }
+      ]
     },
     "cja_code": {
       "type": [
@@ -109,8 +151,7 @@
         "43",
         "20",
         null
-      ],
-      "maxLength": 2
+      ]
     },
     "division_code": {
       "type": [
@@ -126,8 +167,7 @@
         "7",
         "3",
         null
-      ],
-      "maxLength": 20
+      ]
     },
     "default_start_time": {
       "type": [
@@ -170,15 +210,13 @@
         "Not Published",
         "Added to Release Package",
         "Error"
-      ],
-      "maxLength": 128
+      ]
     },
     "addresses": {
       "type": [
         "array",
         "null"
       ],
-      "minItems": 0,
       "items": {
         "$ref": "../objects/address.json"
       }
@@ -188,7 +226,6 @@
         "array",
         "null"
       ],
-      "minItems": 0,
       "items": {
         "$ref": "../objects/contactInformation.json"
       }
@@ -198,7 +235,8 @@
     "lja_type",
     "lja_name",
     "start_date",
-    "publishing_status"
+    "publishing_status",
+    "lja_code"
   ],
   "additionalProperties": false,
   "allOf": [
@@ -212,10 +250,7 @@
               "CRWCRT"
             ]
           }
-        },
-        "required": [
-          "lja_type"
-        ]
+        }
       },
       "then": {
         "required": [
@@ -231,22 +266,6 @@
       }
     },
     {
-      "$comment": "Court:Court.CourtCodeValidation",
-      "required": [
-        "lja_code"
-      ],
-      "properties": {
-        "lja_code": {
-          "pattern": "^[0-9]+$",
-          "minLength": 4,
-          "maxLength": 4,
-          "not": {
-            "type": "null"
-          }
-        }
-      }
-    },
-    {
       "$comment": "Court:Court.CourtLocationCodeValidation (per stepper)",
       "if": {
         "properties": {
@@ -255,10 +274,7 @@
               "CRWCRT"
             ]
           }
-        },
-        "required": [
-          "lja_type"
-        ]
+        }
       },
       "then": {
         "required": [
@@ -284,10 +300,7 @@
               "YCT"
             ]
           }
-        },
-        "required": [
-          "lja_type"
-        ]
+        }
       },
       "then": {
         "properties": {
@@ -373,18 +386,18 @@
             "else": {
               "properties": {
                 "addresses": {
-                  "contains": {
-                    "properties": {
-                      "address_type": {
-                        "const": "Welsh Court Address"
-                      }
-                    },
-                    "required": [
-                      "address_type"
-                    ]
-                  },
-                  "minContains": 0,
-                  "maxContains": 0
+                  "not": {
+                    "contains": {
+                      "properties": {
+                        "address_type": {
+                          "const": "Welsh Court Address"
+                        }
+                      },
+                      "required": [
+                        "address_type"
+                      ]
+                    }
+                  }
                 }
               }
             }
@@ -403,31 +416,24 @@
               "SJCRT"
             ]
           }
-        },
-        "required": [
-          "lja_type"
-        ]
+        }
       },
       "then": {
         "properties": {
           "addresses": {
             "minItems": 1,
-            "allOf": [
-              {
-                "contains": {
-                  "properties": {
-                    "address_type": {
-                      "const": "Court Address"
-                    }
-                  },
-                  "required": [
-                    "address_type"
-                  ]
-                },
-                "minContains": 1,
-                "maxContains": 1
-              }
-            ],
+            "contains": {
+              "properties": {
+                "address_type": {
+                  "const": "Court Address"
+                }
+              },
+              "required": [
+                "address_type"
+              ]
+            },
+            "minContains": 1,
+            "maxContains": 1,
             "not": {
               "type": "null"
             }
@@ -447,31 +453,24 @@
               "CRWCRT"
             ]
           }
-        },
-        "required": [
-          "lja_type"
-        ]
+        }
       },
       "then": {
         "properties": {
           "addresses": {
             "minItems": 1,
-            "allOf": [
-              {
-                "contains": {
-                  "properties": {
-                    "address_type": {
-                      "const": "Court Address"
-                    }
-                  },
-                  "required": [
-                    "address_type"
-                  ]
-                },
-                "minContains": 1,
-                "maxContains": 1
-              }
-            ],
+            "contains": {
+              "properties": {
+                "address_type": {
+                  "const": "Court Address"
+                }
+              },
+              "required": [
+                "address_type"
+              ]
+            },
+            "minContains": 1,
+            "maxContains": 1,
             "not": {
               "type": "null"
             }
@@ -522,70 +521,22 @@
             "else": {
               "properties": {
                 "addresses": {
-                  "contains": {
-                    "properties": {
-                      "address_type": {
-                        "const": "Welsh Court Address"
-                      }
-                    },
-                    "required": [
-                      "address_type"
-                    ]
-                  },
-                  "minContains": 0,
-                  "maxContains": 0
+                  "not": {
+                    "contains": {
+                      "properties": {
+                        "address_type": {
+                          "const": "Welsh Court Address"
+                        }
+                      },
+                      "required": [
+                        "address_type"
+                      ]
+                    }
+                  }
                 }
               }
             }
           }
-        ]
-      }
-    }
-  ],
-  "x-unique-keys": [
-    {
-      "name": "CourtCodeUniqueKey",
-      "key": [
-        "lja_code"
-      ],
-      "when": {
-        "lja_type": [
-          "PSA",
-          "NICRT",
-          "YCT",
-          "SCSCRT",
-          "SJCRT",
-          "CRWCRT"
-        ]
-      }
-    },
-    {
-      "name": "CourtLocationCodeUniqueKey",
-      "key": [
-        "lja_location_code"
-      ],
-      "when": {
-        "lja_type": [
-          "CRWCRT"
-        ]
-      }
-    }
-  ],
-  "x-rules": [
-    {
-      "name": "EndDateNotEarlierThanStartDate",
-      "left": "end_date",
-      "op": ">=",
-      "right": "start_date",
-      "compare_as": "date",
-      "when": {
-        "lja_type": [
-          "PSA",
-          "NICRT",
-          "YCT",
-          "SCSCRT",
-          "SJCRT",
-          "CRWCRT"
         ]
       }
     }

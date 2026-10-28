@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.2/payload.json",
+  "$id": "v2.6/payload.json",
   "title": "Published Reference Data Message payload",
   "type": "object",
   "properties": {
@@ -89,7 +89,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "records/offenceRecord.json"
+                "$ref": "./records/offenceRecord.json"
               }
             }
           }
@@ -110,7 +110,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "records/courtRecord.json"
+                "$ref": "./records/courtRecord.json"
               }
             }
           }
@@ -131,7 +131,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "records/ljaRecord.json"
+                "$ref": "./records/ljaRecord.json"
               }
             }
           }
@@ -152,7 +152,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "records/prisonRecord.json"
+                "$ref": "./records/prisonRecord.json"
               }
             }
           }
@@ -173,7 +173,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "records/enforcerRecord.json"
+                "$ref": "./records/enforcerRecord.json"
               }
             }
           }
@@ -194,7 +194,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "records/centralAuthorityRecord.json"
+                "$ref": "./records/centralAuthorityRecord.json"
               }
             }
           }
@@ -215,7 +215,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "records/majorCreditorRecord.json"
+                "$ref": "./records/majorCreditorRecord.json"
               }
             }
           }

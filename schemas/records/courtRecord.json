@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.5/1.5.2/records/courtRecord.json",
+  "$id": "v2.6/records/courtRecord.json",
   "title": "Court record",
   "type": "object",
   "properties": {
@@ -16,11 +16,23 @@
       "maxLength": 100
     },
     "court_location_code": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "maxLength": 10
+      "type": "string",
+      "maxLength": 10,
+      "$comment": "Court:Court.CourtLocationCodeCrownValidation | CourtLocationCodeMagistratesValidation (per stepper)",
+      "if": {
+        "pattern": "^C"
+      },
+      "then": {
+        "pattern": "^C(?:01|03|04|05|06|07|10|11|12|13|14|16|17|20|21|22|23|30|31|32|33|34|35|36|37|40|41|42|43|44|45|46|47|50|52|53|54|55|60|61|62|63)[A-Z]{2}\\d{2}$"
+      },
+      "else": {
+        "pattern": "^B(?:01|03|04|05|06|07|10|11|12|13|14|16|17|20|21|22|23|30|31|32|33|34|35|36|37|40|41|42|43|44|45|46|47|50|52|53|54|55|60|61|62|63)[A-Z]{2}\\d{2}$"
+      },
+      "x-unique-keys": [
+        {
+          "name": "CourtLocationCodeUniqueKey"
+        }
+      ]
     },
     "start_date": {
       "type": "string",
@@ -31,7 +43,15 @@
         "string",
         "null"
       ],
-      "format": "date"
+      "format": "date",
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDate",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
+        }
+      ]
     },
     "cja_code": {
       "type": "string",
@@ -78,8 +98,7 @@
         "32",
         "43",
         "20"
-      ],
-      "maxLength": 2
+      ]
     },
     "division_code": {
       "type": [
@@ -95,8 +114,7 @@
         "7",
         "3",
         null
-      ],
-      "maxLength": 20
+      ]
     },
     "default_start_time": {
       "type": [
@@ -139,8 +157,7 @@
         "Not Published",
         "Added to Release Package",
         "Error"
-      ],
-      "maxLength": 128
+      ]
     },
     "addresses": {
       "type": "array",
@@ -170,7 +187,6 @@
         "array",
         "null"
       ],
-      "minItems": 0,
       "items": {
         "$ref": "../objects/contactInformation.json"
       }
@@ -181,54 +197,11 @@
     "start_date",
     "publishing_status",
     "cja_code",
-    "addresses"
+    "addresses",
+    "court_location_code"
   ],
   "additionalProperties": false,
-  "x-unique-keys": [
-    {
-      "name": "CourtLocationCodeUniqueKey",
-      "key": [
-        "court_location_code"
-      ]
-    }
-  ],
   "allOf": [
-    {
-      "$comment": "Court:Court.CourtLocationCodeCrownValidation | CourtLocationCodeMagistratesValidation (per stepper)",
-      "if": {
-        "properties": {
-          "court_location_code": {
-            "pattern": "^C"
-          }
-        }
-      },
-      "then": {
-        "required": [
-          "court_location_code"
-        ],
-        "properties": {
-          "court_location_code": {
-            "pattern": "^C(?:01|03|04|05|06|07|10|11|12|13|14|16|17|20|21|22|23|30|31|32|33|34|35|36|37|40|41|42|43|44|45|46|47|50|52|53|54|55|60|61|62|63)[A-Z]{2}\\d{2}$",
-            "not": {
-              "type": "null"
-            }
-          }
-        }
-      },
-      "else": {
-        "required": [
-          "court_location_code"
-        ],
-        "properties": {
-          "court_location_code": {
-            "pattern": "^B(?:01|03|04|05|06|07|10|11|12|13|14|16|17|20|21|22|23|30|31|32|33|34|35|36|37|40|41|42|43|44|45|46|47|50|52|53|54|55|60|61|62|63)[A-Z]{2}\\d{2}$",
-            "not": {
-              "type": "null"
-            }
-          }
-        }
-      }
-    },
     {
       "$comment": "Court:Court.WelshCourtAddressCountValidation",
       "if": {
@@ -257,43 +230,28 @@
               ]
             },
             "minContains": 1,
-            "maxContains": 1,
-            "not": {
-              "type": "null"
-            }
+            "maxContains": 1
           }
-        },
-        "required": [
-          "addresses"
-        ]
+        }
       },
       "else": {
         "properties": {
           "addresses": {
-            "contains": {
-              "properties": {
-                "address_type": {
-                  "const": "Welsh Court Address"
-                }
-              },
-              "required": [
-                "address_type"
-              ]
-            },
-            "minContains": 0,
-            "maxContains": 0
+            "not": {
+              "contains": {
+                "properties": {
+                  "address_type": {
+                    "const": "Welsh Court Address"
+                  }
+                },
+                "required": [
+                  "address_type"
+                ]
+              }
+            }
           }
         }
       }
-    }
-  ],
-  "x-rules": [
-    {
-      "name": "EndDateNotEarlierThanStartDate",
-      "left": "end_date",
-      "op": ">=",
-      "right": "start_date",
-      "compare_as": "date"
     }
   ]
 }
