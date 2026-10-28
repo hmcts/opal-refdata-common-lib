@@ -205,6 +205,26 @@ class RefDataMessagingIntegrationTest {
     }
 
     private static String message(long id, String dataProduct, String name, String addressLine1, String postcode) {
+        String record = "MajorCreditor".equals(dataProduct)
+            ? """
+                {
+                  "name": "%s",
+                  "publishing_status": "Active",
+                  "start_date": "2026-01-01"
+                }
+                """.formatted(name)
+            : """
+                {
+                  "name": "%s",
+                  "publishing_status": "Active",
+                  "start_date": "2026-01-01",
+                  "addresses": [{
+                    "address_type": "PRIS",
+                    "address_line_1": "%s",
+                    "postcode": "%s"
+                  }]
+                }
+                """.formatted(name, addressLine1, postcode);
         return """
             {
               "header": {
@@ -218,19 +238,10 @@ class RefDataMessagingIntegrationTest {
                 "record_count": 1
               },
               "payload": {
-                "records": [{
-                  "description": "%s",
-                  "publishing_status": "Active",
-                  "start_date": "2026-01-01",
-                  "addresses": [{
-                    "address_type": "PRIS",
-                    "address_line_1": "%s",
-                    "post_code": "%s"
-                  }]
-                }]
+                "records": [%s]
               }
             }
-        """.formatted(id, dataProduct, name, addressLine1, postcode);
+        """.formatted(id, dataProduct, record);
     }
 
     @Import({RefDataMessageProcessorImplIT.TestConfig.class, RefDataServiceBusSessionReceiverConfig.class,
