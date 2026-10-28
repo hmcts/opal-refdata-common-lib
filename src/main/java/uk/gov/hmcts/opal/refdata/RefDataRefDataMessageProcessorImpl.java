@@ -2,6 +2,7 @@ package uk.gov.hmcts.opal.refdata;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * commits successfully.
  */
 @Slf4j(topic = "opal.RefDataMessageProcessor")
+@ConditionalOnProperty(prefix = "opal.ref-data.service-bus", name = "consumer-enabled", havingValue = "true")
 @RequiredArgsConstructor
 @Service
 public class RefDataRefDataMessageProcessorImpl implements RefDataMessageProcessor {

@@ -30,7 +30,7 @@ import uk.gov.hmcts.opal.refdata.schemavalidation.JsonSchemaValidationException;
 @SpringBootTest(classes = RefDataMessageProcessorImplIT.TestConfig.class,
     webEnvironment = SpringBootTest.WebEnvironment.NONE,
     properties = {"spring.sql.init.mode=always", "spring.sql.init.schema-locations=classpath:ref-data-schema.sql",
-        "spring.jpa.hibernate.ddl-auto=validate"})
+        "spring.jpa.hibernate.ddl-auto=validate","opal.ref-data.service-bus.consumer-enabled=true"})
 @Testcontainers
 class RefDataMessageProcessorImplIT {
     @Container @ServiceConnection

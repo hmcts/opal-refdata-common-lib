@@ -5,6 +5,7 @@ import java.util.List;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
@@ -15,6 +16,7 @@ import uk.gov.hmcts.opal.refdata.schemavalidation.SchemaValidationService;
  * records into the DTO type declared by the matching handler.
  */
 @Slf4j(topic = "opal.RefDataMessageDecoder")
+@ConditionalOnProperty(prefix = "opal.ref-data.service-bus", name = "consumer-enabled", havingValue = "true")
 @RequiredArgsConstructor
 @Service
 public class RefDataMessageDecoder {

@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import tools.jackson.databind.JsonNode;
@@ -21,6 +22,7 @@ import tools.jackson.databind.JsonNode;
  * Loads JSON schemas from the classpath, caches them, and validates incoming
  * JSON documents against the requested schema.
  */
+@ConditionalOnProperty(prefix = "opal.ref-data.service-bus", name = "consumer-enabled", havingValue = "true")
 @Service
 public class SchemaValidationService {
 
