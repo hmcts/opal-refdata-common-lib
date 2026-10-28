@@ -28,7 +28,7 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord
 
     @Override
     public String getBusinessKey(PrisonRecord dto) {
-        return dto.description();
+        return dto.name();
     }
 
     @Override
@@ -38,19 +38,19 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord
 
     @Override
     public void validateDto(PrisonRecord dto) {
-        if (dto.description().contains("X")) {
+        if (dto.name().contains("X")) {
             throw new IllegalArgumentException("A prison name cannot contain the letter X");
         }
     }
 
     @Override
     public Optional<DummyPrison> findEntity(PrisonRecord dto) {
-        return repository.findByName(dto.description());
+        return repository.findByName(dto.name());
     }
 
     @Override
     public DummyPrison createEntityFromDto(PrisonRecord dto) {
-        Long newPrisonId = UUID.nameUUIDFromBytes(dto.description().getBytes()).getMostSignificantBits();
+        Long newPrisonId = UUID.nameUUIDFromBytes(dto.name().getBytes()).getMostSignificantBits();
         DummyPrison entity = new DummyPrison();
         entity.setId(newPrisonId);
         updateEntityFromDto(dto, entity);
@@ -60,11 +60,11 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord
     @Override
     public void updateEntityFromDto(PrisonRecord dto, DummyPrison e) {
         var address = dto.addresses().get(0);
-        e.setName(dto.description());
+        e.setName(dto.name());
         e.setAddressLine1(address.addressLine1());
         e.setAddressLine2(address.addressLine2());
         e.setAddressLine3(address.addressLine3());
-        e.setPostcode(address.postCode());
+        e.setPostcode(address.postcode());
         e.setAddressLine4(address.addressLine4());
         e.setAddressLine5(address.addressLine5());
     }

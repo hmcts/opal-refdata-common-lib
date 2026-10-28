@@ -121,7 +121,7 @@ class RefDataMessageProcessorImplIT {
         assertThatThrownBy(() -> process(message(
             prisonRecord("Invalid Postcode Prison", "1 Court Road", "INVALID"))))
             .isInstanceOf(JsonSchemaValidationException.class)
-            .hasMessageContaining("$.payload.records[0].addresses[0].post_code")
+            .hasMessageContaining("$.payload.records[0].addresses[0].postcode")
             .hasMessageContaining("does not match the regex pattern");
     }
 
@@ -209,15 +209,14 @@ class RefDataMessageProcessorImplIT {
     private String prisonRecord(String description, String addressLine1, String postcode) {
         return """
             {
-              "description": "%s",
-              "business_unit": "1234",
+              "name": "%s",
               "start_date": "2026-01-01",
               "publishing_status": "Active",
               "addresses": [
                 {
                   "address_type": "PRIS",
                   "address_line_1": "%s",
-                  "post_code": "%s"
+                  "postcode": "%s"
                 }
               ]
             }

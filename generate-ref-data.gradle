@@ -1,5 +1,7 @@
 import groovy.json.JsonSlurper
 
+apply plugin: 'java'
+
 ext.generatedRefDataDtoDir = layout.buildDirectory.dir('generated/sources/refDataDtos/main').get().asFile
 
 tasks.register('generateRefDataDtos') {

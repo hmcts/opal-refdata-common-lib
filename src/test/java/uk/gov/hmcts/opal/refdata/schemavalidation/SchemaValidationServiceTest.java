@@ -51,7 +51,7 @@ class SchemaValidationServiceTest {
               "payload": {
                 "records": [
                   {
-                    "description": "Example Prison",
+                    "name": "Example Prison",
                     "publishing_status": "Active",
                     "start_date": "2026-01-01"
                   }
@@ -87,12 +87,12 @@ class SchemaValidationServiceTest {
               "payload": {
                 "records": [
                   {
-                    "description": "Example Prison",
+                    "name": "Example Prison",
                     "publishing_status": "Active",
                     "start_date": "2026-01-01",
                     "addresses": [
                       {
-                        "post_code": "INVALID"
+                        "postcode": "INVALID"
                       }
                     ]
                   }
@@ -106,7 +106,7 @@ class SchemaValidationServiceTest {
 
         // Then
         assertThat(errors)
-            .anyMatch(error -> error.contains("post_code") && error.contains("pattern"));
+            .anyMatch(error -> error.contains("postcode") && error.contains("pattern"));
     }
 
     @Test
