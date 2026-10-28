@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.6/payload.json",
+  "$id": "v2.7/payload.json",
   "title": "Published Reference Data Message payload",
   "type": "object",
   "properties": {

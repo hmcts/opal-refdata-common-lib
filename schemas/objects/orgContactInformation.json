@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.6/objects/orgContactInformation.json",
+  "$id": "v2.7/objects/orgContactInformation.json",
   "title": "Contact information (Organisation)",
   "type": "object",
   "properties": {

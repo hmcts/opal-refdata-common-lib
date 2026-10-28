@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.6/records/centralAuthorityRecord.json",
+  "$id": "v2.7/records/centralAuthorityRecord.json",
   "title": "Central authority record",
   "type": "object",
   "properties": {

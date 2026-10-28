@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.6/records/enforcerRecord.json",
+  "$id": "v2.7/records/enforcerRecord.json",
   "title": "Enforcer record",
   "type": "object",
   "properties": {

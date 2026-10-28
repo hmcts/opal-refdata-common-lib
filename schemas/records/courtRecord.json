@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.6/records/courtRecord.json",
+  "$id": "v2.7/records/courtRecord.json",
   "title": "Court record",
   "type": "object",
   "properties": {
