@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "v2.5/1.5.0/payload.json",
+  "title": "Published Reference Data Message payload",
+  "type": "object",
+  "properties": {
+    "header": {
+      "type": "object",
+      "properties": {
+        "message_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "message_type": {
+          "const": "ReferenceData"
+        },
+        "data_product": {
+          "type": "string",
+          "enum": [
+            "Offence",
+            "Court",
+            "LJA",
+            "Prison",
+            "Enforcer",
+            "CentralAuthority",
+            "MajorCreditor"
+          ]
+        },
+        "operation": {
+          "const": "PUBLISH"
+        },
+        "source_system": {
+          "const": "Semarchy"
+        },
+        "created_date_time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "release_package_id": {
+          "type": "integer"
+        },
+        "record_count": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "message_id",
+        "message_type",
+        "data_product",
+        "operation",
+        "source_system",
+        "created_date_time",
+        "release_package_id",
+        "record_count"
+      ],
+      "additionalProperties": false
+    },
+    "payload": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "minItems": 1
+        }
+      },
+      "required": [
+        "records"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "header",
+    "payload"
+  ],
+  "oneOf": [
+    {
+      "title": "Offence message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "Offence"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "records/offenceRecord.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Court message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "Court"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "records/courtRecord.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "LJA message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "LJA"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "records/ljaRecord.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Prison message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "Prison"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "records/prisonRecord.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Enforcer message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "Enforcer"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "records/enforcerRecord.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "CentralAuthority message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "CentralAuthority"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "records/centralAuthorityRecord.json"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "MajorCreditor message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "MajorCreditor"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "records/majorCreditorRecord.json"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "unevaluatedProperties": false
+}

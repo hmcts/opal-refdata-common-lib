@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "v2.5/1.5.0/records/centralAuthorityRecord.json",
+  "title": "Central authority record",
+  "type": "object",
+  "properties": {
+    "pss_address_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "authoring_status": {
+      "type": "string",
+      "enum": [
+        "Published",
+        "Draft",
+        "Final",
+        "Not Draft"
+      ],
+      "maxLength": 128
+    },
+    "sequence_number": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "pss_change_set_header_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "pss_email_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "pss_destination_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "second_language_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "cloned_from": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "draft_final_exists_indicator": {
+      "type": "boolean"
+    },
+    "revision_date_from": {
+      "type": "string",
+      "format": "date"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "pss_change_set_item_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    },
+    "organisation_type": {
+      "type": "string",
+      "enum": [
+        "CAT"
+      ],
+      "maxLength": 20
+    },
+    "pss_organisation_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "publishing_status": {
+      "type": "string",
+      "enum": [
+        "Future",
+        "Error",
+        "Submitted",
+        "Inactive",
+        "Superseded",
+        "Active",
+        "Not Published",
+        "Added to Release Package"
+      ],
+      "maxLength": 128
+    },
+    "revision_number": {
+      "type": "integer"
+    },
+    "revision_type": {
+      "type": "string",
+      "enum": [
+        "Edit",
+        "Initial",
+        "New"
+      ],
+      "maxLength": 7
+    },
+    "pss_telephone_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "current_record_indicator": {
+      "type": "boolean"
+    },
+    "organisation_address": {
+      "anyOf": [
+        {
+          "$ref": "../objects/orgAddress.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "release_package_code": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "organisation_header_code": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "contact_information": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "minItems": 0,
+      "items": {
+        "$ref": "../objects/orgContactInformation.json"
+      }
+    },
+    "address": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "minItems": 0,
+      "items": {
+        "$ref": "../objects/orgAddress.json"
+      }
+    }
+  },
+  "required": [
+    "authoring_status",
+    "draft_final_exists_indicator",
+    "revision_date_from",
+    "description",
+    "organisation_type",
+    "publishing_status",
+    "revision_number",
+    "revision_type",
+    "current_record_indicator"
+  ],
+  "additionalProperties": false,
+  "x-unique-keys": [
+    {
+      "name": "CentralAuthoritiesUniqueKey",
+      "key": [
+        "description"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "v2.5/1.5.0/objects/contactInformation.json",
+  "title": "Contact information",
+  "type": "object",
+  "properties": {
+    "contact_value": {
+      "type": "string",
+      "maxLength": 254
+    },
+    "pss_communication_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "pss_link_communications_media_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "contact_sub_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Informant",
+        "Remittance Advice",
+        "Prosecutor",
+        "Offender Management Unit",
+        "Prisoner Escort and Custody Service",
+        "General",
+        "Contact",
+        "Reception",
+        "National Payment",
+        "Magistrates Court Contact",
+        "NCES Notification",
+        "Crown Prosecution Service Magistrates Court",
+        "Crown Prosecution Service",
+        "Enforcement Area",
+        "Crown Prosecution Service Crown Court",
+        null
+      ],
+      "maxLength": 100
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "contact_type": {
+      "type": "string",
+      "enum": [
+        "Mobile",
+        "Destination ID",
+        "Telephone",
+        "Fax",
+        "Email Address"
+      ],
+      "maxLength": 30
+    },
+    "start_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    }
+  },
+  "required": [
+    "contact_value",
+    "contact_type"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$comment": "Court:ContactInformation.ContactValueValidation",
+      "anyOf": [
+        {
+          "properties": {
+            "contact_type": {
+              "allOf": [
+                {
+                  "not": {
+                    "enum": [
+                      "Email Address",
+                      "Telephone",
+                      "Fax"
+                    ]
+                  }
+                },
+                {
+                  "not": {
+                    "type": "null"
+                  }
+                }
+              ]
+            }
+          },
+          "required": [
+            "contact_type"
+          ]
+        },
+        {
+          "required": [
+            "contact_type"
+          ],
+          "properties": {
+            "contact_type": {
+              "const": "Email Address"
+            },
+            "contact_value": {
+              "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+              "maxLength": 254
+            }
+          }
+        },
+        {
+          "required": [
+            "contact_type"
+          ],
+          "properties": {
+            "contact_type": {
+              "const": "Telephone"
+            },
+            "contact_value": {
+              "maxLength": 254
+            }
+          }
+        },
+        {
+          "required": [
+            "contact_type"
+          ],
+          "properties": {
+            "contact_type": {
+              "const": "Fax"
+            },
+            "contact_value": {
+              "maxLength": 14
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
