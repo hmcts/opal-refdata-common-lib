@@ -228,48 +228,6 @@
       "title": "Offence record",
       "type": "object",
       "properties": {
-        "pss_civil_application_data_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pnld_standard_offence_wording": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4000
-        },
-        "cjs_title": {
-          "type": "string",
-          "maxLength": 120
-        },
-        "sys_single_revision_offence_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "area": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "offence_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "second_language_offence_wording_text": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4000
-        },
         "cjs_code": {
           "type": "string",
           "maxLength": 8,
@@ -277,28 +235,9 @@
             "pattern": "[^A-Za-z0-9]"
           }
         },
-        "draft_final_exists_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "offence_source": {
+        "cjs_title": {
           "type": "string",
-          "enum": [
-            "NSD",
-            "PNLD",
-            "APPS",
-            "MOJ"
-          ],
-          "maxLength": 10
-        },
-        "current_editor": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 128
+          "maxLength": 120
         },
         "second_language_cjs_title": {
           "type": [
@@ -307,126 +246,12 @@
           ],
           "maxLength": 120
         },
-        "pss_offence_revision_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pssxhb_reference_offence_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pnld_prosecution_time_limit": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 40
-        },
-        "sys_entry_number_sequence": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 100
-        },
-        "sys_pnld_data_hash": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 32
-        },
-        "psspnld_offence_revision_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pnld_offence_start_date": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "offence_class": {
-          "type": "string",
-          "enum": [
-            "1",
-            "3",
-            "2",
-            "S"
-          ],
-          "maxLength": 1
-        },
-        "pss_change_set_header_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "revision_number": {
-          "type": "integer"
-        },
-        "standard_list": {
-          "type": "string",
-          "enum": [
-            "Yes",
-            "No"
-          ],
-          "maxLength": 128
-        },
-        "court_extract_available": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "pnld_welsh_standard_offence_wording": {
+        "user_acts_and_section": {
           "type": [
             "string",
             "null"
           ],
           "maxLength": 4000
-        },
-        "pnld_mode_of_trial": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 50
-        },
-        "pnld_date_of_last_update": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "proceedings_code": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "exclusiveMaximum": 100
-        },
-        "ho_sub_class": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "minimum": -9999999,
-          "maximum": 99999999
-        },
-        "pss_offence_act_and_section_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
         },
         "second_language_offence_act_and_section_text": {
           "type": [
@@ -435,105 +260,16 @@
           ],
           "maxLength": 4000
         },
-        "description": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 250
+        "date_used_from": {
+          "type": "string",
+          "format": "date"
         },
-        "resentencing_activation_code": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 10
-        },
-        "pss_offence_statement_of_fact_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "link_type": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "FIRST_HEARING",
-            "STANDALONE",
-            "SJP",
-            "LINKED",
-            null
-          ],
-          "maxLength": 128
-        },
-        "pnld_max_fine_type_magistrates_court": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 1
-        },
-        "pnld_offence_end_date": {
+        "date_used_to": {
           "type": [
             "string",
             "null"
           ],
           "format": "date"
-        },
-        "court_of_appeal_flag": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "sys_max_entry_number": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "active_offence_order": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "NOT_APPLICABLE",
-            "OFFENCE",
-            "COURT_ORDER",
-            null
-          ],
-          "maxLength": 128
-        },
-        "user_statement_of_facts": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4000
-        },
-        "revision_type": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "New",
-            "Initial",
-            "Edit",
-            null
-          ],
-          "maxLength": 128
-        },
-        "boxwork_notification_template": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 10
         },
         "recordable": {
           "type": "string",
@@ -543,43 +279,146 @@
           ],
           "maxLength": 128
         },
-        "pnld_principal_offence_category": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 200
-        },
-        "authoring_status": {
-          "type": [
-            "string",
-            "null"
-          ],
+        "reportable": {
+          "type": "string",
           "enum": [
-            "Draft",
-            "Final",
-            "Not Draft",
-            "Published",
-            null
+            "Yes",
+            "No"
           ],
           "maxLength": 128
         },
-        "application_synonym": {
+        "standard_list": {
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "maxLength": 128
+        },
+        "traffic_control": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "dvla_code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4
+        },
+        "offence_notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "maximum_penalty": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 100
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 250
+        },
+        "derived_from_cjs_code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 10
+        },
+        "ho_class": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": -9999999,
+          "maximum": 99999999
+        },
+        "ho_sub_class": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": -9999999,
+          "maximum": 99999999
+        },
+        "proceedings_code": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "exclusiveMaximum": 100
+        },
+        "pnld_standard_offence_wording": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "pnld_welsh_standard_offence_wording": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "pnld_date_of_last_update": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "pnld_prosecution_time_limit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 40
+        },
+        "pnld_max_fine_type_magistrates_court": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1
+        },
+        "pnld_max_fine_type_magistrates_court_description": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1000
+        },
+        "pnld_mode_of_trial": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 50
+        },
+        "pnld_endorsable_flag": {
           "type": [
             "string",
             "null"
           ],
           "enum": [
-            "AS MOJ",
-            "DEFENDANT",
-            "TRUE",
-            "AS Text",
-            "FALSE",
-            "Applicant",
-            "APPLICANT",
+            "N",
+            "Y",
             null
           ],
-          "maxLength": 10
+          "maxLength": 128
         },
         "pnld_location_flag": {
           "type": [
@@ -593,13 +432,106 @@
           ],
           "maxLength": 128
         },
-        "reportable": {
-          "type": "string",
+        "pnld_principal_offence_category": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 200
+        },
+        "user_offence_wording": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "user_statement_of_facts": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "entry_prompt_substitution_sow": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "entry_prompt_substitution_sof": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "entry_prompt_substitution_ans": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "area": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "blocked": {
+          "type": [
+            "string",
+            "null"
+          ],
           "enum": [
-            "Yes",
-            "No"
+            "N",
+            "Y",
+            null
           ],
           "maxLength": 128
+        },
+        "second_language_offence_statement_of_facts_text": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "second_language_offence_wording_text": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "offence_code": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "pnld_offence_start_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "pnld_offence_end_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "sow_reference": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 10
         },
         "publishing_status": {
           "type": [
@@ -619,326 +551,15 @@
           ],
           "maxLength": 128
         },
-        "entry_prompt_substitution_ans": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4000
-        },
-        "listing_notification_template": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "POSTAL_NOTIFICATION",
-            "TRUE",
-            "NOT_APPLICABLE",
-            null
-          ],
-          "maxLength": 128
-        },
-        "applicant_appellant_flag": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "Appellant",
-            "Applicant",
-            null
-          ],
-          "maxLength": 128
-        },
-        "second_language_offence_statement_of_facts_text": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4000
-        },
-        "sys_sort_terminal_entry": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "traffic_control": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "clone_type_code": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 3
-        },
-        "current_record_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "plea_applicable_flag": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "pnld_max_fine_type_magistrates_court_description": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 1000
-        },
-        "summons_template_type": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "BREACH",
-            "FIRST_HEARING",
-            "PARENT_GENERIC_CASE",
-            "GENERIC_APPLICATION",
-            "NOT_APPLICABLE",
-            null
-          ],
-          "maxLength": 128
-        },
-        "date_used_to": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "contested_fee": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "obsolete_indicator": {
+        "offence_source": {
           "type": "string",
           "enum": [
-            "N",
-            "Y"
-          ],
-          "maxLength": 128
-        },
-        "sys_show_deleted": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "breach_type": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "COMMISSION_OF_NEW_OFFENCE_BREACH",
-            "NOT_APPLICABLE",
-            "GENERIC_BREACH",
-            null
-          ],
-          "maxLength": 128
-        },
-        "can_be_bulk": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "entry_prompt_substitution_sof": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4000
-        },
-        "prefix": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 100
-        },
-        "prosecutor_as_third_party_flag": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "all_terminal_entries": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4000
-        },
-        "blocked": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "N",
-            "Y",
-            null
-          ],
-          "maxLength": 128
-        },
-        "ho_class": {
-          "type": [
-            "integer",
-            "null"
-          ],
-          "minimum": -9999999,
-          "maximum": 99999999
-        },
-        "pss_changed_by": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "maximum_penalty": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 100
-        },
-        "pnld_endorsable_flag": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "N",
-            "Y",
-            null
-          ],
-          "maxLength": 128
-        },
-        "sys_terminal_entry_clone": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 512
-        },
-        "appeal_flag": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "sow_reference": {
-          "type": [
-            "string",
-            "null"
+            "NSD",
+            "PNLD",
+            "APPS",
+            "MOJ"
           ],
           "maxLength": 10
-        },
-        "exparte": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "jurisdiction": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "EITHER",
-            "CROWN",
-            "MAGISTRATES",
-            null
-          ],
-          "maxLength": 128
-        },
-        "custodial_indicator": {
-          "type": "string",
-          "enum": [
-            "Yes",
-            "No"
-          ],
-          "maxLength": 128
-        },
-        "entry_prompt_substitution_sow": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4000
-        },
-        "date_used_from": {
-          "type": "string",
-          "format": "date"
-        },
-        "user_acts_and_section": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4000
-        },
-        "offence_notes": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4000
-        },
-        "derived_from_cjs_code": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 10
-        },
-        "sys_terminal_entry_long": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4000
-        },
-        "sys_user_wording_entry_number_validation": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "dvla_code": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4
-        },
-        "sys_cloned_to": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_offence_wording_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
         },
         "mis_classification": {
           "type": [
@@ -965,14 +586,17 @@
           ],
           "maxLength": 4
         },
-        "user_offence_wording": {
-          "type": [
-            "string",
-            "null"
+        "offence_class": {
+          "type": "string",
+          "enum": [
+            "1",
+            "3",
+            "2",
+            "S"
           ],
-          "maxLength": 4000
+          "maxLength": 1
         },
-        "commissioner_of_oath": {
+        "can_be_bulk": {
           "type": [
             "boolean",
             "null"
@@ -984,316 +608,207 @@
             "null"
           ]
         },
-        "cloned_from": {
+        "contested_fee": {
           "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 8
-        },
-        "pss_applications_data_id": {
-          "type": [
-            "integer",
+            "boolean",
             "null"
           ]
         },
-        "pss_changed_date": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "entry_prompt": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 240
-        },
-        "sys_terminal_entry_short": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 600
-        },
-        "entry_format": {
+        "application_synonym": {
           "type": [
             "string",
             "null"
           ],
           "enum": [
-            "DT",
-            "INT",
-            "TXT",
-            "CUR",
-            "TM",
-            "NUM",
-            "MNU",
+            "AS MOJ",
+            "DEFENDANT",
+            "TRUE",
+            "AS Text",
+            "FALSE",
+            "Applicant",
+            "APPLICANT",
             null
-          ],
-          "maxLength": 3
-        },
-        "clone_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "entry_number": {
-          "type": "integer"
-        },
-        "delete_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "maximum": {
-          "type": [
-            "string",
-            "null"
           ],
           "maxLength": 10
         },
-        "standard_entry_identifier": {
+        "exparte": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "jurisdiction": {
           "type": [
             "string",
             "null"
           ],
           "enum": [
-            "HOBR",
-            "VR",
-            "LN",
-            "VT",
-            "PT",
-            "OO",
-            "FA",
-            "LO",
-            "PR",
-            "OD",
-            "CO",
+            "EITHER",
+            "CROWN",
+            "MAGISTRATES",
             null
           ],
           "maxLength": 128
         },
-        "minimum": {
+        "appeal_flag": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "summons_template_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "BREACH",
+            "FIRST_HEARING",
+            "PARENT_GENERIC_CASE",
+            "GENERIC_APPLICATION",
+            "NOT_APPLICABLE",
+            null
+          ],
+          "maxLength": 128
+        },
+        "link_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "FIRST_HEARING",
+            "STANDALONE",
+            "SJP",
+            "LINKED",
+            null
+          ],
+          "maxLength": 128
+        },
+        "hearing_code": {
           "type": [
             "string",
             "null"
           ],
           "maxLength": 10
         },
-        "sys_unique_entry_number_indicator": {
+        "applicant_appellant_flag": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "Appellant",
+            "Applicant",
+            null
+          ],
+          "maxLength": 128
+        },
+        "plea_applicable_flag": {
           "type": [
             "boolean",
             "null"
           ]
         },
-        "menu_03_code": {
+        "active_offence_order": {
           "type": [
-            "integer",
+            "string",
+            "null"
+          ],
+          "enum": [
+            "NOT_APPLICABLE",
+            "OFFENCE",
+            "COURT_ORDER",
+            null
+          ],
+          "maxLength": 128
+        },
+        "commissioner_of_oath": {
+          "type": [
+            "boolean",
             "null"
           ]
         },
-        "menu_28_code": {
+        "breach_type": {
           "type": [
-            "integer",
+            "string",
+            "null"
+          ],
+          "enum": [
+            "COMMISSION_OF_NEW_OFFENCE_BREACH",
+            "NOT_APPLICABLE",
+            "GENERIC_BREACH",
+            null
+          ],
+          "maxLength": 128
+        },
+        "court_of_appeal_flag": {
+          "type": [
+            "boolean",
             "null"
           ]
         },
-        "menu_21_code": {
+        "court_extract_available": {
           "type": [
-            "integer",
+            "boolean",
             "null"
           ]
         },
-        "offence_type_code": {
+        "listing_notification_template": {
           "type": [
-            "integer",
+            "string",
+            "null"
+          ],
+          "enum": [
+            "POSTAL_NOTIFICATION",
+            "TRUE",
+            "NOT_APPLICABLE",
+            null
+          ],
+          "maxLength": 128
+        },
+        "boxwork_notification_template": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 10
+        },
+        "prosecutor_as_third_party_flag": {
+          "type": [
+            "boolean",
             "null"
           ]
         },
-        "menu_08_code": {
+        "resentencing_activation_code": {
           "type": [
-            "integer",
+            "string",
             "null"
-          ]
+          ],
+          "maxLength": 10
         },
-        "menu_27_code": {
+        "prefix": {
           "type": [
-            "integer",
+            "string",
             "null"
-          ]
+          ],
+          "maxLength": 100
         },
-        "menu_02_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
+        "obsolete_indicator": {
+          "type": "string",
+          "enum": [
+            "N",
+            "Y"
+          ],
+          "maxLength": 128
         },
-        "menu_25_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_11_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_17_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_26_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_29_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_30_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_07_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_09_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "release_package_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_01_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_04_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_24_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_15_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_19_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "offence_header_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_12_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_13_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_20_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_05_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_18_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_22_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_10_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_16_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_23_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_06_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "hearing_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "menu_14_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
+        "custodial_indicator": {
+          "type": "string",
+          "enum": [
+            "Yes",
+            "No"
+          ],
+          "maxLength": 128
         }
       },
       "required": [
@@ -1301,14 +816,12 @@
         "cjs_code",
         "offence_source",
         "offence_class",
-        "revision_number",
         "standard_list",
         "recordable",
         "reportable",
         "obsolete_indicator",
         "custodial_indicator",
-        "date_used_from",
-        "entry_number"
+        "date_used_from"
       ],
       "additionalProperties": false,
       "x-unique-keys": [
@@ -1320,3187 +833,6 @@
         }
       ],
       "allOf": [
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber27MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber29MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber14MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber10MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber01MaxValidationText",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber20MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber05MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber03MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber21MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber30MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber12MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber19MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber02MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber04MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber17MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber24MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber08MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber23MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber09MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber06MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber07MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber26MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber11MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber18MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber25MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber01MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber16MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber28MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber15MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber13MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          "$comment": "Offence:OffenceRevision.EntryNumber22MinMaxValidation",
-          "anyOf": [
-            {
-              "properties": {
-                "entry_format": {
-                  "allOf": [
-                    {
-                      "not": {
-                        "enum": [
-                          "CUR",
-                          "TXT",
-                          "INT",
-                          "NUM"
-                        ]
-                      }
-                    },
-                    {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  ]
-                }
-              },
-              "required": [
-                "entry_format"
-              ]
-            },
-            {
-              "properties": {
-                "delete_indicator": {
-                  "const": "1"
-                }
-              },
-              "required": [
-                "delete_indicator"
-              ]
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "CUR"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0\\.0[1-9]|0\\.[1-9]\\d?|[1-9]\\d{0,6}(\\.\\d{1,2})?)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "const": "TXT"
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,2}|[1-3]\\d{3}|4000)$).+"
-                  }
-                }
-              }
-            },
-            {
-              "required": [
-                "entry_format"
-              ],
-              "properties": {
-                "entry_format": {
-                  "enum": [
-                    "INT",
-                    "NUM"
-                  ]
-                },
-                "minimum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                },
-                "maximum": {
-                  "not": {
-                    "pattern": "^(?!(0|[1-9]\\d{0,6})(\\.\\d{1,2})?$).+"
-                  }
-                }
-              }
-            }
-          ]
-        },
         {
           "$comment": "Offence:OffenceRevision.CivilAppDataMandatoryFieldValidation",
           "if": {
@@ -4571,75 +903,9 @@
       "title": "Court record",
       "type": "object",
       "properties": {
-        "court_location_code": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 10
-        },
-        "pss_common_platform_court_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "common_platform_uuid": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "uuid"
-        },
-        "draft_final_exists_indicator": {
-          "type": "boolean"
-        },
-        "revision_type": {
+        "court_name": {
           "type": "string",
-          "enum": [
-            "Initial",
-            "New",
-            "Edit"
-          ],
-          "maxLength": 7
-        },
-        "scottish_district_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "pss_national_courthouse_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "northern_ireland_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "current_record_indicator": {
-          "type": "boolean"
-        },
-        "cloned_from": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 128
-        },
-        "authoring_status": {
-          "type": "string",
-          "enum": [
-            "Draft",
-            "Final",
-            "Published",
-            "Not Draft"
-          ],
-          "maxLength": 128
+          "maxLength": 100
         },
         "court_welsh_name": {
           "type": [
@@ -4648,67 +914,23 @@
           ],
           "maxLength": 100
         },
-        "pss_common_platform_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "court_type": {
-          "type": "string",
-          "enum": [
-            "CHOA"
-          ],
-          "maxLength": 6
-        },
-        "pss_central_finance_location_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "welsh_indicator": {
-          "type": "string",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "maxLength": 5
-        },
-        "crown_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "pss_change_set_header_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "notes": {
+        "court_location_code": {
           "type": [
             "string",
             "null"
           ],
-          "maxLength": 4000
+          "maxLength": 10
         },
-        "magistrates_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "scottish_sheriff_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "court_name": {
+        "start_date": {
           "type": "string",
-          "maxLength": 100
+          "format": "date"
+        },
+        "end_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
         },
         "cja_code": {
           "type": "string",
@@ -4758,86 +980,6 @@
           ],
           "maxLength": 2
         },
-        "psscmaid": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "scottish_justice_of_peace_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "pss_welsh_link_address_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "default_duration": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 10,
-          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
-        },
-        "default_start_time": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 10,
-          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
-        },
-        "revision_number": {
-          "type": "integer"
-        },
-        "court_hearing_operation_area_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "youth_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "revision_date_to": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "pss_welsh_address_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "revision_date_from": {
-          "type": "string",
-          "format": "date"
-        },
-        "publishing_status": {
-          "type": "string",
-          "enum": [
-            "Superseded",
-            "Future",
-            "Active",
-            "Inactive",
-            "Submitted",
-            "Not Published",
-            "Added to Release Package",
-            "Error"
-          ],
-          "maxLength": 128
-        },
         "division_code": {
           "type": [
             "string",
@@ -4855,63 +997,72 @@
           ],
           "maxLength": 20
         },
-        "pss_location_id": {
+        "default_start_time": {
           "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "cluster_information_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "court_lja_header_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "venue_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "enforcement_area_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "court_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "release_package_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "region_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "address": {
-          "type": [
-            "array",
+            "string",
             "null"
           ],
-          "minItems": 0,
+          "maxLength": 10,
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+        },
+        "default_duration": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 10,
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+        },
+        "common_platform_uuid": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uuid"
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "publishing_status": {
+          "type": "string",
+          "enum": [
+            "Superseded",
+            "Future",
+            "Active",
+            "Inactive",
+            "Submitted",
+            "Not Published",
+            "Added to Release Package",
+            "Error"
+          ],
+          "maxLength": 128
+        },
+        "addresses": {
+          "type": "array",
+          "minItems": 1,
           "items": {
             "$ref": "#/$defs/address"
-          }
+          },
+          "allOf": [
+            {
+              "contains": {
+                "properties": {
+                  "address_type": {
+                    "const": "Court Address"
+                  }
+                },
+                "required": [
+                  "address_type"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          ]
         },
         "contact_information": {
           "type": [
@@ -4925,46 +1076,22 @@
         }
       },
       "required": [
-        "draft_final_exists_indicator",
-        "revision_type",
-        "current_record_indicator",
-        "authoring_status",
-        "court_type",
-        "welsh_indicator",
         "court_name",
-        "revision_number",
-        "revision_date_from",
+        "start_date",
         "publishing_status",
-        "cja_code"
+        "cja_code",
+        "addresses"
       ],
       "additionalProperties": false,
-      "allOf": [
+      "x-unique-keys": [
         {
-          "if": {
-            "properties": {
-              "welsh_indicator": {
-                "enum": [
-                  "true"
-                ]
-              }
-            },
-            "required": [
-              "welsh_indicator"
-            ]
-          },
-          "then": {
-            "required": [
-              "court_welsh_name"
-            ],
-            "properties": {
-              "court_welsh_name": {
-                "not": {
-                  "type": "null"
-                }
-              }
-            }
-          }
-        },
+          "name": "CourtLocationCodeUniqueKey",
+          "key": [
+            "court_location_code"
+          ]
+        }
+      ],
+      "allOf": [
         {
           "$comment": "Court:Court.CourtLocationCodeCrownValidation | CourtLocationCodeMagistratesValidation (per stepper)",
           "if": {
@@ -5000,6 +1127,72 @@
               }
             }
           }
+        },
+        {
+          "$comment": "Court:Court.WelshCourtAddressCountValidation",
+          "if": {
+            "required": [
+              "court_welsh_name"
+            ],
+            "properties": {
+              "court_welsh_name": {
+                "not": {
+                  "type": "null"
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "addresses": {
+                "contains": {
+                  "properties": {
+                    "address_type": {
+                      "const": "Welsh Court Address"
+                    }
+                  },
+                  "required": [
+                    "address_type"
+                  ]
+                },
+                "minContains": 1,
+                "maxContains": 1,
+                "not": {
+                  "type": "null"
+                }
+              }
+            },
+            "required": [
+              "addresses"
+            ]
+          },
+          "else": {
+            "properties": {
+              "addresses": {
+                "contains": {
+                  "properties": {
+                    "address_type": {
+                      "const": "Welsh Court Address"
+                    }
+                  },
+                  "required": [
+                    "address_type"
+                  ]
+                },
+                "minContains": 0,
+                "maxContains": 0
+              }
+            }
+          }
+        }
+      ],
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDate",
+          "left": "end_date",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
         }
       ]
     },
@@ -5007,43 +1200,16 @@
       "title": "LJA record",
       "type": "object",
       "properties": {
-        "lja_location_code": {
+        "lja_code": {
           "type": [
             "string",
             "null"
           ],
-          "maxLength": 10
+          "maxLength": 4
         },
-        "pss_common_platform_court_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "common_platform_uuid": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "uuid"
-        },
-        "draft_final_exists_indicator": {
-          "type": "boolean"
-        },
-        "revision_type": {
+        "lja_name": {
           "type": "string",
-          "enum": [
-            "Initial",
-            "New",
-            "Edit"
-          ],
-          "maxLength": 7
-        },
-        "scottish_district_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "maxLength": 100
         },
         "court_short_name": {
           "type": [
@@ -5052,51 +1218,12 @@
           ],
           "maxLength": 200
         },
-        "northern_ireland_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "current_record_indicator": {
-          "type": "boolean"
-        },
-        "cloned_from": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 128
-        },
-        "authoring_status": {
-          "type": "string",
-          "enum": [
-            "Draft",
-            "Final",
-            "Published",
-            "Not Draft"
-          ],
-          "maxLength": 128
-        },
         "lja_welsh_name": {
           "type": [
             "string",
             "null"
           ],
           "maxLength": 100
-        },
-        "lja_code": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4
-        },
-        "pss_common_platform_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
         },
         "lja_type": {
           "type": "string",
@@ -5111,54 +1238,23 @@
           ],
           "maxLength": 6
         },
-        "pss_central_finance_location_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "welsh_indicator": {
-          "type": "string",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "maxLength": 5
-        },
-        "crown_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "pss_change_set_header_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "notes": {
+        "lja_location_code": {
           "type": [
             "string",
             "null"
           ],
-          "maxLength": 4000
+          "maxLength": 10
         },
-        "magistrates_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "scottish_sheriff_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "lja_name": {
+        "start_date": {
           "type": "string",
-          "maxLength": 100
+          "format": "date"
+        },
+        "end_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
         },
         "cja_code": {
           "type": [
@@ -5212,92 +1308,6 @@
           ],
           "maxLength": 2
         },
-        "psscmaid": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "scottish_justice_of_peace_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "pss_welsh_link_address_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "default_duration": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 10,
-          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
-        },
-        "default_start_time": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 10,
-          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
-        },
-        "revision_number": {
-          "type": "integer"
-        },
-        "court_hearing_operation_area_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "pss_petty_sessional_area_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "youth_court_indicator": {
-          "type": [
-            "boolean",
-            "null"
-          ]
-        },
-        "revision_date_to": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "pss_welsh_address_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "revision_date_from": {
-          "type": "string",
-          "format": "date"
-        },
-        "publishing_status": {
-          "type": "string",
-          "enum": [
-            "Superseded",
-            "Future",
-            "Active",
-            "Inactive",
-            "Submitted",
-            "Not Published",
-            "Added to Release Package",
-            "Error"
-          ],
-          "maxLength": 128
-        },
         "division_code": {
           "type": [
             "string",
@@ -5315,55 +1325,51 @@
           ],
           "maxLength": 20
         },
-        "pss_location_id": {
+        "default_start_time": {
           "type": [
-            "integer",
+            "string",
             "null"
-          ]
+          ],
+          "maxLength": 10,
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
         },
-        "cluster_information_code": {
+        "default_duration": {
           "type": [
-            "integer",
+            "string",
             "null"
-          ]
+          ],
+          "maxLength": 10,
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
         },
-        "court_lja_header_code": {
+        "common_platform_uuid": {
           "type": [
-            "integer",
+            "string",
             "null"
-          ]
+          ],
+          "format": "uuid"
         },
-        "venue_code": {
+        "notes": {
           "type": [
-            "integer",
+            "string",
             "null"
-          ]
+          ],
+          "maxLength": 4000
         },
-        "enforcement_area_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
+        "publishing_status": {
+          "type": "string",
+          "enum": [
+            "Superseded",
+            "Future",
+            "Active",
+            "Inactive",
+            "Submitted",
+            "Not Published",
+            "Added to Release Package",
+            "Error"
+          ],
+          "maxLength": 128
         },
-        "court_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "release_package_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "region_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "address": {
+        "addresses": {
           "type": [
             "array",
             "null"
@@ -5385,45 +1391,13 @@
         }
       },
       "required": [
-        "draft_final_exists_indicator",
-        "revision_type",
-        "current_record_indicator",
-        "authoring_status",
         "lja_type",
-        "welsh_indicator",
         "lja_name",
-        "revision_number",
-        "revision_date_from",
+        "start_date",
         "publishing_status"
       ],
       "additionalProperties": false,
       "allOf": [
-        {
-          "if": {
-            "properties": {
-              "welsh_indicator": {
-                "enum": [
-                  "true"
-                ]
-              }
-            },
-            "required": [
-              "welsh_indicator"
-            ]
-          },
-          "then": {
-            "required": [
-              "lja_welsh_name"
-            ],
-            "properties": {
-              "lja_welsh_name": {
-                "not": {
-                  "type": "null"
-                }
-              }
-            }
-          }
-        },
         {
           "if": {
             "properties": {
@@ -5495,6 +1469,273 @@
               }
             }
           }
+        },
+        {
+          "$comment": "Court:Court.CourtAddressCountValidation | FinancialOfficeAddressCountValidation | WelshCourtAddressCountValidation",
+          "if": {
+            "properties": {
+              "lja_type": {
+                "enum": [
+                  "PSA",
+                  "YCT"
+                ]
+              }
+            },
+            "required": [
+              "lja_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "addresses": {
+                "minItems": 2,
+                "allOf": [
+                  {
+                    "contains": {
+                      "properties": {
+                        "address_type": {
+                          "const": "Financial Office Address"
+                        }
+                      },
+                      "required": [
+                        "address_type"
+                      ]
+                    },
+                    "minContains": 1,
+                    "maxContains": 1
+                  },
+                  {
+                    "contains": {
+                      "properties": {
+                        "address_type": {
+                          "const": "Court Address"
+                        }
+                      },
+                      "required": [
+                        "address_type"
+                      ]
+                    },
+                    "minContains": 1,
+                    "maxContains": 1
+                  }
+                ],
+                "not": {
+                  "type": "null"
+                }
+              }
+            },
+            "required": [
+              "addresses"
+            ],
+            "allOf": [
+              {
+                "$comment": "Court:Court.WelshCourtAddressCountValidation",
+                "if": {
+                  "required": [
+                    "lja_welsh_name"
+                  ],
+                  "properties": {
+                    "lja_welsh_name": {
+                      "not": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "addresses": {
+                      "contains": {
+                        "properties": {
+                          "address_type": {
+                            "const": "Welsh Court Address"
+                          }
+                        },
+                        "required": [
+                          "address_type"
+                        ]
+                      },
+                      "minContains": 1,
+                      "maxContains": 1,
+                      "not": {
+                        "type": "null"
+                      }
+                    }
+                  },
+                  "required": [
+                    "addresses"
+                  ]
+                },
+                "else": {
+                  "properties": {
+                    "addresses": {
+                      "contains": {
+                        "properties": {
+                          "address_type": {
+                            "const": "Welsh Court Address"
+                          }
+                        },
+                        "required": [
+                          "address_type"
+                        ]
+                      },
+                      "minContains": 0,
+                      "maxContains": 0
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "$comment": "Court:Court.CourtAddressCountValidation | FinancialOfficeAddressCountValidation | WelshCourtAddressCountValidation",
+          "if": {
+            "properties": {
+              "lja_type": {
+                "enum": [
+                  "NICRT",
+                  "SCSCRT",
+                  "SJCRT"
+                ]
+              }
+            },
+            "required": [
+              "lja_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "addresses": {
+                "minItems": 1,
+                "allOf": [
+                  {
+                    "contains": {
+                      "properties": {
+                        "address_type": {
+                          "const": "Court Address"
+                        }
+                      },
+                      "required": [
+                        "address_type"
+                      ]
+                    },
+                    "minContains": 1,
+                    "maxContains": 1
+                  }
+                ],
+                "not": {
+                  "type": "null"
+                }
+              }
+            },
+            "required": [
+              "addresses"
+            ]
+          }
+        },
+        {
+          "$comment": "Court:Court.CourtAddressCountValidation | FinancialOfficeAddressCountValidation | WelshCourtAddressCountValidation",
+          "if": {
+            "properties": {
+              "lja_type": {
+                "enum": [
+                  "CRWCRT"
+                ]
+              }
+            },
+            "required": [
+              "lja_type"
+            ]
+          },
+          "then": {
+            "properties": {
+              "addresses": {
+                "minItems": 1,
+                "allOf": [
+                  {
+                    "contains": {
+                      "properties": {
+                        "address_type": {
+                          "const": "Court Address"
+                        }
+                      },
+                      "required": [
+                        "address_type"
+                      ]
+                    },
+                    "minContains": 1,
+                    "maxContains": 1
+                  }
+                ],
+                "not": {
+                  "type": "null"
+                }
+              }
+            },
+            "required": [
+              "addresses"
+            ],
+            "allOf": [
+              {
+                "$comment": "Court:Court.WelshCourtAddressCountValidation",
+                "if": {
+                  "required": [
+                    "lja_welsh_name"
+                  ],
+                  "properties": {
+                    "lja_welsh_name": {
+                      "not": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                },
+                "then": {
+                  "properties": {
+                    "addresses": {
+                      "contains": {
+                        "properties": {
+                          "address_type": {
+                            "const": "Welsh Court Address"
+                          }
+                        },
+                        "required": [
+                          "address_type"
+                        ]
+                      },
+                      "minContains": 1,
+                      "maxContains": 1,
+                      "not": {
+                        "type": "null"
+                      }
+                    }
+                  },
+                  "required": [
+                    "addresses"
+                  ]
+                },
+                "else": {
+                  "properties": {
+                    "addresses": {
+                      "contains": {
+                        "properties": {
+                          "address_type": {
+                            "const": "Welsh Court Address"
+                          }
+                        },
+                        "required": [
+                          "address_type"
+                        ]
+                      },
+                      "minContains": 0,
+                      "maxContains": 0
+                    }
+                  }
+                }
+              }
+            ]
+          }
         }
       ],
       "x-unique-keys": [
@@ -5513,6 +1754,36 @@
               "CRWCRT"
             ]
           }
+        },
+        {
+          "name": "CourtLocationCodeUniqueKey",
+          "key": [
+            "lja_location_code"
+          ],
+          "when": {
+            "lja_type": [
+              "CRWCRT"
+            ]
+          }
+        }
+      ],
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDate",
+          "left": "end_date",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date",
+          "when": {
+            "lja_type": [
+              "PSA",
+              "NICRT",
+              "YCT",
+              "SCSCRT",
+              "SJCRT",
+              "CRWCRT"
+            ]
+          }
         }
       ]
     },
@@ -5520,27 +1791,41 @@
       "title": "Prison record",
       "type": "object",
       "properties": {
-        "pss_address_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
+        "name": {
+          "type": "string",
+          "maxLength": 4000
         },
-        "authoring_status": {
+        "welsh_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 4000
+        },
+        "start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "end_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "publishing_status": {
           "type": "string",
           "enum": [
-            "Published",
-            "Draft",
-            "Final",
-            "Not Draft"
+            "Future",
+            "Error",
+            "Submitted",
+            "Inactive",
+            "Superseded",
+            "Active",
+            "Not Published",
+            "Added to Release Package"
           ],
           "maxLength": 128
-        },
-        "sequence_number": {
-          "type": [
-            "integer",
-            "null"
-          ]
         },
         "notes": {
           "type": [
@@ -5549,132 +1834,15 @@
           ],
           "maxLength": 4000
         },
-        "pss_change_set_header_id": {
+        "addresses": {
           "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_email_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_destination_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "second_language_name": {
-          "type": [
-            "string",
+            "array",
             "null"
           ],
-          "maxLength": 4000
-        },
-        "cloned_from": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 128
-        },
-        "draft_final_exists_indicator": {
-          "type": "boolean"
-        },
-        "revision_date_from": {
-          "type": "string",
-          "format": "date"
-        },
-        "description": {
-          "type": "string",
-          "maxLength": 4000
-        },
-        "filter_code": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 10
-        },
-        "pss_change_set_item_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 500
-        },
-        "organisation_type": {
-          "type": "string",
-          "enum": [
-            "PRIS"
-          ],
-          "maxLength": 20
-        },
-        "pss_organisation_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "publishing_status": {
-          "type": "string",
-          "enum": [
-            "Future",
-            "Error",
-            "Submitted",
-            "Inactive",
-            "Superseded",
-            "Active",
-            "Not Published",
-            "Added to Release Package"
-          ],
-          "maxLength": 128
-        },
-        "revision_number": {
-          "type": "integer"
-        },
-        "revision_type": {
-          "type": "string",
-          "enum": [
-            "Edit",
-            "Initial",
-            "New"
-          ],
-          "maxLength": 7
-        },
-        "pss_telephone_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "current_record_indicator": {
-          "type": "boolean"
-        },
-        "organisation_address": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/orgAddress"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "release_package_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "organisation_header_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/orgAddress"
+          }
         },
         "contact_information": {
           "type": [
@@ -5685,36 +1853,29 @@
           "items": {
             "$ref": "#/$defs/orgContactInformation"
           }
-        },
-        "address": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "minItems": 0,
-          "items": {
-            "$ref": "#/$defs/orgAddress"
-          }
         }
       },
       "required": [
-        "authoring_status",
-        "draft_final_exists_indicator",
-        "revision_date_from",
-        "description",
-        "organisation_type",
+        "name",
         "publishing_status",
-        "revision_number",
-        "revision_type",
-        "current_record_indicator"
+        "start_date"
       ],
       "additionalProperties": false,
       "x-unique-keys": [
         {
           "name": "PrisonsUniqueKey",
           "key": [
-            "description"
+            "name"
           ]
+        }
+      ],
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDateValidation",
+          "left": "end_date",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
         }
       ]
     },
@@ -5722,96 +1883,33 @@
       "title": "Enforcer record",
       "type": "object",
       "properties": {
-        "pss_address_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "authoring_status": {
-          "type": "string",
-          "enum": [
-            "Published",
-            "Draft",
-            "Final",
-            "Not Draft"
-          ],
-          "maxLength": 128
-        },
-        "sequence_number": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_change_set_header_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_email_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_destination_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "second_language_name": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 35
-        },
-        "cloned_from": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 128
-        },
-        "draft_final_exists_indicator": {
-          "type": "boolean"
-        },
-        "revision_date_from": {
-          "type": "string",
-          "format": "date"
-        },
-        "description": {
-          "type": "string",
-          "maxLength": 35
-        },
-        "pss_change_set_item_id": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 500
-        },
         "enforcer_code": {
           "type": [
             "integer",
             "null"
           ]
         },
-        "organisation_type": {
+        "name": {
           "type": "string",
-          "enum": [
-            "ENF"
-          ],
-          "maxLength": 20
+          "maxLength": 35
         },
-        "pss_organisation_id": {
+        "welsh_name": {
           "type": [
-            "integer",
+            "string",
             "null"
-          ]
+          ],
+          "maxLength": 35
+        },
+        "start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "end_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
         },
         "publishing_status": {
           "type": "string",
@@ -5827,58 +1925,15 @@
           ],
           "maxLength": 128
         },
-        "revision_number": {
-          "type": "integer"
-        },
-        "revision_type": {
-          "type": "string",
-          "enum": [
-            "Edit",
-            "Initial",
-            "New"
+        "addresses": {
+          "type": [
+            "array",
+            "null"
           ],
-          "maxLength": 7
-        },
-        "pss_telephone_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "current_record_indicator": {
-          "type": "boolean"
-        },
-        "organisation_address": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/orgAddress"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "organisation_welsh_address": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/orgAddress"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "release_package_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "organisation_header_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/orgAddress"
+          }
         },
         "contact_information": {
           "type": [
@@ -5889,28 +1944,12 @@
           "items": {
             "$ref": "#/$defs/orgContactInformation"
           }
-        },
-        "address": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "minItems": 0,
-          "items": {
-            "$ref": "#/$defs/orgAddress"
-          }
         }
       },
       "required": [
-        "authoring_status",
-        "draft_final_exists_indicator",
-        "revision_date_from",
-        "description",
-        "organisation_type",
+        "name",
         "publishing_status",
-        "revision_number",
-        "revision_type",
-        "current_record_indicator"
+        "start_date"
       ],
       "additionalProperties": false,
       "x-unique-keys": [
@@ -5923,8 +1962,17 @@
         {
           "name": "NationalProbationServicesUniqueKey",
           "key": [
-            "description"
+            "name"
           ]
+        }
+      ],
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDateValidation",
+          "left": "end_date",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
         }
       ]
     },
@@ -5932,90 +1980,27 @@
       "title": "Central authority record",
       "type": "object",
       "properties": {
-        "pss_address_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "authoring_status": {
+        "name": {
           "type": "string",
-          "enum": [
-            "Published",
-            "Draft",
-            "Final",
-            "Not Draft"
-          ],
-          "maxLength": 128
+          "maxLength": 4000
         },
-        "sequence_number": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_change_set_header_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_email_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_destination_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "second_language_name": {
+        "welsh_name": {
           "type": [
             "string",
             "null"
           ],
           "maxLength": 4000
         },
-        "cloned_from": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 128
-        },
-        "draft_final_exists_indicator": {
-          "type": "boolean"
-        },
-        "revision_date_from": {
+        "start_date": {
           "type": "string",
           "format": "date"
         },
-        "description": {
-          "type": "string",
-          "maxLength": 4000
-        },
-        "pss_change_set_item_id": {
+        "end_date": {
           "type": [
             "string",
             "null"
           ],
-          "maxLength": 500
-        },
-        "organisation_type": {
-          "type": "string",
-          "enum": [
-            "CAT"
-          ],
-          "maxLength": 20
-        },
-        "pss_organisation_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "format": "date"
         },
         "publishing_status": {
           "type": "string",
@@ -6031,48 +2016,15 @@
           ],
           "maxLength": 128
         },
-        "revision_number": {
-          "type": "integer"
-        },
-        "revision_type": {
-          "type": "string",
-          "enum": [
-            "Edit",
-            "Initial",
-            "New"
+        "addresses": {
+          "type": [
+            "array",
+            "null"
           ],
-          "maxLength": 7
-        },
-        "pss_telephone_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "current_record_indicator": {
-          "type": "boolean"
-        },
-        "organisation_address": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/orgAddress"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "release_package_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "organisation_header_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/orgAddress"
+          }
         },
         "contact_information": {
           "type": [
@@ -6083,36 +2035,29 @@
           "items": {
             "$ref": "#/$defs/orgContactInformation"
           }
-        },
-        "address": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "minItems": 0,
-          "items": {
-            "$ref": "#/$defs/orgAddress"
-          }
         }
       },
       "required": [
-        "authoring_status",
-        "draft_final_exists_indicator",
-        "revision_date_from",
-        "description",
-        "organisation_type",
+        "name",
         "publishing_status",
-        "revision_number",
-        "revision_type",
-        "current_record_indicator"
+        "start_date"
       ],
       "additionalProperties": false,
       "x-unique-keys": [
         {
           "name": "CentralAuthoritiesUniqueKey",
           "key": [
-            "description"
+            "name"
           ]
+        }
+      ],
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDateValidation",
+          "left": "end_date",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
         }
       ]
     },
@@ -6120,104 +2065,27 @@
       "title": "Major creditor record",
       "type": "object",
       "properties": {
-        "pss_address_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "authoring_status": {
+        "name": {
           "type": "string",
-          "enum": [
-            "Published",
-            "Draft",
-            "Final",
-            "Not Draft"
-          ],
-          "maxLength": 128
+          "maxLength": 4000
         },
-        "sequence_number": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_change_set_header_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_email_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "revision_date_to": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "short_name": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 4
-        },
-        "pss_destination_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "second_language_name": {
+        "welsh_name": {
           "type": [
             "string",
             "null"
           ],
           "maxLength": 4000
         },
-        "cloned_from": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 128
-        },
-        "draft_final_exists_indicator": {
-          "type": "boolean"
-        },
-        "revision_date_from": {
+        "start_date": {
           "type": "string",
           "format": "date"
         },
-        "description": {
-          "type": "string",
-          "maxLength": 4000
-        },
-        "pss_change_set_item_id": {
+        "end_date": {
           "type": [
             "string",
             "null"
           ],
-          "maxLength": 500
-        },
-        "organisation_type": {
-          "type": "string",
-          "enum": [
-            "MCR"
-          ],
-          "maxLength": 20
-        },
-        "pss_organisation_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "format": "date"
         },
         "publishing_status": {
           "type": "string",
@@ -6232,24 +2100,6 @@
             "Added to Release Package"
           ],
           "maxLength": 128
-        },
-        "revision_number": {
-          "type": "integer"
-        },
-        "revision_type": {
-          "type": "string",
-          "enum": [
-            "Edit",
-            "Initial",
-            "New"
-          ],
-          "maxLength": 7
-        },
-        "pss_telephone_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
         },
         "business_unit": {
           "type": [
@@ -6263,18 +2113,19 @@
           ],
           "maxLength": 4
         },
-        "current_record_indicator": {
-          "type": "boolean"
+        "account_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 18
         },
-        "organisation_address": {
-          "anyOf": [
-            {
-              "$ref": "#/$defs/orgAddress"
-            },
-            {
-              "type": "null"
-            }
-          ]
+        "sort_code": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 6
         },
         "bank_account_number": {
           "type": [
@@ -6283,31 +2134,22 @@
           ],
           "maxLength": 10
         },
-        "bank_account_name": {
+        "short_name": {
           "type": [
             "string",
             "null"
           ],
-          "maxLength": 18
+          "maxLength": 4
         },
-        "bank_account_sort_code": {
+        "addresses": {
           "type": [
-            "string",
+            "array",
             "null"
           ],
-          "maxLength": 6
-        },
-        "release_package_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "organisation_header_code": {
-          "type": [
-            "integer",
-            "null"
-          ]
+          "minItems": 0,
+          "items": {
+            "$ref": "#/$defs/orgAddress"
+          }
         },
         "contact_information": {
           "type": [
@@ -6318,36 +2160,29 @@
           "items": {
             "$ref": "#/$defs/orgContactInformation"
           }
-        },
-        "address": {
-          "type": [
-            "array",
-            "null"
-          ],
-          "minItems": 0,
-          "items": {
-            "$ref": "#/$defs/orgAddress"
-          }
         }
       },
       "required": [
-        "authoring_status",
-        "draft_final_exists_indicator",
-        "revision_date_from",
-        "description",
-        "organisation_type",
+        "name",
         "publishing_status",
-        "revision_number",
-        "revision_type",
-        "current_record_indicator"
+        "start_date"
       ],
       "additionalProperties": false,
       "x-unique-keys": [
         {
           "name": "MajorCreditorsUniqueKey",
           "key": [
-            "description"
+            "name"
           ]
+        }
+      ],
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDateValidation",
+          "left": "end_date",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
         }
       ]
     },
@@ -6355,37 +2190,6 @@
       "title": "Address",
       "type": "object",
       "properties": {
-        "pss_link_address_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "end_date": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "start_date": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "pss_address_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "post_code": {
-          "type": "string",
-          "maxLength": 8,
-          "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
-        },
         "address_type": {
           "type": "string",
           "enum": [
@@ -6426,10 +2230,15 @@
             "null"
           ],
           "maxLength": 35
+        },
+        "postcode": {
+          "type": "string",
+          "maxLength": 8,
+          "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
         }
       },
       "required": [
-        "post_code",
+        "postcode",
         "address_type",
         "address_line_1"
       ],
@@ -6439,35 +2248,6 @@
       "title": "Address (Organisation)",
       "type": "object",
       "properties": {
-        "start_date": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "end_date": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "address_type": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 100
-        },
-        "post_code": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "maxLength": 8,
-          "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
-        },
         "address_line_1": {
           "type": [
             "string",
@@ -6502,6 +2282,21 @@
             "null"
           ],
           "maxLength": 35
+        },
+        "postcode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 8,
+          "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
+        },
+        "address_type": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 100
         }
       },
       "required": [],
@@ -6511,54 +2306,6 @@
       "title": "Contact information",
       "type": "object",
       "properties": {
-        "contact_value": {
-          "type": "string",
-          "maxLength": 254
-        },
-        "pss_communication_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "pss_link_communications_media_id": {
-          "type": [
-            "integer",
-            "null"
-          ]
-        },
-        "contact_sub_type": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "enum": [
-            "Informant",
-            "Remittance Advice",
-            "Prosecutor",
-            "Offender Management Unit",
-            "Prisoner Escort and Custody Service",
-            "General",
-            "Contact",
-            "Reception",
-            "National Payment",
-            "Magistrates Court Contact",
-            "NCES Notification",
-            "Crown Prosecution Service Magistrates Court",
-            "Crown Prosecution Service",
-            "Enforcement Area",
-            "Crown Prosecution Service Crown Court",
-            null
-          ],
-          "maxLength": 100
-        },
-        "end_date": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
         "contact_type": {
           "type": "string",
           "enum": [
@@ -6570,12 +2317,9 @@
           ],
           "maxLength": 30
         },
-        "start_date": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
+        "contact_value": {
+          "type": "string",
+          "maxLength": 254
         }
       },
       "required": [
@@ -6660,16 +2404,16 @@
       "title": "Contact information (Organisation)",
       "type": "object",
       "properties": {
-        "end_date": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
-        },
-        "contact_value": {
+        "contact_type": {
           "type": "string",
-          "maxLength": 256
+          "enum": [
+            "Telephone",
+            "Email Address",
+            "Mobile",
+            "Fax",
+            "Destination ID"
+          ],
+          "maxLength": 30
         },
         "contact_sub_type": {
           "type": [
@@ -6712,23 +2456,9 @@
           ],
           "maxLength": 100
         },
-        "contact_type": {
+        "contact_value": {
           "type": "string",
-          "enum": [
-            "Telephone",
-            "Email Address",
-            "Mobile",
-            "Fax",
-            "Destination ID"
-          ],
-          "maxLength": 30
-        },
-        "start_date": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "format": "date"
+          "maxLength": 256
         }
       },
       "required": [

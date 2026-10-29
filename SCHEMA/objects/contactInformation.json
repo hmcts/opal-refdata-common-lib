@@ -2,54 +2,6 @@
   "title": "Contact information",
   "type": "object",
   "properties": {
-    "contact_value": {
-      "type": "string",
-      "maxLength": 254
-    },
-    "pss_communication_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "pss_link_communications_media_id": {
-      "type": [
-        "integer",
-        "null"
-      ]
-    },
-    "contact_sub_type": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "enum": [
-        "Informant",
-        "Remittance Advice",
-        "Prosecutor",
-        "Offender Management Unit",
-        "Prisoner Escort and Custody Service",
-        "General",
-        "Contact",
-        "Reception",
-        "National Payment",
-        "Magistrates Court Contact",
-        "NCES Notification",
-        "Crown Prosecution Service Magistrates Court",
-        "Crown Prosecution Service",
-        "Enforcement Area",
-        "Crown Prosecution Service Crown Court",
-        null
-      ],
-      "maxLength": 100
-    },
-    "end_date": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date"
-    },
     "contact_type": {
       "type": "string",
       "enum": [
@@ -61,12 +13,9 @@
       ],
       "maxLength": 30
     },
-    "start_date": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "format": "date"
+    "contact_value": {
+      "type": "string",
+      "maxLength": 254
     }
   },
   "required": [
