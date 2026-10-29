@@ -432,13 +432,5 @@
         }
       }
     }
-  ],
-  "x-unique-keys": [
-    {
-      "name": "CourtLocationCodeUniqueKey",
-      "key": [
-        "court_location_code"
-      ]
-    }
   ]
 }

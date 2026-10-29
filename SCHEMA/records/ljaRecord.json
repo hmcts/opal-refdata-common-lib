@@ -508,17 +508,6 @@
           "CRWCRT"
         ]
       }
-    },
-    {
-      "name": "CourtLocationCodeUniqueKey",
-      "key": [
-        "lja_location_code"
-      ],
-      "when": {
-        "lja_type": [
-          "CRWCRT"
-        ]
-      }
     }
   ]
 }
