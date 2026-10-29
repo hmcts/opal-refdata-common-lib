@@ -10,7 +10,7 @@
         },
         "data_product": {
           "type": "string",
-          "enum": ["Offence", "Court", "LJA", "Prison", "Enforcer", "CentralAuthority", "MajorCreditor"]
+          "enum": ["Offence", "Result", "Court", "LJA", "Prison", "Enforcer", "CentralAuthority", "MajorCreditor"]
         },
         "operation": {
           "const": "PUBLISH"

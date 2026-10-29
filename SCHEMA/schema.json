@@ -16,7 +16,7 @@
         },
         "data_product": {
           "type": "string",
-          "enum": ["Offence", "Court", "LJA", "Prison", "Enforcer", "CentralAuthority", "MajorCreditor"]
+          "enum": ["Offence", "Result", "Court", "LJA", "Prison", "Enforcer", "CentralAuthority", "MajorCreditor"]
         },
         "operation": {
           "const": "PUBLISH"
@@ -68,6 +68,27 @@
             "records": {
               "items": {
                 "$ref": "#/$defs/offenceRecord"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Result message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "Result"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "#/$defs/resultRecord"
               }
             }
           }
@@ -539,6 +560,142 @@
               }
             }
           }
+        }
+      ]
+    },
+    "resultRecord": {
+      "title": "Result record",
+      "type": "object",
+      "properties": {
+        "result_code": {
+          "type": "string",
+          "maxLength": 6
+        },
+        "result_title": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "result_title_welsh": {
+          "type": ["string", "null"],
+          "maxLength": 60
+        },
+        "result_type": {
+          "type": "string",
+          "enum": ["RESULT", "ACTION"]
+        },
+        "imposition": {
+          "type": "boolean"
+        },
+        "imposition_category": {
+          "type": ["string", "null"],
+          "enum": ["Court Charge", null]
+        },
+        "imposition_allocation_priority": {
+          "type": ["integer", "null"]
+        },
+        "imposition_accruing": {
+          "type": "boolean"
+        },
+        "imposition_creditor": {
+          "type": ["string", "null"],
+          "enum": ["Crown Prosecution Costs", "Court Charge", "Compensation Costs", "Victim Surcharge", "Legal Aid", "Fines", "Witness Expenses & Central Fund", null]
+        },
+        "enforcement": {
+          "type": "boolean"
+        },
+        "enforcement_override": {
+          "type": "boolean"
+        },
+        "further_enforcement_warning_required": {
+          "type": "boolean"
+        },
+        "further_enforcement_disallowed": {
+          "type": "boolean"
+        },
+        "enforcement_on_hold": {
+          "type": "boolean"
+        },
+        "requires_enforcer": {
+          "type": "boolean"
+        },
+        "generates_a_hearing": {
+          "type": "boolean"
+        },
+        "generates_a_warrant": {
+          "type": "boolean"
+        },
+        "collection_order": {
+          "type": "boolean"
+        },
+        "disallow_ttp_extension": {
+          "type": "boolean"
+        },
+        "preserve_last_enforcement_on_ttp_extension": {
+          "type": "boolean"
+        },
+        "prevent_payment_card": {
+          "type": "boolean"
+        },
+        "lists_monies": {
+          "type": "boolean"
+        },
+        "allow_payment_terms": {
+          "type": "boolean"
+        },
+        "requires_employment_data": {
+          "type": "boolean"
+        },
+        "allow_additional_action": {
+          "type": "boolean"
+        },
+        "next_permitted_actions_type": {
+          "type": "string",
+          "enum": ["SELECTED", "ALL"]
+        },
+        "next_permitted_action_count": {
+          "type": "integer"
+        },
+        "requires_lja": {
+          "type": "boolean"
+        },
+        "manual_enforcement": {
+          "type": "boolean"
+        },
+        "auto_enforcement": {
+          "type": "boolean"
+        },
+        "publishing_status": {
+          "type": "string",
+          "enum": ["Final", "Draft", "Published", "Not Draft"]
+        }
+      },
+      "required": ["disallow_ttp_extension", "allow_payment_terms", "lists_monies", "requires_lja", "requires_enforcer", "generates_a_hearing", "result_title", "auto_enforcement", "imposition", "preserve_last_enforcement_on_ttp_extension", "enforcement_on_hold", "generates_a_warrant", "imposition_accruing", "requires_employment_data", "next_permitted_actions_type", "enforcement", "enforcement_override", "further_enforcement_disallowed", "next_permitted_action_count", "result_code", "further_enforcement_warning_required", "publishing_status", "prevent_payment_card", "result_type", "collection_order", "allow_additional_action", "manual_enforcement"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$comment": "Result:ResultRevision.CheckNextPermitted",
+          "anyOf": [
+            {
+              "properties": {
+                "next_permitted_actions_type": {
+                  "const": "SELECTED"
+                },
+                "next_permitted_action_count": {
+                  "exclusiveMinimum": 0
+                }
+              }
+            },
+            {
+              "properties": {
+                "next_permitted_actions_type": {
+                  "const": "ALL"
+                },
+                "next_permitted_action_count": {
+                  "const": 0
+                }
+              }
+            }
+          ]
         }
       ]
     },
