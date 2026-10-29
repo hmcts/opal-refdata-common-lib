@@ -1,6 +1,5 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.7/records/centralAuthorityRecord.json",
   "title": "Central authority record",
   "type": "object",
   "properties": {
@@ -58,7 +57,7 @@
         "null"
       ],
       "items": {
-        "$ref": "../objects/orgAddress.json"
+        "$ref": "#/$defs/orgAddress"
       }
     },
     "contact_information": {
@@ -67,7 +66,7 @@
         "null"
       ],
       "items": {
-        "$ref": "../objects/orgContactInformation.json"
+        "$ref": "#/$defs/orgContactInformation"
       }
     }
   },

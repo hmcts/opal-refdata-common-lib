@@ -1,6 +1,5 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.7/payload.json",
   "title": "Published Reference Data Message payload",
   "type": "object",
   "properties": {
@@ -18,6 +17,7 @@
           "type": "string",
           "enum": [
             "Offence",
+            "Result",
             "Court",
             "LJA",
             "Prison",
@@ -89,7 +89,28 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "./records/offenceRecord.json"
+                "$ref": "#/$defs/offenceRecord"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Result message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "Result"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "#/$defs/resultRecord"
               }
             }
           }
@@ -110,7 +131,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "./records/courtRecord.json"
+                "$ref": "#/$defs/courtRecord"
               }
             }
           }
@@ -131,7 +152,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "./records/ljaRecord.json"
+                "$ref": "#/$defs/ljaRecord"
               }
             }
           }
@@ -152,7 +173,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "./records/prisonRecord.json"
+                "$ref": "#/$defs/prisonRecord"
               }
             }
           }
@@ -173,7 +194,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "./records/enforcerRecord.json"
+                "$ref": "#/$defs/enforcerRecord"
               }
             }
           }
@@ -194,7 +215,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "./records/centralAuthorityRecord.json"
+                "$ref": "#/$defs/centralAuthorityRecord"
               }
             }
           }
@@ -215,7 +236,7 @@
           "properties": {
             "records": {
               "items": {
-                "$ref": "./records/majorCreditorRecord.json"
+                "$ref": "#/$defs/majorCreditorRecord"
               }
             }
           }

@@ -1,6 +1,5 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "v2.7/records/offenceRecord.json",
   "title": "Offence record",
   "type": "object",
   "properties": {
