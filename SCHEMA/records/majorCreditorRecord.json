@@ -4,7 +4,12 @@
   "properties": {
     "name": {
       "type": "string",
-      "maxLength": 4000
+      "maxLength": 4000,
+      "x-unique-keys": [
+        {
+          "name": "MajorCreditorsUniqueKey"
+        }
+      ]
     },
     "welsh_name": {
       "type": [
@@ -22,7 +27,15 @@
         "string",
         "null"
       ],
-      "format": "date"
+      "format": "date",
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDateValidation",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
+        }
+      ]
     },
     "publishing_status": {
       "type": "string",
@@ -35,8 +48,7 @@
         "Active",
         "Not Published",
         "Added to Release Package"
-      ],
-      "maxLength": 128
+      ]
     },
     "business_unit": {
       "type": [
@@ -47,8 +59,7 @@
         "1234",
         "5678",
         null
-      ],
-      "maxLength": 4
+      ]
     },
     "account_name": {
       "type": [
@@ -83,7 +94,6 @@
         "array",
         "null"
       ],
-      "minItems": 0,
       "items": {
         "$ref": "#/$defs/orgAddress"
       }
@@ -93,7 +103,6 @@
         "array",
         "null"
       ],
-      "minItems": 0,
       "items": {
         "$ref": "#/$defs/orgContactInformation"
       }
@@ -104,22 +113,5 @@
     "publishing_status",
     "start_date"
   ],
-  "additionalProperties": false,
-  "x-unique-keys": [
-    {
-      "name": "MajorCreditorsUniqueKey",
-      "key": [
-        "name"
-      ]
-    }
-  ],
-  "x-rules": [
-    {
-      "name": "EndDateNotEarlierThanStartDateValidation",
-      "left": "end_date",
-      "op": ">=",
-      "right": "start_date",
-      "compare_as": "date"
-    }
-  ]
+  "additionalProperties": false
 }

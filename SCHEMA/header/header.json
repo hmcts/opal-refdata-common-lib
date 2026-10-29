@@ -10,15 +10,7 @@
         },
         "data_product": {
           "type": "string",
-          "enum": [
-            "Offence",
-            "Court",
-            "LJA",
-            "Prison",
-            "Enforcer",
-            "CentralAuthority",
-            "MajorCreditor"
-          ]
+          "enum": ["Offence", "Court", "LJA", "Prison", "Enforcer", "CentralAuthority", "MajorCreditor"]
         },
         "operation": {
           "const": "PUBLISH"
@@ -38,15 +30,6 @@
           "minimum": 1
         }
       },
-      "required": [
-        "message_id",
-        "message_type",
-        "data_product",
-        "operation",
-        "source_system",
-        "created_date_time",
-        "release_package_id",
-        "record_count"
-      ],
+      "required": ["message_id", "message_type", "data_product", "operation", "source_system", "created_date_time", "release_package_id", "record_count"],
       "additionalProperties": false
     }

@@ -4,7 +4,12 @@
   "properties": {
     "name": {
       "type": "string",
-      "maxLength": 4000
+      "maxLength": 4000,
+      "x-unique-keys": [
+        {
+          "name": "CentralAuthoritiesUniqueKey"
+        }
+      ]
     },
     "welsh_name": {
       "type": [
@@ -22,7 +27,15 @@
         "string",
         "null"
       ],
-      "format": "date"
+      "format": "date",
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDateValidation",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
+        }
+      ]
     },
     "publishing_status": {
       "type": "string",
@@ -35,15 +48,13 @@
         "Active",
         "Not Published",
         "Added to Release Package"
-      ],
-      "maxLength": 128
+      ]
     },
     "addresses": {
       "type": [
         "array",
         "null"
       ],
-      "minItems": 0,
       "items": {
         "$ref": "#/$defs/orgAddress"
       }
@@ -53,7 +64,6 @@
         "array",
         "null"
       ],
-      "minItems": 0,
       "items": {
         "$ref": "#/$defs/orgContactInformation"
       }
@@ -64,22 +74,5 @@
     "publishing_status",
     "start_date"
   ],
-  "additionalProperties": false,
-  "x-unique-keys": [
-    {
-      "name": "CentralAuthoritiesUniqueKey",
-      "key": [
-        "name"
-      ]
-    }
-  ],
-  "x-rules": [
-    {
-      "name": "EndDateNotEarlierThanStartDateValidation",
-      "left": "end_date",
-      "op": ">=",
-      "right": "start_date",
-      "compare_as": "date"
-    }
-  ]
+  "additionalProperties": false
 }

@@ -8,8 +8,7 @@
         "Court Address",
         "Financial Office Address",
         "Welsh Court Address"
-      ],
-      "maxLength": 100
+      ]
     },
     "address_line_1": {
       "type": "string",

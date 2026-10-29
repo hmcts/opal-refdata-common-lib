@@ -10,8 +10,7 @@
         "Telephone",
         "Fax",
         "Email Address"
-      ],
-      "maxLength": 30
+      ]
     },
     "contact_value": {
       "type": "string",
@@ -30,59 +29,34 @@
         {
           "properties": {
             "contact_type": {
-              "allOf": [
-                {
-                  "not": {
-                    "enum": [
-                      "Email Address",
-                      "Telephone",
-                      "Fax"
-                    ]
-                  }
-                },
-                {
-                  "not": {
-                    "type": "null"
-                  }
-                }
-              ]
+              "not": {
+                "enum": [
+                  "Email Address",
+                  "Telephone",
+                  "Fax"
+                ]
+              }
             }
-          },
-          "required": [
-            "contact_type"
-          ]
+          }
         },
         {
-          "required": [
-            "contact_type"
-          ],
           "properties": {
             "contact_type": {
               "const": "Email Address"
             },
             "contact_value": {
-              "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
-              "maxLength": 254
+              "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
             }
           }
         },
         {
-          "required": [
-            "contact_type"
-          ],
           "properties": {
             "contact_type": {
               "const": "Telephone"
-            },
-            "contact_value": {
-              "maxLength": 254
             }
           }
         },
         {
-          "required": [
-            "contact_type"
-          ],
           "properties": {
             "contact_type": {
               "const": "Fax"
