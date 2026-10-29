@@ -1,0 +1,117 @@
+{
+  "title": "Major creditor record",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 4000,
+      "x-unique-keys": [
+        {
+          "name": "MajorCreditorsUniqueKey"
+        }
+      ]
+    },
+    "welsh_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDateValidation",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
+        }
+      ]
+    },
+    "publishing_status": {
+      "type": "string",
+      "enum": [
+        "Future",
+        "Error",
+        "Submitted",
+        "Inactive",
+        "Superseded",
+        "Active",
+        "Not Published",
+        "Added to Release Package"
+      ]
+    },
+    "business_unit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "1234",
+        "5678",
+        null
+      ]
+    },
+    "account_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 18
+    },
+    "sort_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 6
+    },
+    "bank_account_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 10
+    },
+    "short_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4
+    },
+    "addresses": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/orgAddress"
+      }
+    },
+    "contact_information": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/orgContactInformation"
+      }
+    }
+  },
+  "required": [
+    "name",
+    "publishing_status",
+    "start_date"
+  ],
+  "additionalProperties": false
+}

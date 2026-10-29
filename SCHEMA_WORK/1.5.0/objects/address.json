@@ -1,0 +1,84 @@
+{
+  "title": "Address",
+  "type": "object",
+  "properties": {
+    "pss_link_address_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "start_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "pss_address_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "post_code": {
+      "type": "string",
+      "maxLength": 8,
+      "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
+    },
+    "address_type": {
+      "type": "string",
+      "enum": [
+        "Court Address",
+        "Financial Office Address",
+        "Welsh Court Address"
+      ],
+      "maxLength": 100
+    },
+    "address_line_1": {
+      "type": "string",
+      "maxLength": 35
+    },
+    "address_line_2": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    },
+    "address_line_3": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    },
+    "address_line_4": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    },
+    "address_line_5": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    }
+  },
+  "required": [
+    "post_code",
+    "address_type",
+    "address_line_1"
+  ],
+  "additionalProperties": false
+}

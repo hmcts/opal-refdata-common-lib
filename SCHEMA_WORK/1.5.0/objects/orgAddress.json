@@ -1,0 +1,72 @@
+{
+  "title": "Address (Organisation)",
+  "type": "object",
+  "properties": {
+    "start_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "address_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 100
+    },
+    "post_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 8,
+      "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
+    },
+    "address_line_1": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    },
+    "address_line_2": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    },
+    "address_line_3": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    },
+    "address_line_4": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    },
+    "address_line_5": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    }
+  },
+  "required": [],
+  "additionalProperties": false
+}

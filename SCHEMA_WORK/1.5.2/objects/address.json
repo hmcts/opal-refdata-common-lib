@@ -1,0 +1,58 @@
+{
+  "title": "Address",
+  "type": "object",
+  "properties": {
+    "address_type": {
+      "type": "string",
+      "enum": [
+        "Court Address",
+        "Financial Office Address",
+        "Welsh Court Address"
+      ],
+      "maxLength": 100
+    },
+    "address_line_1": {
+      "type": "string",
+      "maxLength": 35
+    },
+    "address_line_2": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    },
+    "address_line_3": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    },
+    "address_line_4": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    },
+    "address_line_5": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 35
+    },
+    "postcode": {
+      "type": "string",
+      "maxLength": 8,
+      "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
+    }
+  },
+  "required": [
+    "postcode",
+    "address_type",
+    "address_line_1"
+  ],
+  "additionalProperties": false
+}

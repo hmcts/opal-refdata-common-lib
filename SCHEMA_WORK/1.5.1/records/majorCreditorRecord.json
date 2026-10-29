@@ -1,0 +1,235 @@
+{
+  "title": "Major creditor record",
+  "type": "object",
+  "properties": {
+    "pss_address_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "authoring_status": {
+      "type": "string",
+      "enum": [
+        "Published",
+        "Draft",
+        "Final",
+        "Not Draft"
+      ],
+      "maxLength": 128
+    },
+    "sequence_number": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "pss_change_set_header_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "pss_email_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "revision_date_to": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "short_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4
+    },
+    "pss_destination_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "second_language_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "cloned_from": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "draft_final_exists_indicator": {
+      "type": "boolean"
+    },
+    "revision_date_from": {
+      "type": "string",
+      "format": "date"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "pss_change_set_item_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    },
+    "organisation_type": {
+      "type": "string",
+      "enum": [
+        "MCR"
+      ],
+      "maxLength": 20
+    },
+    "pss_organisation_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "publishing_status": {
+      "type": "string",
+      "enum": [
+        "Future",
+        "Error",
+        "Submitted",
+        "Inactive",
+        "Superseded",
+        "Active",
+        "Not Published",
+        "Added to Release Package"
+      ],
+      "maxLength": 128
+    },
+    "revision_number": {
+      "type": "integer"
+    },
+    "revision_type": {
+      "type": "string",
+      "enum": [
+        "Edit",
+        "Initial",
+        "New"
+      ],
+      "maxLength": 7
+    },
+    "pss_telephone_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "business_unit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "1234",
+        "5678",
+        null
+      ],
+      "maxLength": 4
+    },
+    "current_record_indicator": {
+      "type": "boolean"
+    },
+    "organisation_address": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/orgAddress"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "bank_account_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 10
+    },
+    "bank_account_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 18
+    },
+    "bank_account_sort_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 6
+    },
+    "release_package_code": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "organisation_header_code": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "contact_information": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/orgContactInformation"
+      }
+    },
+    "address": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/orgAddress"
+      }
+    }
+  },
+  "required": [
+    "authoring_status",
+    "draft_final_exists_indicator",
+    "revision_date_from",
+    "description",
+    "organisation_type",
+    "publishing_status",
+    "revision_number",
+    "revision_type",
+    "current_record_indicator"
+  ],
+  "additionalProperties": false,
+  "x-unique-keys": [
+    {
+      "name": "MajorCreditorsUniqueKey",
+      "key": [
+        "description"
+      ]
+    }
+  ]
+}
