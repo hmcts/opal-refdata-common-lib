@@ -68,6 +68,7 @@ class RefDataServiceBusSessionReceiverConfigTest {
     }
 
     private static ServiceBusClientBuilder mockBuilder() {
+        ServiceBusSessionReceiverClient receiverClient = mock(ServiceBusSessionReceiverClient.class);
         ServiceBusClientBuilder builder = mock(ServiceBusClientBuilder.class);
         ServiceBusClientBuilder.ServiceBusSessionReceiverClientBuilder sessionBuilder =
             mock(ServiceBusClientBuilder.ServiceBusSessionReceiverClientBuilder.class);
@@ -76,7 +77,7 @@ class RefDataServiceBusSessionReceiverConfigTest {
         when(sessionBuilder.subscriptionName(anyString())).thenReturn(sessionBuilder);
         when(sessionBuilder.disableAutoComplete()).thenReturn(sessionBuilder);
         when(sessionBuilder.receiveMode(any(ServiceBusReceiveMode.class))).thenReturn(sessionBuilder);
-        when(sessionBuilder.buildClient()).thenReturn(mock(ServiceBusSessionReceiverClient.class));
+        when(sessionBuilder.buildClient()).thenReturn(receiverClient);
         return builder;
     }
 }
