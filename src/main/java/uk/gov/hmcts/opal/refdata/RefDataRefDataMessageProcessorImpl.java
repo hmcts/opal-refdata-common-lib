@@ -7,6 +7,8 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 /**
  * Applies decoded ref-data records through the registered handlers in a
@@ -53,7 +55,9 @@ public class RefDataRefDataMessageProcessorImpl implements RefDataMessageProcess
             applyUpdate(handler, dto);
         }
         );
-        handler.cachesToClear().stream().distinct().forEach(this::clearCache);
+        // Defer invalidation until commit so a concurrent request cannot read the old database
+        // values after the cache is cleared and repopulate the cache with stale data.
+        handler.cachesToClear().stream().distinct().forEach(this::clearCacheAfterCommit);
     }
 
     private <T, E> void applyUpdate(RefDataUpdateHandler<T, E> handler, T dto) {
@@ -65,6 +69,21 @@ public class RefDataRefDataMessageProcessorImpl implements RefDataMessageProcess
     }
 
     // Clears Spring cache by name that holds ref data
+    private void clearCacheAfterCommit(String cacheName) {
+        if (TransactionSynchronizationManager.isSynchronizationActive()) {
+            TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+                @Override
+                public void afterCommit() {
+                    clearCache(cacheName);
+                }
+            });
+            return;
+        }
+
+        // Support direct/non-transactional use; transactional calls are deferred above.
+        clearCache(cacheName);
+    }
+
     private void clearCache(String cacheName) {
         Cache cache = cacheManager.getCache(cacheName);
         if (cache == null) {
