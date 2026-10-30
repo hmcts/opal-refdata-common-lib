@@ -13,6 +13,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 @SuppressWarnings("unchecked")
 class RefDataRefDataMessageProcessorImplTest {
@@ -52,6 +54,36 @@ class RefDataRefDataMessageProcessorImplTest {
         verify(handler).updateEntityFromDto(dto, entity);
         verify(handler, never()).saveEntity(entity);
         verify(cache).clear();
+    }
+
+    @Test
+    void shouldClearHandlerCachesOnlyAfterTransactionCommits() {
+        // Given
+        var dto = new TestDto("Example");
+        var entity = new TestEntity();
+        RefDataUpdateHandler<TestDto, TestEntity> handler = mock(RefDataUpdateHandler.class);
+        var message = new RefDataMessage<>("message-1", "Prison", 1, List.of(dto));
+        doReturn(message).when(decoder).decode("payload");
+        when(handlerRegistry.find("Prison"))
+            .thenReturn(Optional.<RefDataUpdateHandler<?, ?>>of(handler));
+        when(handler.getBusinessKey(dto)).thenReturn("Example");
+        when(handler.findEntity(dto)).thenReturn(Optional.of(entity));
+        when(handler.cachesToClear()).thenReturn(List.of("prisons"));
+        when(cacheManager.getCache("prisons")).thenReturn(cache);
+        TransactionSynchronizationManager.initSynchronization();
+
+        try {
+            // When
+            processor.processMessage("payload");
+
+            // Then
+            verify(cache, never()).clear();
+            TransactionSynchronizationManager.getSynchronizations()
+                .forEach(TransactionSynchronization::afterCommit);
+            verify(cache).clear();
+        } finally {
+            TransactionSynchronizationManager.clearSynchronization();
+        }
     }
 
     @Test

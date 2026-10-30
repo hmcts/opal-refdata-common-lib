@@ -92,6 +92,7 @@ class RefDataMessageProcessorImplIT {
 
     @Test
     void processMessage_rollsBackAllRecordsWhenAnyRecordFails() {
+        cacheManager.getCache(PRISON_CACHE).put(1234L, "Original name");
         String message = message(
             prisonRecord("Bristol Prison", "1 Court Road", "BS11AA"),
             prisonRecord("X Prison", "1 High Street", "BS11AA"));
@@ -99,6 +100,7 @@ class RefDataMessageProcessorImplIT {
             .hasMessage("A prison name cannot contain the letter X");
         assertThat(repository.findByName("Bristol Prison").orElseThrow().getName()).isEqualTo("Bristol Prison");
         assertThat(repository.count()).isEqualTo(1);
+        assertThat(cacheManager.getCache(PRISON_CACHE).get(1234L, String.class)).isEqualTo("Original name");
     }
 
     @Test
