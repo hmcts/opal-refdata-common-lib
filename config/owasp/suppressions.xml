@@ -25,6 +25,36 @@
     <cve>CVE-2025-15104</cve>
   </suppress>
 
+  <suppress until="2027-10-30Z">
+    <notes><![CDATA[
+    False positive: CVE-2026-33117 affects the Azure Java Key Vault Keys library's
+    cryptographic verification path, not the Azure Core, AMQP, HTTP Netty, JSON, or Identity
+    modules used here. Dependency-Check maps these modules to the generic
+    microsoft:azure_sdk_for_java CPE.
+    ]]></notes>
+    <packageUrl regex="true">^pkg:maven/com\.azure/(azure-core|azure-core-amqp|azure-core-http-netty|azure-json|azure-identity)@.*$</packageUrl>
+    <cve>CVE-2026-33117</cve>
+  </suppress>
+
+  <suppress until="2027-10-30Z">
+    <notes><![CDATA[
+    False positive: CVE-2023-36415 is not applicable to the Java Azure Identity
+    library; Dependency-Check has matched an unrelated Azure Identity product.
+    ]]></notes>
+    <packageUrl regex="true">^pkg:maven/com\.azure/azure-identity@.*$</packageUrl>
+    <cve>CVE-2023-36415</cve>
+  </suppress>
+
+  <suppress until="2027-10-30Z">
+    <notes><![CDATA[
+    False positive for the resolved versions: CVE-2024-35255 affects Azure Identity
+    versions below 1.12.2 and MSAL4J versions below 1.15.1. This project resolves
+    azure-identity 1.17.0 and msal4j 1.22.0.
+    ]]></notes>
+    <packageUrl regex="true">^pkg:maven/(com\.azure/azure-identity|com\.microsoft\.azure/msal4j)@.*$</packageUrl>
+    <cve>CVE-2024-35255</cve>
+  </suppress>
+
   <!--End of false positives section -->
 
   <!--Please add Temporary suppression here-->
