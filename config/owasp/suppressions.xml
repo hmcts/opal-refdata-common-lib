@@ -17,6 +17,14 @@
     <cve>CVE-2025-21199</cve>
   </suppress>
 
+  <suppress>
+    <notes><![CDATA[
+        False positive: CVE-2025-15104 applies to Nu Html Checker (validator.nu), not com.networknt:json-schema-validator.
+        ]]></notes>
+    <packageUrl regex="true">^pkg:maven/com\.networknt/json-schema-validator@.*$</packageUrl>
+    <cve>CVE-2025-15104</cve>
+  </suppress>
+
   <!--End of false positives section -->
 
   <!--Please add Temporary suppression here-->
