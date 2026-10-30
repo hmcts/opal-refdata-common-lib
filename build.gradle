@@ -164,7 +164,7 @@ dependencies {
 
   implementation "org.springframework.boot:spring-boot-starter-data-jpa"
   implementation 'org.springframework.boot:spring-boot-starter-validation'
-  implementation 'com.networknt:json-schema-validator:1.5.9'
+  implementation 'com.networknt:json-schema-validator:3.0.8'
 
   implementation('uk.gov.hmcts:spring-exception-handler:1.0.3') {
     exclude group: 'com.microsoft.azure', module: 'applicationinsights-spring-boot-starter'
