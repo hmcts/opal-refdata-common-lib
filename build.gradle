@@ -163,7 +163,15 @@ dependencies {
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-json'
 
   implementation 'com.azure:azure-messaging-servicebus:7.17.19'
-  implementation 'com.azure:azure-identity:1.17.0'
+  implementation 'com.azure:azure-core:1.59.1'
+  implementation 'com.azure:azure-core-amqp:2.12.1'
+  implementation 'com.azure:azure-identity:1.18.0'
+  implementation('org.apache.qpid:proton-j:0.35.0') {
+    because 'Fixes Proton-J CVEs'
+  }
+  implementation('com.microsoft.azure:msal4j:1.22.0') {
+    because 'Fixes CVE-2024-35255'
+  }
   implementation "org.springframework.boot:spring-boot-starter-data-jpa"
   implementation 'org.springframework.boot:spring-boot-starter-validation'
   implementation 'com.networknt:json-schema-validator:1.5.9'
