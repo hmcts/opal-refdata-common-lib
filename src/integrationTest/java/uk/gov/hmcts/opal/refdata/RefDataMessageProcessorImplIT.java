@@ -98,7 +98,9 @@ class RefDataMessageProcessorImplIT {
             prisonRecord("X Prison", "1 High Street", "BS11AA"));
         assertThatThrownBy(() -> process(message)).isInstanceOf(IllegalArgumentException.class)
             .hasMessage("A prison name cannot contain the letter X");
-        assertThat(repository.findByName("Bristol Prison").orElseThrow().getName()).isEqualTo("Bristol Prison");
+        DummyPrison rolledBack = repository.findByName("Bristol Prison").orElseThrow();
+        assertThat(rolledBack.getName()).isEqualTo("Bristol Prison");
+        assertThat(rolledBack.getAddressLine1()).isEqualTo("1 High Street");
         assertThat(repository.count()).isEqualTo(1);
         assertThat(cacheManager.getCache(PRISON_CACHE).get(1234L, String.class)).isEqualTo("Original name");
     }
