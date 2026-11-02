@@ -2,6 +2,7 @@ package uk.gov.hmcts.opal.refdata.schemavalidation;
 
 import uk.gov.hmcts.common.exceptions.standard.InternalServerErrorException;
 
+@SuppressWarnings("java:S110")
 public class SchemaConfigurationException extends InternalServerErrorException {
 
     public SchemaConfigurationException(String msg) {
