@@ -1,0 +1,648 @@
+{
+  "title": "Offence record",
+  "type": "object",
+  "properties": {
+    "cjs_code": {
+      "type": "string",
+      "maxLength": 8,
+      "not": {
+        "pattern": "[^A-Za-z0-9]"
+      },
+      "x-unique-keys": [
+        {
+          "name": "CJSCodeUniqueKey"
+        }
+      ]
+    },
+    "cjs_title": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "second_language_cjs_title": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 120
+    },
+    "user_acts_and_section": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "second_language_offence_act_and_section_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "date_used_from": {
+      "type": "string",
+      "format": "date"
+    },
+    "date_used_to": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "x-rules": [
+        {
+          "name": "DateUsedToGEDateUsedFromValidation",
+          "op": ">=",
+          "right": "date_used_from",
+          "compare_as": "date"
+        }
+      ]
+    },
+    "recordable": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
+    "reportable": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
+    "standard_list": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    },
+    "traffic_control": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "dvla_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4
+    },
+    "offence_notes": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "maximum_penalty": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 100
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 250
+    },
+    "derived_from_cjs_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 10
+    },
+    "ho_class": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": -9999999,
+      "maximum": 99999999
+    },
+    "ho_sub_class": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": -9999999,
+      "maximum": 99999999
+    },
+    "proceedings_code": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "exclusiveMaximum": 100
+    },
+    "pnld_standard_offence_wording": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "pnld_welsh_standard_offence_wording": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "pnld_date_of_last_update": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "pnld_prosecution_time_limit": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 40
+    },
+    "pnld_max_fine_type_magistrates_court": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 1
+    },
+    "pnld_max_fine_type_magistrates_court_description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 1000
+    },
+    "pnld_mode_of_trial": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 50
+    },
+    "pnld_endorsable_flag": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "N",
+        "Y",
+        null
+      ]
+    },
+    "pnld_location_flag": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "N",
+        "Y",
+        null
+      ]
+    },
+    "pnld_principal_offence_category": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 200
+    },
+    "user_offence_wording": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "user_statement_of_facts": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "entry_prompt_substitution_sow": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "entry_prompt_substitution_sof": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "entry_prompt_substitution_ans": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "area": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "blocked": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "N",
+        "Y",
+        null
+      ]
+    },
+    "second_language_offence_statement_of_facts_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "second_language_offence_wording_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "offence_code": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "pnld_offence_start_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "pnld_offence_end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "sow_reference": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 10
+    },
+    "publishing_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Not Published",
+        "Active",
+        "Submitted",
+        "Added to Release Package",
+        "Inactive",
+        "Error",
+        "Future",
+        "Superseded",
+        null
+      ]
+    },
+    "offence_source": {
+      "type": "string",
+      "enum": [
+        "NSD",
+        "PNLD",
+        "APPS",
+        "MOJ"
+      ]
+    },
+    "mis_classification": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "DRU",
+        "FRF",
+        "THG",
+        "VAP",
+        "IMO",
+        "FTS",
+        "DDR",
+        "SNM",
+        "OSM",
+        "DAM",
+        "SEX",
+        "DWC",
+        "XXX",
+        "ROB",
+        "BUR",
+        null
+      ]
+    },
+    "offence_class": {
+      "type": "string",
+      "enum": [
+        "1",
+        "3",
+        "2",
+        "S"
+      ]
+    },
+    "can_be_bulk": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "initial_fee_applicable": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "contested_fee": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "application_synonym": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "AS MOJ",
+        "DEFENDANT",
+        "TRUE",
+        "AS Text",
+        "FALSE",
+        "Applicant",
+        "APPLICANT",
+        null
+      ]
+    },
+    "exparte": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "jurisdiction": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "EITHER",
+        "CROWN",
+        "MAGISTRATES",
+        null
+      ]
+    },
+    "appeal_flag": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "summons_template_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "BREACH",
+        "FIRST_HEARING",
+        "PARENT_GENERIC_CASE",
+        "GENERIC_APPLICATION",
+        "NOT_APPLICABLE",
+        null
+      ]
+    },
+    "link_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "FIRST_HEARING",
+        "STANDALONE",
+        "SJP",
+        "LINKED",
+        null
+      ]
+    },
+    "hearing_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 10
+    },
+    "applicant_appellant_flag": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Appellant",
+        "Applicant",
+        null
+      ]
+    },
+    "plea_applicable_flag": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "active_offence_order": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "NOT_APPLICABLE",
+        "OFFENCE",
+        "COURT_ORDER",
+        null
+      ]
+    },
+    "commissioner_of_oath": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "breach_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "COMMISSION_OF_NEW_OFFENCE_BREACH",
+        "NOT_APPLICABLE",
+        "GENERIC_BREACH",
+        null
+      ]
+    },
+    "court_of_appeal_flag": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "court_extract_available": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "listing_notification_template": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "POSTAL_NOTIFICATION",
+        "TRUE",
+        "NOT_APPLICABLE",
+        null
+      ]
+    },
+    "boxwork_notification_template": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 19
+    },
+    "prosecutor_as_third_party_flag": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "resentencing_activation_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 10
+    },
+    "prefix": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 100
+    },
+    "obsolete_indicator": {
+      "type": "string",
+      "enum": [
+        "N",
+        "Y"
+      ]
+    },
+    "custodial_indicator": {
+      "type": "string",
+      "enum": [
+        "Yes",
+        "No"
+      ]
+    }
+  },
+  "required": [
+    "cjs_title",
+    "cjs_code",
+    "offence_source",
+    "offence_class",
+    "standard_list",
+    "recordable",
+    "reportable",
+    "obsolete_indicator",
+    "custodial_indicator",
+    "date_used_from"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$comment": "Offence:OffenceRevision.CivilAppDataMandatoryFieldValidation",
+      "if": {
+        "properties": {
+          "offence_source": {
+            "const": "APPS"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "jurisdiction",
+          "hearing_code",
+          "link_type",
+          "active_offence_order",
+          "summons_template_type",
+          "breach_type"
+        ],
+        "properties": {
+          "jurisdiction": {
+            "not": {
+              "type": "null"
+            }
+          },
+          "hearing_code": {
+            "not": {
+              "type": "null"
+            }
+          },
+          "link_type": {
+            "not": {
+              "type": "null"
+            }
+          },
+          "active_offence_order": {
+            "not": {
+              "type": "null"
+            }
+          },
+          "summons_template_type": {
+            "not": {
+              "type": "null"
+            }
+          },
+          "breach_type": {
+            "not": {
+              "type": "null"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

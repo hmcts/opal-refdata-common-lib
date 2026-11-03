@@ -1,0 +1,14 @@
+{
+  "title": "Result parameter option",
+  "type": "object",
+  "properties": {
+    "option_value": {
+      "type": "string",
+      "maxLength": 500
+    }
+  },
+  "required": [
+    "option_value"
+  ],
+  "additionalProperties": false
+}

@@ -201,6 +201,61 @@
   "additionalProperties": false,
   "allOf": [
     {
+      "$comment": "Court:Court.DefaultStartTimeCourtDurationValidation",
+      "anyOf": [
+        {
+          "required": [
+            "default_start_time",
+            "default_duration"
+          ],
+          "properties": {
+            "default_start_time": {
+              "not": {
+                "type": "null"
+              }
+            },
+            "default_duration": {
+              "not": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "allOf": [
+            {
+              "not": {
+                "required": [
+                  "default_start_time"
+                ],
+                "properties": {
+                  "default_start_time": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "default_duration"
+                ],
+                "properties": {
+                  "default_duration": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
       "$comment": "Court:Court.WelshCourtAddressCountValidation",
       "if": {
         "required": [

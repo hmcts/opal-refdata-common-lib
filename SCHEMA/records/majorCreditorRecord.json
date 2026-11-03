@@ -4,7 +4,7 @@
   "properties": {
     "name": {
       "type": "string",
-      "maxLength": 4000,
+      "maxLength": 35,
       "x-unique-keys": [
         {
           "name": "MajorCreditorsUniqueKey"
@@ -51,15 +51,12 @@
       ]
     },
     "business_unit": {
-      "type": [
-        "string",
-        "null"
-      ],
+      "type": "string",
       "enum": [
         "1234",
-        "5678",
-        null
-      ]
+        "5678"
+      ],
+      "$comment": "Organisation:Organisation.MajorCreditorBusinessUnitMandatory"
     },
     "account_name": {
       "type": [
@@ -73,21 +70,23 @@
         "string",
         "null"
       ],
-      "maxLength": 6
+      "maxLength": 6,
+      "$comment": "Organisation:Organisation.BankAccountSortCodeMustBe6",
+      "minLength": 6
     },
     "bank_account_number": {
       "type": [
         "string",
         "null"
       ],
-      "maxLength": 10
+      "maxLength": 10,
+      "$comment": "Organisation:Organisation.BankAccountNumberMustBe10",
+      "minLength": 10
     },
     "short_name": {
-      "type": [
-        "string",
-        "null"
-      ],
-      "maxLength": 4
+      "type": "string",
+      "maxLength": 4,
+      "$comment": "Organisation:Organisation.MajorCreditorCodeValidation"
     },
     "addresses": {
       "type": [
@@ -111,7 +110,167 @@
   "required": [
     "name",
     "publishing_status",
-    "start_date"
+    "start_date",
+    "business_unit",
+    "short_name"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$comment": "Organisation:Organisation.BankDataValidation",
+      "anyOf": [
+        {
+          "allOf": [
+            {
+              "not": {
+                "required": [
+                  "account_name"
+                ],
+                "properties": {
+                  "account_name": {
+                    "minLength": 1,
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "bank_account_number"
+                ],
+                "properties": {
+                  "bank_account_number": {
+                    "minLength": 1,
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "sort_code"
+                ],
+                "properties": {
+                  "sort_code": {
+                    "minLength": 1,
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "required": [
+            "account_name",
+            "bank_account_number",
+            "sort_code"
+          ],
+          "properties": {
+            "account_name": {
+              "minLength": 1,
+              "not": {
+                "type": "null"
+              }
+            },
+            "bank_account_number": {
+              "minLength": 1,
+              "not": {
+                "type": "null"
+              }
+            },
+            "sort_code": {
+              "minLength": 1,
+              "not": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "$comment": "Organisation:Organisation.BankAccountDetailsValidation",
+      "anyOf": [
+        {
+          "allOf": [
+            {
+              "not": {
+                "required": [
+                  "account_name"
+                ],
+                "properties": {
+                  "account_name": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "sort_code"
+                ],
+                "properties": {
+                  "sort_code": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "bank_account_number"
+                ],
+                "properties": {
+                  "bank_account_number": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "required": [
+            "account_name",
+            "sort_code",
+            "bank_account_number"
+          ],
+          "properties": {
+            "account_name": {
+              "not": {
+                "type": "null"
+              }
+            },
+            "sort_code": {
+              "not": {
+                "type": "null"
+              }
+            },
+            "bank_account_number": {
+              "not": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
 }

@@ -7,7 +7,7 @@
         "string",
         "null"
       ],
-      "maxLength": 35
+      "maxLength": 80
     },
     "address_line_2": {
       "type": [
@@ -50,9 +50,32 @@
         "string",
         "null"
       ],
-      "maxLength": 100
+      "enum": [
+        "DVLA",
+        "BASS",
+        "EMC",
+        "NPS",
+        "MCR",
+        "DESLA",
+        "WEL",
+        "YOT",
+        "GPS",
+        "PROYO",
+        "DDRP",
+        "ATTC",
+        "CAT",
+        "NCESCOST",
+        "RCU",
+        "BULKSCAN",
+        "PRIS",
+        "NPS_Breach",
+        "ENF",
+        null
+      ]
     }
   },
-  "required": [],
+  "required": [
+
+  ],
   "additionalProperties": false
 }

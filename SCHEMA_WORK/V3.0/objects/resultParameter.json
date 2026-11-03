@@ -1,0 +1,72 @@
+{
+  "title": "Result parameter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 128
+    },
+    "prompt": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "text-60",
+        "menu-radio",
+        "menu-checkbox",
+        "integer",
+        "decimal",
+        "date",
+        "text-1000",
+        "menu-autocomplete"
+      ]
+    },
+    "mandatory": {
+      "type": "boolean"
+    },
+    "parameter_min": {
+      "type": "integer"
+    },
+    "parameter_max": {
+      "type": "integer"
+    },
+    "language_dependent": {
+      "type": "boolean"
+    },
+    "hint": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    },
+    "api_data": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 128
+    },
+    "options": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/resultParameterOption"
+      }
+    }
+  },
+  "required": [
+    "mandatory",
+    "prompt",
+    "language_dependent",
+    "name",
+    "parameter_min",
+    "parameter_max",
+    "type"
+  ],
+  "additionalProperties": false
+}

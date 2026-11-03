@@ -1,0 +1,80 @@
+{
+  "title": "Prosecutor record",
+  "type": "object",
+  "properties": {
+    "prosecutor_code": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 4000,
+      "x-unique-keys": [
+        {
+          "name": "ProsecutorNameUniqueKey"
+        }
+      ]
+    },
+    "short_name": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "welsh_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDate",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
+        }
+      ]
+    },
+    "publishing_status": {
+      "type": "string",
+      "enum": [
+        "Superseded",
+        "Future",
+        "Active",
+        "Inactive",
+        "Submitted",
+        "Not Published",
+        "Added to Release Package",
+        "Error"
+      ]
+    },
+    "addresses": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/address"
+      }
+    }
+  },
+  "required": [
+    "start_date",
+    "short_name",
+    "name",
+    "publishing_status"
+  ],
+  "additionalProperties": false
+}

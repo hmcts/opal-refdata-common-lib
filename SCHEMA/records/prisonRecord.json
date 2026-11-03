@@ -63,7 +63,12 @@
         "null"
       ],
       "items": {
-        "$ref": "#/$defs/orgAddress"
+        "$ref": "#/$defs/orgAddress",
+        "properties": {
+          "address_line_1": {
+            "maxLength": 35
+          }
+        }
       }
     },
     "contact_information": {

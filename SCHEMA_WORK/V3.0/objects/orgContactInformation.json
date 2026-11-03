@@ -1,0 +1,65 @@
+{
+  "title": "Contact information (Organisation)",
+  "type": "object",
+  "properties": {
+    "contact_type": {
+      "type": "string",
+      "enum": [
+        "Telephone",
+        "Email Address",
+        "Mobile",
+        "Fax",
+        "Destination ID"
+      ]
+    },
+    "contact_sub_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Informant",
+        "Reception",
+        "Offender Management Unit",
+        "NPS",
+        "ATTC",
+        "DDRP",
+        "NPS_Breaches",
+        "National Payment",
+        "Remittance Advice",
+        "REGION",
+        "ENF",
+        "DESLA",
+        "YOT",
+        "PROYO",
+        "EMC",
+        "Enforcement Area",
+        "Crown Prosecution Service Crown Court",
+        "PRIS",
+        "RCU",
+        "DVLA",
+        "NCESCOST",
+        "MCR",
+        "Prosecutor",
+        "Contact",
+        "Crown Prosecution Service Magistrates Court",
+        "NCES Notification",
+        "BULKSCAN",
+        "CAT",
+        "BASS",
+        "GPS",
+        "Magistrates Court Contact",
+        null
+      ]
+    },
+    "contact_value": {
+      "type": "string",
+      "maxLength": 256
+    }
+  },
+  "required": [
+    "contact_value",
+    "contact_type"
+  ],
+  "additionalProperties": false
+}

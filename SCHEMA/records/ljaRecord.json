@@ -240,6 +240,72 @@
           }
         }
       }
+    },
+    {
+      "$comment": "Court:Court.DefaultStartTimeCourtDurationValidation",
+      "if": {
+        "properties": {
+          "lja_type": {
+            "enum": [
+              "CRWCRT"
+            ]
+          }
+        }
+      },
+      "then": {
+        "anyOf": [
+          {
+            "required": [
+              "default_start_time",
+              "default_duration"
+            ],
+            "properties": {
+              "default_start_time": {
+                "not": {
+                  "type": "null"
+                }
+              },
+              "default_duration": {
+                "not": {
+                  "type": "null"
+                }
+              }
+            }
+          },
+          {
+            "allOf": [
+              {
+                "not": {
+                  "required": [
+                    "default_start_time"
+                  ],
+                  "properties": {
+                    "default_start_time": {
+                      "not": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "not": {
+                  "required": [
+                    "default_duration"
+                  ],
+                  "properties": {
+                    "default_duration": {
+                      "not": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
     }
   ]
 }

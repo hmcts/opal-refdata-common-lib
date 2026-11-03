@@ -6,6 +6,7 @@
       "type": "string",
       "enum": [
         "Court Address",
+        "Prosecutor",
         "Financial Office Address",
         "Welsh Court Address"
       ]
