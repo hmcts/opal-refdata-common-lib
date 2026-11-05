@@ -74,7 +74,7 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord
     }
 
     @Override
-    public void deleteEntity(DummyPrison entity) {
+    public void deleteEntity(String businessKey) {
         throw new UnsupportedOperationException("delete method not needed to test message processor");
     }
 }
