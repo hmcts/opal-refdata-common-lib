@@ -19,7 +19,8 @@
         "Prison",
         "Enforcer",
         "CentralAuthority",
-        "MajorCreditor"
+        "MajorCreditor",
+        "CourtFee"
       ]
     },
     "operation": {
@@ -52,3 +53,4 @@
   ],
   "additionalProperties": false
 }
+

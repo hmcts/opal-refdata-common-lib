@@ -397,12 +397,6 @@
         "null"
       ],
       "enum": [
-        "AS MOJ",
-        "DEFENDANT",
-        "TRUE",
-        "AS Text",
-        "FALSE",
-        "Applicant",
         "APPLICANT",
         null
       ]
@@ -646,3 +640,4 @@
     }
   ]
 }
+

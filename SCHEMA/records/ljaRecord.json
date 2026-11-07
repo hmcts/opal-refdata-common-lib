@@ -142,7 +142,21 @@
         "null"
       ],
       "maxLength": 10,
-      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+      "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$",
+      "x-rules": [
+        {
+          "name": "DefaultStartTimeCourtDurationValidation",
+          "op": "all_or_none",
+          "with": [
+            "default_duration"
+          ],
+          "when": {
+            "lja_type": [
+              "CRWCRT"
+            ]
+          }
+        }
+      ]
     },
     "default_duration": {
       "type": [
@@ -240,72 +254,7 @@
           }
         }
       }
-    },
-    {
-      "$comment": "Court:Court.DefaultStartTimeCourtDurationValidation",
-      "if": {
-        "properties": {
-          "lja_type": {
-            "enum": [
-              "CRWCRT"
-            ]
-          }
-        }
-      },
-      "then": {
-        "anyOf": [
-          {
-            "required": [
-              "default_start_time",
-              "default_duration"
-            ],
-            "properties": {
-              "default_start_time": {
-                "not": {
-                  "type": "null"
-                }
-              },
-              "default_duration": {
-                "not": {
-                  "type": "null"
-                }
-              }
-            }
-          },
-          {
-            "allOf": [
-              {
-                "not": {
-                  "required": [
-                    "default_start_time"
-                  ],
-                  "properties": {
-                    "default_start_time": {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "not": {
-                  "required": [
-                    "default_duration"
-                  ],
-                  "properties": {
-                    "default_duration": {
-                      "not": {
-                        "type": "null"
-                      }
-                    }
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      }
     }
   ]
 }
+

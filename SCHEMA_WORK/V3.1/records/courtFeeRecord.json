@@ -1,0 +1,71 @@
+{
+  "title": "Court fee record",
+  "type": "object",
+  "properties": {
+    "court_fee_code": {
+      "type": "string",
+      "maxLength": 10,
+      "x-unique-keys": [
+        {
+          "name": "CourtFeeCode"
+        }
+      ]
+    },
+    "court_fee_description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 50
+    },
+    "court_fee_amount": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "statistics_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 10
+    },
+    "publishing_status": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Superseded",
+        "Future",
+        "Active",
+        "Inactive",
+        "Submitted",
+        "Not Published",
+        "Added to Release Package",
+        "Error",
+        null
+      ]
+    },
+    "start_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    }
+  },
+  "required": [
+    "court_fee_code"
+  ],
+  "additionalProperties": false
+}
+

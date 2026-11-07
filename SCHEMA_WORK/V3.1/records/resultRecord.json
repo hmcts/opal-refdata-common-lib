@@ -1,0 +1,438 @@
+{
+  "title": "Result record",
+  "type": "object",
+  "properties": {
+    "result_code": {
+      "type": "string",
+      "maxLength": 6
+    },
+    "result_title": {
+      "type": "string",
+      "maxLength": 60
+    },
+    "result_title_welsh": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 60
+    },
+    "result_type": {
+      "type": "string",
+      "enum": [
+        "RESULT",
+        "ACTION"
+      ]
+    },
+    "imposition": {
+      "type": "boolean"
+    },
+    "imposition_category": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Victim Surcharge",
+        "Legal Aid",
+        "Crown Prosecution Costs",
+        "Fines",
+        "Compensation",
+        "Fund",
+        "Costs",
+        "Court Charge",
+        "Witness Expenses & Central Fund",
+        null
+      ]
+    },
+    "imposition_allocation_priority": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "imposition_accruing": {
+      "type": "boolean"
+    },
+    "imposition_creditor": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "DPP",
+        "!DPP",
+        "CF",
+        "Any",
+        null
+      ]
+    },
+    "enforcement": {
+      "type": "boolean"
+    },
+    "enforcement_override": {
+      "type": "boolean"
+    },
+    "further_enforcement_warning_required": {
+      "type": "boolean"
+    },
+    "further_enforcement_disallowed": {
+      "type": "boolean"
+    },
+    "enforcement_on_hold": {
+      "type": "boolean"
+    },
+    "requires_enforcer": {
+      "type": "boolean"
+    },
+    "generates_a_hearing": {
+      "type": "boolean"
+    },
+    "generates_a_warrant": {
+      "type": "boolean"
+    },
+    "collection_order": {
+      "type": "boolean"
+    },
+    "disallow_ttp_extension": {
+      "type": "boolean"
+    },
+    "preserve_last_enforcement_on_ttp_extension": {
+      "type": "boolean"
+    },
+    "prevent_payment_card": {
+      "type": "boolean"
+    },
+    "lists_monies": {
+      "type": "boolean"
+    },
+    "allow_payment_terms": {
+      "type": "boolean"
+    },
+    "requires_employment_data": {
+      "type": "boolean"
+    },
+    "allow_additional_action": {
+      "type": "boolean"
+    },
+    "next_permitted_actions_type": {
+      "type": "string",
+      "enum": [
+        "SELECTED",
+        "ALL"
+      ]
+    },
+    "next_permitted_action_count": {
+      "type": "integer"
+    },
+    "requires_lja": {
+      "type": "boolean"
+    },
+    "manual_enforcement": {
+      "type": "boolean"
+    },
+    "auto_enforcement": {
+      "type": "boolean"
+    },
+    "publishing_status": {
+      "type": "string",
+      "enum": [
+        "Submitted",
+        "Error",
+        "Not Published",
+        "Inactive",
+        "Active",
+        "Added to Release Package",
+        "Future",
+        "Superseded"
+      ]
+    },
+    "result_parameters": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/resultParameter"
+      }
+    },
+    "result_next_permitted_action_mappings": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/resultNextPermittedActionMapping"
+      }
+    }
+  },
+  "required": [
+    "disallow_ttp_extension",
+    "allow_payment_terms",
+    "lists_monies",
+    "requires_lja",
+    "requires_enforcer",
+    "generates_a_hearing",
+    "result_title",
+    "auto_enforcement",
+    "imposition",
+    "preserve_last_enforcement_on_ttp_extension",
+    "enforcement_on_hold",
+    "generates_a_warrant",
+    "imposition_accruing",
+    "requires_employment_data",
+    "next_permitted_actions_type",
+    "enforcement",
+    "enforcement_override",
+    "further_enforcement_disallowed",
+    "next_permitted_action_count",
+    "result_code",
+    "further_enforcement_warning_required",
+    "publishing_status",
+    "prevent_payment_card",
+    "result_type",
+    "collection_order",
+    "allow_additional_action",
+    "manual_enforcement"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$comment": "Result:EnforcementResultRevision.CheckEnforcementFields",
+      "anyOf": [
+        {
+          "properties": {
+            "enforcement": {
+              "const": true
+            }
+          }
+        },
+        {
+          "properties": {
+            "enforcement": {
+              "const": false
+            },
+            "further_enforcement_warning_required": {
+              "const": false
+            },
+            "further_enforcement_disallowed": {
+              "const": false
+            },
+            "enforcement_on_hold": {
+              "const": false
+            },
+            "generates_a_hearing": {
+              "const": false
+            },
+            "generates_a_warrant": {
+              "const": false
+            },
+            "collection_order": {
+              "const": false
+            },
+            "preserve_last_enforcement_on_ttp_extension": {
+              "const": false
+            },
+            "prevent_payment_card": {
+              "const": false
+            },
+            "lists_monies": {
+              "const": false
+            },
+            "allow_payment_terms": {
+              "const": false
+            },
+            "requires_employment_data": {
+              "const": false
+            },
+            "allow_additional_action": {
+              "const": false
+            },
+            "manual_enforcement": {
+              "const": false
+            },
+            "auto_enforcement": {
+              "const": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "$comment": "Result:EnforcementResultRevision.CheckNextPermitted",
+      "anyOf": [
+        {
+          "properties": {
+            "next_permitted_actions_type": {
+              "const": "SELECTED"
+            },
+            "next_permitted_action_count": {
+              "exclusiveMinimum": 0
+            }
+          }
+        },
+        {
+          "properties": {
+            "next_permitted_actions_type": {
+              "const": "ALL"
+            },
+            "next_permitted_action_count": {
+              "const": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "$comment": "Result:EnforcementResultRevision.CheckImpositionAccruing",
+      "anyOf": [
+        {
+          "allOf": [
+            {
+              "properties": {
+                "imposition": {
+                  "const": false
+                }
+              }
+            },
+            {
+              "properties": {
+                "imposition_accruing": {
+                  "const": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "properties": {
+                "imposition": {
+                  "const": true
+                }
+              }
+            },
+            {
+              "anyOf": [
+                {
+                  "properties": {
+                    "imposition_accruing": {
+                      "const": true
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "imposition_accruing": {
+                      "const": false
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "$comment": "Result:EnforcementResultRevision.CheckImpositionAndEnforcement",
+      "not": {
+        "properties": {
+          "imposition": {
+            "const": true
+          },
+          "enforcement": {
+            "const": true
+          }
+        }
+      }
+    },
+    {
+      "$comment": "Result:EnforcementResultRevision.CheckMandatoryImpositionFields",
+      "anyOf": [
+        {
+          "required": [
+            "imposition_category",
+            "imposition_allocation_priority",
+            "imposition_creditor"
+          ],
+          "properties": {
+            "imposition": {
+              "const": true
+            },
+            "imposition_category": {
+              "not": {
+                "type": "null"
+              }
+            },
+            "imposition_allocation_priority": {
+              "not": {
+                "type": "null"
+              }
+            },
+            "imposition_creditor": {
+              "not": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "allOf": [
+            {
+              "properties": {
+                "imposition": {
+                  "const": false
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "imposition_category"
+                ],
+                "properties": {
+                  "imposition_category": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "imposition_allocation_priority"
+                ],
+                "properties": {
+                  "imposition_allocation_priority": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "imposition_creditor"
+                ],
+                "properties": {
+                  "imposition_creditor": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

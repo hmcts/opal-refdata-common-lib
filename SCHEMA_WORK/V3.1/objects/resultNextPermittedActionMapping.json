@@ -1,0 +1,16 @@
+{
+  "title": "Result next permitted action mapping",
+  "type": "object",
+  "properties": {
+    "result_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 6
+    }
+  },
+  "required": [],
+  "additionalProperties": false
+}
+

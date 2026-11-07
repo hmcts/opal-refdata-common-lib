@@ -33,7 +33,15 @@
         "null"
       ],
       "enum": [
+        "Victim Surcharge",
+        "Legal Aid",
+        "Crown Prosecution Costs",
+        "Fines",
+        "Compensation",
+        "Fund",
+        "Costs",
         "Court Charge",
+        "Witness Expenses & Central Fund",
         null
       ]
     },
@@ -52,13 +60,10 @@
         "null"
       ],
       "enum": [
-        "Crown Prosecution Costs",
-        "Court Charge",
-        "Compensation Costs",
-        "Victim Surcharge",
-        "Legal Aid",
-        "Fines",
-        "Witness Expenses & Central Fund",
+        "DPP",
+        "!DPP",
+        "CF",
+        "Any",
         null
       ]
     },
@@ -139,7 +144,7 @@
         "Active",
         "Added to Release Package",
         "Future",
-        "Superceded"
+        "Superseded"
       ]
     },
     "result_parameters": {
@@ -193,7 +198,7 @@
   "additionalProperties": false,
   "allOf": [
     {
-      "$comment": "Result:ResultRevision.CheckEnforcementFields",
+      "$comment": "Result:EnforcementResultRevision.CheckEnforcementFields",
       "anyOf": [
         {
           "properties": {
@@ -207,9 +212,6 @@
             "enforcement": {
               "const": false
             },
-            "enforcement_override": {
-              "const": false
-            },
             "further_enforcement_warning_required": {
               "const": false
             },
@@ -217,9 +219,6 @@
               "const": false
             },
             "enforcement_on_hold": {
-              "const": false
-            },
-            "requires_enforcer": {
               "const": false
             },
             "generates_a_hearing": {
@@ -249,9 +248,6 @@
             "allow_additional_action": {
               "const": false
             },
-            "requires_lja": {
-              "const": false
-            },
             "manual_enforcement": {
               "const": false
             },
@@ -263,7 +259,7 @@
       ]
     },
     {
-      "$comment": "Result:ResultRevision.CheckNextPermitted",
+      "$comment": "Result:EnforcementResultRevision.CheckNextPermitted",
       "anyOf": [
         {
           "properties": {
@@ -288,7 +284,7 @@
       ]
     },
     {
-      "$comment": "Result:ResultRevision.CheckImpositionAccruing",
+      "$comment": "Result:EnforcementResultRevision.CheckImpositionAccruing",
       "anyOf": [
         {
           "allOf": [
@@ -340,7 +336,7 @@
       ]
     },
     {
-      "$comment": "Result:ResultRevision.CheckImpositionAndEnforcement",
+      "$comment": "Result:EnforcementResultRevision.CheckImpositionAndEnforcement",
       "not": {
         "properties": {
           "imposition": {
@@ -353,7 +349,7 @@
       }
     },
     {
-      "$comment": "Result:ResultRevision.CheckMandatoryImpositionFields",
+      "$comment": "Result:EnforcementResultRevision.CheckMandatoryImpositionFields",
       "anyOf": [
         {
           "required": [
@@ -439,3 +435,4 @@
     }
   ]
 }
+

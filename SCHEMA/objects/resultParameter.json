@@ -4,32 +4,34 @@
   "properties": {
     "name": {
       "type": "string",
-      "maxLength": 128
+      "maxLength": 100
     },
     "prompt": {
       "type": "string",
-      "maxLength": 500
+      "maxLength": 100
     },
     "type": {
       "type": "string",
       "enum": [
+        "text-5",
         "text-60",
         "menu-radio",
         "menu-checkbox",
         "integer",
-        "decimal",
         "date",
         "text-1000",
+        "decimal-2dp",
+        "text-100",
         "menu-autocomplete"
       ]
     },
     "mandatory": {
       "type": "boolean"
     },
-    "parameter_min": {
+    "min": {
       "type": "integer"
     },
-    "parameter_max": {
+    "max": {
       "type": "integer"
     },
     "language_dependent": {
@@ -42,12 +44,17 @@
       ],
       "maxLength": 500
     },
-    "api_data": {
+    "apidata": {
       "type": [
         "string",
         "null"
       ],
-      "maxLength": 128
+      "enum": [
+        "courts",
+        "enforcers",
+        "prisons",
+        null
+      ]
     },
     "options": {
       "type": [
@@ -55,7 +62,7 @@
         "null"
       ],
       "items": {
-        "$ref": "#/$defs/resultParameterOption"
+        "type": "string"
       }
     }
   },
@@ -64,9 +71,95 @@
     "prompt",
     "language_dependent",
     "name",
-    "parameter_min",
-    "parameter_max",
+    "min",
+    "max",
     "type"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$comment": "Result:EnforcementResultParameter.CheckAPIField",
+      "anyOf": [
+        {
+          "allOf": [
+            {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "menu-autocomplete",
+                    "menu-checkbox",
+                    "menu-radio"
+                  ]
+                }
+              }
+            },
+            {
+              "anyOf": [
+                {
+                  "required": [
+                    "apidata"
+                  ],
+                  "properties": {
+                    "apidata": {
+                      "not": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "options": {
+                      "minItems": 1,
+                      "not": {
+                        "type": "null"
+                      }
+                    }
+                  },
+                  "required": [
+                    "options"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {
+              "properties": {
+                "type": {
+                  "not": {
+                    "enum": [
+                      "menu-autocomplete",
+                      "menu-checkbox",
+                      "menu-radio"
+                    ]
+                  }
+                },
+                "options": {
+                  "maxItems": 0
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "apidata"
+                ],
+                "properties": {
+                  "apidata": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
+

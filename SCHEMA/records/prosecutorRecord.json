@@ -6,6 +6,11 @@
       "type": [
         "integer",
         "null"
+      ],
+      "x-unique-keys": [
+        {
+          "name": "ProsecutorCodeUniqueKey"
+        }
       ]
     },
     "name": {
@@ -78,3 +83,4 @@
   ],
   "additionalProperties": false
 }
+
