@@ -162,8 +162,8 @@ dependencies {
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
   implementation group: 'org.springframework.boot', name: 'spring-boot-starter-json'
 
-  implementation 'com.azure:azure-messaging-servicebus:7.17.19'
-  implementation 'com.azure:azure-identity:1.17.0'
+  implementation 'com.azure:azure-messaging-servicebus:7.19.1'
+  implementation 'com.azure:azure-identity:1.19.0'
   implementation('org.apache.qpid:proton-j:0.35.0') {
     because 'Fixes Proton-J CVEs'
   }
