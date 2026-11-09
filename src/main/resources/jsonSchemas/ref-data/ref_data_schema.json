@@ -16,7 +16,7 @@
         },
         "data_product": {
           "type": "string",
-          "enum": ["Offence", "Court", "LJA", "Prison", "Enforcer", "CentralAuthority", "MajorCreditor"]
+          "enum": ["Offence", "Result", "Prosecutor", "Court", "LJA", "Prison", "Enforcer", "CentralAuthority", "MajorCreditor", "CourtFee"]
         },
         "operation": {
           "const": "PUBLISH"
@@ -68,6 +68,48 @@
             "records": {
               "items": {
                 "$ref": "#/$defs/offenceRecord"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Result message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "Result"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "#/$defs/resultRecord"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Prosecutor message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "Prosecutor"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "#/$defs/prosecutorRecord"
               }
             }
           }
@@ -194,6 +236,27 @@
             "records": {
               "items": {
                 "$ref": "#/$defs/majorCreditorRecord"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "CourtFee message",
+      "properties": {
+        "header": {
+          "properties": {
+            "data_product": {
+              "const": "CourtFee"
+            }
+          }
+        },
+        "payload": {
+          "properties": {
+            "records": {
+              "items": {
+                "$ref": "#/$defs/courtFeeRecord"
               }
             }
           }
@@ -416,7 +479,7 @@
         },
         "application_synonym": {
           "type": ["string", "null"],
-          "enum": ["AS MOJ", "DEFENDANT", "TRUE", "AS Text", "FALSE", "Applicant", "APPLICANT", null]
+          "enum": ["APPLICANT", null]
         },
         "exparte": {
           "type": ["boolean", "null"]
@@ -542,6 +605,580 @@
         }
       ]
     },
+    "resultRecord": {
+      "title": "Result record",
+      "type": "object",
+      "properties": {
+        "result_code": {
+          "type": "string",
+          "maxLength": 6
+        },
+        "result_title": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "result_title_welsh": {
+          "type": ["string", "null"],
+          "maxLength": 60
+        },
+        "result_type": {
+          "type": "string",
+          "enum": ["RESULT", "ACTION"]
+        },
+        "imposition": {
+          "type": "boolean"
+        },
+        "imposition_category": {
+          "type": ["string", "null"],
+          "enum": ["Victim Surcharge", "Legal Aid", "Crown Prosecution Costs", "Fines", "Compensation", "Fund", "Costs", "Court Charge", "Witness Expenses & Central Fund", null]
+        },
+        "imposition_allocation_priority": {
+          "type": ["integer", "null"]
+        },
+        "imposition_accruing": {
+          "type": "boolean"
+        },
+        "imposition_creditor": {
+          "type": ["string", "null"],
+          "enum": ["DPP", "!DPP", "CF", "Any", null]
+        },
+        "enforcement": {
+          "type": "boolean"
+        },
+        "enforcement_override": {
+          "type": "boolean"
+        },
+        "further_enforcement_warning_required": {
+          "type": "boolean"
+        },
+        "further_enforcement_disallowed": {
+          "type": "boolean"
+        },
+        "enforcement_on_hold": {
+          "type": "boolean"
+        },
+        "requires_enforcer": {
+          "type": "boolean"
+        },
+        "generates_a_hearing": {
+          "type": "boolean"
+        },
+        "generates_a_warrant": {
+          "type": "boolean"
+        },
+        "collection_order": {
+          "type": "boolean"
+        },
+        "disallow_ttp_extension": {
+          "type": "boolean"
+        },
+        "preserve_last_enforcement_on_ttp_extension": {
+          "type": "boolean"
+        },
+        "prevent_payment_card": {
+          "type": "boolean"
+        },
+        "lists_monies": {
+          "type": "boolean"
+        },
+        "allow_payment_terms": {
+          "type": "boolean"
+        },
+        "requires_employment_data": {
+          "type": "boolean"
+        },
+        "allow_additional_action": {
+          "type": "boolean"
+        },
+        "next_permitted_actions_type": {
+          "type": "string",
+          "enum": ["SELECTED", "ALL"]
+        },
+        "next_permitted_action_count": {
+          "type": "integer"
+        },
+        "requires_lja": {
+          "type": "boolean"
+        },
+        "manual_enforcement": {
+          "type": "boolean"
+        },
+        "auto_enforcement": {
+          "type": "boolean"
+        },
+        "publishing_status": {
+          "type": "string",
+          "enum": ["Submitted", "Error", "Not Published", "Inactive", "Active", "Added to Release Package", "Future", "Superseded"]
+        },
+        "result_parameters": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/$defs/resultParameter"
+          }
+        },
+        "result_next_permitted_action_mappings": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/$defs/resultNextPermittedActionMapping"
+          }
+        }
+      },
+      "required": ["disallow_ttp_extension", "allow_payment_terms", "lists_monies", "requires_lja", "requires_enforcer", "generates_a_hearing", "result_title", "auto_enforcement", "imposition", "preserve_last_enforcement_on_ttp_extension", "enforcement_on_hold", "generates_a_warrant", "imposition_accruing", "requires_employment_data", "next_permitted_actions_type", "enforcement", "enforcement_override", "further_enforcement_disallowed", "next_permitted_action_count", "result_code", "further_enforcement_warning_required", "publishing_status", "prevent_payment_card", "result_type", "collection_order", "allow_additional_action", "manual_enforcement"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$comment": "Result:EnforcementResultRevision.CheckEnforcementFields",
+          "anyOf": [
+            {
+              "properties": {
+                "enforcement": {
+                  "const": true
+                }
+              }
+            },
+            {
+              "properties": {
+                "enforcement": {
+                  "const": false
+                },
+                "further_enforcement_warning_required": {
+                  "const": false
+                },
+                "further_enforcement_disallowed": {
+                  "const": false
+                },
+                "enforcement_on_hold": {
+                  "const": false
+                },
+                "generates_a_hearing": {
+                  "const": false
+                },
+                "generates_a_warrant": {
+                  "const": false
+                },
+                "collection_order": {
+                  "const": false
+                },
+                "preserve_last_enforcement_on_ttp_extension": {
+                  "const": false
+                },
+                "prevent_payment_card": {
+                  "const": false
+                },
+                "lists_monies": {
+                  "const": false
+                },
+                "allow_payment_terms": {
+                  "const": false
+                },
+                "requires_employment_data": {
+                  "const": false
+                },
+                "allow_additional_action": {
+                  "const": false
+                },
+                "manual_enforcement": {
+                  "const": false
+                },
+                "auto_enforcement": {
+                  "const": false
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$comment": "Result:EnforcementResultRevision.CheckNextPermitted",
+          "anyOf": [
+            {
+              "properties": {
+                "next_permitted_actions_type": {
+                  "const": "SELECTED"
+                },
+                "next_permitted_action_count": {
+                  "exclusiveMinimum": 0
+                }
+              }
+            },
+            {
+              "properties": {
+                "next_permitted_actions_type": {
+                  "const": "ALL"
+                },
+                "next_permitted_action_count": {
+                  "const": 0
+                }
+              }
+            }
+          ]
+        },
+        {
+          "$comment": "Result:EnforcementResultRevision.CheckImpositionAccruing",
+          "anyOf": [
+            {
+              "allOf": [
+                {
+                  "properties": {
+                    "imposition": {
+                      "const": false
+                    }
+                  }
+                },
+                {
+                  "properties": {
+                    "imposition_accruing": {
+                      "const": false
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "properties": {
+                    "imposition": {
+                      "const": true
+                    }
+                  }
+                },
+                {
+                  "anyOf": [
+                    {
+                      "properties": {
+                        "imposition_accruing": {
+                          "const": true
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "imposition_accruing": {
+                          "const": false
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$comment": "Result:EnforcementResultRevision.CheckImpositionAndEnforcement",
+          "not": {
+            "properties": {
+              "imposition": {
+                "const": true
+              },
+              "enforcement": {
+                "const": true
+              }
+            }
+          }
+        },
+        {
+          "$comment": "Result:EnforcementResultRevision.CheckMandatoryImpositionFields",
+          "anyOf": [
+            {
+              "required": ["imposition_category", "imposition_allocation_priority", "imposition_creditor"],
+              "properties": {
+                "imposition": {
+                  "const": true
+                },
+                "imposition_category": {
+                  "not": {
+                    "type": "null"
+                  }
+                },
+                "imposition_allocation_priority": {
+                  "not": {
+                    "type": "null"
+                  }
+                },
+                "imposition_creditor": {
+                  "not": {
+                    "type": "null"
+                  }
+                }
+              }
+            },
+            {
+              "allOf": [
+                {
+                  "properties": {
+                    "imposition": {
+                      "const": false
+                    }
+                  }
+                },
+                {
+                  "not": {
+                    "required": ["imposition_category"],
+                    "properties": {
+                      "imposition_category": {
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "not": {
+                    "required": ["imposition_allocation_priority"],
+                    "properties": {
+                      "imposition_allocation_priority": {
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "not": {
+                    "required": ["imposition_creditor"],
+                    "properties": {
+                      "imposition_creditor": {
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "resultParameter": {
+      "title": "Result parameter",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "prompt": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "type": {
+          "type": "string",
+          "enum": ["text-5", "text-60", "menu-radio", "menu-checkbox", "integer", "date", "text-1000", "decimal-2dp", "text-100", "menu-autocomplete"]
+        },
+        "mandatory": {
+          "type": "boolean"
+        },
+        "min": {
+          "type": "integer"
+        },
+        "max": {
+          "type": "integer"
+        },
+        "language_dependent": {
+          "type": "boolean"
+        },
+        "hint": {
+          "type": ["string", "null"],
+          "maxLength": 500
+        },
+        "apidata": {
+          "type": ["string", "null"],
+          "enum": ["courts", "enforcers", "prisons", null]
+        },
+        "options": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["mandatory", "prompt", "language_dependent", "name", "min", "max", "type"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$comment": "Result:EnforcementResultParameter.CheckAPIField",
+          "anyOf": [
+            {
+              "allOf": [
+                {
+                  "properties": {
+                    "type": {
+                      "enum": ["menu-autocomplete", "menu-checkbox", "menu-radio"]
+                    }
+                  }
+                },
+                {
+                  "anyOf": [
+                    {
+                      "required": ["apidata"],
+                      "properties": {
+                        "apidata": {
+                          "not": {
+                            "type": "null"
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "options": {
+                          "minItems": 1,
+                          "not": {
+                            "type": "null"
+                          }
+                        }
+                      },
+                      "required": ["options"]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "properties": {
+                    "type": {
+                      "not": {
+                        "enum": ["menu-autocomplete", "menu-checkbox", "menu-radio"]
+                      }
+                    },
+                    "options": {
+                      "maxItems": 0
+                    }
+                  }
+                },
+                {
+                  "not": {
+                    "required": ["apidata"],
+                    "properties": {
+                      "apidata": {
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "resultNextPermittedActionMapping": {
+      "title": "Result next permitted action mapping",
+      "type": "object",
+      "properties": {
+        "result_code": {
+          "type": ["string", "null"],
+          "maxLength": 6
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "prosecutorRecord": {
+      "title": "Prosecutor record",
+      "type": "object",
+      "properties": {
+        "prosecutor_code": {
+          "type": ["integer", "null"],
+          "x-unique-keys": [
+            {
+              "name": "ProsecutorCodeUniqueKey"
+            }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 4000,
+          "x-unique-keys": [
+            {
+              "name": "ProsecutorNameUniqueKey"
+            }
+          ]
+        },
+        "short_name": {
+          "type": "string",
+          "maxLength": 4000
+        },
+        "welsh_name": {
+          "type": ["string", "null"],
+          "maxLength": 4000
+        },
+        "start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "end_date": {
+          "type": ["string", "null"],
+          "format": "date",
+          "x-rules": [
+            {
+              "name": "EndDateNotEarlierThanStartDate",
+              "op": ">=",
+              "right": "start_date",
+              "compare_as": "date"
+            }
+          ]
+        },
+        "publishing_status": {
+          "type": "string",
+          "enum": ["Superseded", "Future", "Active", "Inactive", "Submitted", "Not Published", "Added to Release Package", "Error"]
+        },
+        "addresses": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/$defs/address"
+          }
+        }
+      },
+      "required": ["start_date", "short_name", "name", "publishing_status"],
+      "additionalProperties": false
+    },
+    "address": {
+      "title": "Address",
+      "type": "object",
+      "properties": {
+        "address_type": {
+          "type": "string",
+          "enum": ["Court Address", "Prosecutor", "Financial Office Address", "Welsh Court Address"]
+        },
+        "address_line_1": {
+          "type": "string",
+          "maxLength": 35
+        },
+        "address_line_2": {
+          "type": ["string", "null"],
+          "maxLength": 35
+        },
+        "address_line_3": {
+          "type": ["string", "null"],
+          "maxLength": 35
+        },
+        "address_line_4": {
+          "type": ["string", "null"],
+          "maxLength": 35
+        },
+        "address_line_5": {
+          "type": ["string", "null"],
+          "maxLength": 35
+        },
+        "postcode": {
+          "type": "string",
+          "maxLength": 8,
+          "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
+        }
+      },
+      "required": ["postcode", "address_type", "address_line_1"],
+      "additionalProperties": false
+    },
     "courtRecord": {
       "title": "Court record",
       "type": "object",
@@ -651,6 +1288,54 @@
       "additionalProperties": false,
       "allOf": [
         {
+          "$comment": "Court:Court.DefaultStartTimeCourtDurationValidation",
+          "anyOf": [
+            {
+              "required": ["default_start_time", "default_duration"],
+              "properties": {
+                "default_start_time": {
+                  "not": {
+                    "type": "null"
+                  }
+                },
+                "default_duration": {
+                  "not": {
+                    "type": "null"
+                  }
+                }
+              }
+            },
+            {
+              "allOf": [
+                {
+                  "not": {
+                    "required": ["default_start_time"],
+                    "properties": {
+                      "default_start_time": {
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "not": {
+                    "required": ["default_duration"],
+                    "properties": {
+                      "default_duration": {
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
           "$comment": "Court:Court.WelshCourtAddressCountValidation",
           "if": {
             "required": ["court_welsh_name"],
@@ -694,6 +1379,65 @@
               }
             }
           }
+        }
+      ]
+    },
+    "contactInformation": {
+      "title": "Contact information",
+      "type": "object",
+      "properties": {
+        "contact_type": {
+          "type": "string",
+          "enum": ["Mobile", "Destination ID", "Telephone", "Fax", "Email Address"]
+        },
+        "contact_value": {
+          "type": "string",
+          "maxLength": 254
+        }
+      },
+      "required": ["contact_value", "contact_type"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "$comment": "Court:ContactInformation.ContactValueValidation",
+          "anyOf": [
+            {
+              "properties": {
+                "contact_type": {
+                  "not": {
+                    "enum": ["Email Address", "Telephone", "Fax"]
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "contact_type": {
+                  "const": "Email Address"
+                },
+                "contact_value": {
+                  "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+                }
+              }
+            },
+            {
+              "properties": {
+                "contact_type": {
+                  "const": "Telephone"
+                }
+              }
+            },
+            {
+              "properties": {
+                "contact_type": {
+                  "const": "Fax"
+                },
+                "contact_value": {
+                  "maxLength": 14
+                }
+              }
+            }
+          ]
         }
       ]
     },
@@ -760,7 +1504,17 @@
         "default_start_time": {
           "type": ["string", "null"],
           "maxLength": 10,
-          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+          "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$",
+          "x-rules": [
+            {
+              "name": "DefaultStartTimeCourtDurationValidation",
+              "op": "all_or_none",
+              "with": ["default_duration"],
+              "when": {
+                "lja_type": ["CRWCRT"]
+              }
+            }
+          ]
         },
         "default_duration": {
           "type": ["string", "null"],
@@ -873,7 +1627,12 @@
         "addresses": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/$defs/orgAddress"
+            "$ref": "#/$defs/orgAddress",
+            "properties": {
+              "address_line_1": {
+                "maxLength": 35
+              }
+            }
           }
         },
         "contact_information": {
@@ -884,6 +1643,63 @@
         }
       },
       "required": ["name", "publishing_status", "start_date"],
+      "additionalProperties": false
+    },
+    "orgAddress": {
+      "title": "Address (Organisation)",
+      "type": "object",
+      "properties": {
+        "address_line_1": {
+          "type": ["string", "null"],
+          "maxLength": 80
+        },
+        "address_line_2": {
+          "type": ["string", "null"],
+          "maxLength": 35
+        },
+        "address_line_3": {
+          "type": ["string", "null"],
+          "maxLength": 35
+        },
+        "address_line_4": {
+          "type": ["string", "null"],
+          "maxLength": 35
+        },
+        "address_line_5": {
+          "type": ["string", "null"],
+          "maxLength": 35
+        },
+        "postcode": {
+          "type": ["string", "null"],
+          "maxLength": 8,
+          "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
+        },
+        "address_type": {
+          "type": ["string", "null"],
+          "enum": ["DVLA", "BASS", "EMC", "NPS", "MCR", "DESLA", "WEL", "YOT", "GPS", "PROYO", "DDRP", "ATTC", "CAT", "NCESCOST", "RCU", "BULKSCAN", "PRIS", "NPS_Breach", "ENF", null]
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "orgContactInformation": {
+      "title": "Contact information (Organisation)",
+      "type": "object",
+      "properties": {
+        "contact_type": {
+          "type": "string",
+          "enum": ["Telephone", "Email Address", "Mobile", "Fax", "Destination ID"]
+        },
+        "contact_sub_type": {
+          "type": ["string", "null"],
+          "enum": ["Informant", "Reception", "Offender Management Unit", "NPS", "ATTC", "DDRP", "NPS_Breaches", "National Payment", "Remittance Advice", "REGION", "ENF", "DESLA", "YOT", "PROYO", "EMC", "Enforcement Area", "Crown Prosecution Service Crown Court", "PRIS", "RCU", "DVLA", "NCESCOST", "MCR", "Prosecutor", "Contact", "Crown Prosecution Service Magistrates Court", "NCES Notification", "BULKSCAN", "CAT", "BASS", "GPS", "Magistrates Court Contact", null]
+        },
+        "contact_value": {
+          "type": "string",
+          "maxLength": 256
+        }
+      },
+      "required": ["contact_value", "contact_type"],
       "additionalProperties": false
     },
     "enforcerRecord": {
@@ -900,12 +1716,7 @@
         },
         "name": {
           "type": "string",
-          "maxLength": 35,
-          "x-unique-keys": [
-            {
-              "name": "NationalProbationServicesUniqueKey"
-            }
-          ]
+          "maxLength": 35
         },
         "welsh_name": {
           "type": ["string", "null"],
@@ -934,7 +1745,12 @@
         "addresses": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/$defs/orgAddress"
+            "$ref": "#/$defs/orgAddress",
+            "properties": {
+              "address_line_1": {
+                "maxLength": 35
+              }
+            }
           }
         },
         "contact_information": {
@@ -987,7 +1803,12 @@
         "addresses": {
           "type": ["array", "null"],
           "items": {
-            "$ref": "#/$defs/orgAddress"
+            "$ref": "#/$defs/orgAddress",
+            "properties": {
+              "address_line_1": {
+                "maxLength": 35
+              }
+            }
           }
         },
         "contact_information": {
@@ -1006,7 +1827,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "maxLength": 4000,
+          "maxLength": 35,
           "x-unique-keys": [
             {
               "name": "MajorCreditorsUniqueKey"
@@ -1038,8 +1859,9 @@
           "enum": ["Future", "Error", "Submitted", "Inactive", "Superseded", "Active", "Not Published", "Added to Release Package"]
         },
         "business_unit": {
-          "type": ["string", "null"],
-          "enum": ["1234", "5678", null]
+          "type": "string",
+          "enum": ["1234", "5678"],
+          "$comment": "Organisation:Organisation.MajorCreditorBusinessUnitMandatory"
         },
         "account_name": {
           "type": ["string", "null"],
@@ -1047,15 +1869,20 @@
         },
         "sort_code": {
           "type": ["string", "null"],
-          "maxLength": 6
+          "maxLength": 6,
+          "$comment": "Organisation:Organisation.BankAccountSortCodeMustBe6",
+          "minLength": 6
         },
         "bank_account_number": {
           "type": ["string", "null"],
-          "maxLength": 10
+          "maxLength": 10,
+          "$comment": "Organisation:Organisation.BankAccountNumberMustBe10",
+          "minLength": 10
         },
         "short_name": {
-          "type": ["string", "null"],
-          "maxLength": 4
+          "type": "string",
+          "maxLength": 4,
+          "$comment": "Organisation:Organisation.MajorCreditorCodeValidation"
         },
         "addresses": {
           "type": ["array", "null"],
@@ -1070,135 +1897,140 @@
           }
         }
       },
-      "required": ["name", "publishing_status", "start_date"],
-      "additionalProperties": false
-    },
-    "address": {
-      "title": "Address",
-      "type": "object",
-      "properties": {
-        "address_type": {
-          "type": "string",
-          "enum": ["Court Address", "Financial Office Address", "Welsh Court Address"]
-        },
-        "address_line_1": {
-          "type": "string",
-          "maxLength": 35
-        },
-        "address_line_2": {
-          "type": ["string", "null"],
-          "maxLength": 35
-        },
-        "address_line_3": {
-          "type": ["string", "null"],
-          "maxLength": 35
-        },
-        "address_line_4": {
-          "type": ["string", "null"],
-          "maxLength": 35
-        },
-        "address_line_5": {
-          "type": ["string", "null"],
-          "maxLength": 35
-        },
-        "postcode": {
-          "type": "string",
-          "maxLength": 8,
-          "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
-        }
-      },
-      "required": ["postcode", "address_type", "address_line_1"],
-      "additionalProperties": false
-    },
-    "orgAddress": {
-      "title": "Address (Organisation)",
-      "type": "object",
-      "properties": {
-        "address_line_1": {
-          "type": ["string", "null"],
-          "maxLength": 35
-        },
-        "address_line_2": {
-          "type": ["string", "null"],
-          "maxLength": 35
-        },
-        "address_line_3": {
-          "type": ["string", "null"],
-          "maxLength": 35
-        },
-        "address_line_4": {
-          "type": ["string", "null"],
-          "maxLength": 35
-        },
-        "address_line_5": {
-          "type": ["string", "null"],
-          "maxLength": 35
-        },
-        "postcode": {
-          "type": ["string", "null"],
-          "maxLength": 8,
-          "pattern": "^((?: *[Gg] *[Ii] *[Rr] *0 *[Aa] *[Aa]|(?: *[A-Za-z]){1,2} *[0-9](?: *[0-9A-Za-z])? *[0-9](?: *[AaBbDdEeFfGgHhJjLlNnPpQqRrSsTtUuWwXxYyZz]){2})) *$"
-        },
-        "address_type": {
-          "type": ["string", "null"],
-          "maxLength": 100
-        }
-      },
-      "required": [],
-      "additionalProperties": false
-    },
-    "contactInformation": {
-      "title": "Contact information",
-      "type": "object",
-      "properties": {
-        "contact_type": {
-          "type": "string",
-          "enum": ["Mobile", "Destination ID", "Telephone", "Fax", "Email Address"]
-        },
-        "contact_value": {
-          "type": "string",
-          "maxLength": 254
-        }
-      },
-      "required": ["contact_value", "contact_type"],
+      "required": ["name", "publishing_status", "start_date", "business_unit", "short_name"],
       "additionalProperties": false,
       "allOf": [
         {
-          "$comment": "Court:ContactInformation.ContactValueValidation",
+          "$comment": "Organisation:Organisation.BankDataValidation",
           "anyOf": [
             {
-              "properties": {
-                "contact_type": {
+              "allOf": [
+                {
                   "not": {
-                    "enum": ["Email Address", "Telephone", "Fax"]
+                    "required": ["account_name"],
+                    "properties": {
+                      "account_name": {
+                        "minLength": 1,
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "not": {
+                    "required": ["bank_account_number"],
+                    "properties": {
+                      "bank_account_number": {
+                        "minLength": 1,
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "not": {
+                    "required": ["sort_code"],
+                    "properties": {
+                      "sort_code": {
+                        "minLength": 1,
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "required": ["account_name", "bank_account_number", "sort_code"],
+              "properties": {
+                "account_name": {
+                  "minLength": 1,
+                  "not": {
+                    "type": "null"
+                  }
+                },
+                "bank_account_number": {
+                  "minLength": 1,
+                  "not": {
+                    "type": "null"
+                  }
+                },
+                "sort_code": {
+                  "minLength": 1,
+                  "not": {
+                    "type": "null"
                   }
                 }
               }
-            },
+            }
+          ]
+        },
+        {
+          "$comment": "Organisation:Organisation.BankAccountDetailsValidation",
+          "anyOf": [
             {
-              "properties": {
-                "contact_type": {
-                  "const": "Email Address"
+              "allOf": [
+                {
+                  "not": {
+                    "required": ["account_name"],
+                    "properties": {
+                      "account_name": {
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
                 },
-                "contact_value": {
-                  "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
-                }
-              }
-            },
-            {
-              "properties": {
-                "contact_type": {
-                  "const": "Telephone"
-                }
-              }
-            },
-            {
-              "properties": {
-                "contact_type": {
-                  "const": "Fax"
+                {
+                  "not": {
+                    "required": ["sort_code"],
+                    "properties": {
+                      "sort_code": {
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
                 },
-                "contact_value": {
-                  "maxLength": 14
+                {
+                  "not": {
+                    "required": ["bank_account_number"],
+                    "properties": {
+                      "bank_account_number": {
+                        "not": {
+                          "type": "null"
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "required": ["account_name", "sort_code", "bank_account_number"],
+              "properties": {
+                "account_name": {
+                  "not": {
+                    "type": "null"
+                  }
+                },
+                "sort_code": {
+                  "not": {
+                    "type": "null"
+                  }
+                },
+                "bank_account_number": {
+                  "not": {
+                    "type": "null"
+                  }
                 }
               }
             }
@@ -1206,24 +2038,44 @@
         }
       ]
     },
-    "orgContactInformation": {
-      "title": "Contact information (Organisation)",
+    "courtFeeRecord": {
+      "title": "Court fee record",
       "type": "object",
       "properties": {
-        "contact_type": {
+        "court_fee_code": {
           "type": "string",
-          "enum": ["Telephone", "Email Address", "Mobile", "Fax", "Destination ID"]
+          "maxLength": 10,
+          "x-unique-keys": [
+            {
+              "name": "CourtFeeCode"
+            }
+          ]
         },
-        "contact_sub_type": {
+        "court_fee_description": {
           "type": ["string", "null"],
-          "enum": ["Informant", "Reception", "Offender Management Unit", "NPS", "ATTC", "DDRP", "NPS_Breaches", "National Payment", "Remittance Advice", "REGION", "ENF", "DESLA", "YOT", "PROYO", "EMC", "Enforcement Area", "Crown Prosecution Service Crown Court", "PRIS", "RCU", "DVLA", "NCESCOST", "MCR", "Prosecutor", "Contact", "Crown Prosecution Service Magistrates Court", "NCES Notification", "BULKSCAN", "CAT", "BASS", "GPS", "Magistrates Court Contact", null]
+          "maxLength": 50
         },
-        "contact_value": {
-          "type": "string",
-          "maxLength": 256
+        "court_fee_amount": {
+          "type": ["number", "null"]
+        },
+        "statistics_code": {
+          "type": ["string", "null"],
+          "maxLength": 10
+        },
+        "publishing_status": {
+          "type": ["string", "null"],
+          "enum": ["Superseded", "Future", "Active", "Inactive", "Submitted", "Not Published", "Added to Release Package", "Error", null]
+        },
+        "start_date": {
+          "type": ["string", "null"],
+          "format": "date"
+        },
+        "end_date": {
+          "type": ["string", "null"],
+          "format": "date"
         }
       },
-      "required": ["contact_value", "contact_type"],
+      "required": ["court_fee_code"],
       "additionalProperties": false
     }
   },
