@@ -20,7 +20,7 @@ import uk.gov.hmcts.opal.refdata.schemavalidation.SchemaValidationService;
 @RequiredArgsConstructor
 @Service
 public class RefDataMessageDecoder {
-    private static final String REF_DATA_MESSAGE_SCHEMA = "ref-data/ref_data_schema.json";
+    public static final String REF_DATA_MESSAGE_SCHEMA = "ref-data/ref_data_schema.json";
     private static final String HEADER = "header";
     private static final String MESSAGE_ID = "message_id";
     private static final String PAYLOAD = "payload";

@@ -78,9 +78,9 @@ public interface RefDataUpdateHandler<T, E> {
      * Deletes an entity from the consuming service's database.
      * Only used by a test support endpoint.
      *
-     * @param businessCode a String representation of the business key of the entity for deletion
+     * @param businessKey a String representation of the business key of the entity for deletion
      */
-    void deleteEntity(String businessCode);
+    void deleteEntity(String businessKey);
 
     /**
      * Lists Spring caches by name whose contents can be affected by updates from this

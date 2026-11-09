@@ -210,7 +210,9 @@ class RefDataMessagingIntegrationTest {
                 {
                   "name": "%s",
                   "publishing_status": "Active",
-                  "start_date": "2026-01-01"
+                  "start_date": "2026-01-01",
+                  "business_unit": "1234",
+                  "short_name": "MC01"
                 }
                 """.formatted(name)
             : """
