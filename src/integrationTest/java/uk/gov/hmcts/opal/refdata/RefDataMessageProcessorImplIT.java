@@ -125,7 +125,7 @@ class RefDataMessageProcessorImplIT {
         assertThatThrownBy(() -> process(message(
             prisonRecord("Invalid Postcode Prison", "1 Court Road", "INVALID"))))
             .isInstanceOf(JsonSchemaValidationException.class)
-            .hasMessageContaining("$.payload.records[0].addresses[0].postcode")
+            .hasMessageContaining("/payload/records/0/addresses/0/postcode")
             .hasMessageContaining("does not match the regex pattern");
     }
 
@@ -165,7 +165,7 @@ class RefDataMessageProcessorImplIT {
             }
             """))
             .isInstanceOf(JsonSchemaValidationException.class)
-            .hasMessageContaining("$.payload.records: must have at least 1 items but found 0");
+            .hasMessageContaining("/payload/records: must have at least 1 items but found 0");
         assertThat(repository.count()).isEqualTo(1);
     }
 

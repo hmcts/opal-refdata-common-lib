@@ -2,12 +2,12 @@ package uk.gov.hmcts.opal.refdata.schemavalidation;
 
 import static java.lang.String.format;
 
+import com.networknt.schema.Error;
 import com.networknt.schema.InputFormat;
-import com.networknt.schema.JsonSchema;
-import com.networknt.schema.JsonSchemaFactory;
-import com.networknt.schema.SpecVersion.VersionFlag;
-import com.networknt.schema.ValidationMessage;
-import java.io.IOException;
+import com.networknt.schema.Schema;
+import com.networknt.schema.SchemaLocation;
+import com.networknt.schema.SchemaRegistry;
+import com.networknt.schema.SpecificationVersion;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.Set;
@@ -28,7 +28,8 @@ public class SchemaValidationService {
 
     private static final String PATH_ROOT = "jsonSchemas";
 
-    private final Map<String, JsonSchema> schemaCache = new ConcurrentHashMap<>();
+    private final SchemaRegistry schemaRegistry = SchemaRegistry.withDefaultDialect(SpecificationVersion.DRAFT_2020_12);
+    private final Map<String, Schema> schemaCache = new ConcurrentHashMap<>();
 
     public boolean isValid(JsonNode jsonNode, String jsonSchemaFileName) {
         return validate(jsonNode, jsonSchemaFileName).isEmpty();
@@ -55,12 +56,12 @@ public class SchemaValidationService {
     }
 
     public Set<String> validate(JsonNode jsonNode, String jsonSchemaFileName) {
-        JsonSchema jsonSchema = getJsonSchema(jsonSchemaFileName);
-        Set<ValidationMessage> validationMessages = jsonSchema.validate(jsonNode.toString(), InputFormat.JSON);
-        return validationMessages.stream().map(ValidationMessage::getMessage).collect(Collectors.toSet());
+        Schema schema = getJsonSchema(jsonSchemaFileName);
+        return schema.validate(jsonNode.toString(), InputFormat.JSON).stream()
+            .map(Error::toString).collect(Collectors.toSet());
     }
 
-    private JsonSchema getJsonSchema(String schemaFileName) {
+    private Schema getJsonSchema(String schemaFileName) {
         if (schemaFileName.isBlank()) {
             throw new SchemaConfigurationException("A schema filename is required to validate a JSON document.");
         }
@@ -68,7 +69,7 @@ public class SchemaValidationService {
         return schemaCache.computeIfAbsent(schemaFileName, this::loadJsonSchema);
     }
 
-    private JsonSchema loadJsonSchema(String schemaFileName) {
+    private Schema loadJsonSchema(String schemaFileName) {
         String filePath = Path.of(PATH_ROOT, schemaFileName).toString();
         ClassPathResource classPathResource = new ClassPathResource(filePath);
 
@@ -77,11 +78,6 @@ public class SchemaValidationService {
                 format("No JSON Schema file found at '%s'", classPathResource.getPath()));
         }
 
-        try {
-            JsonSchemaFactory factory = JsonSchemaFactory.getInstance(VersionFlag.V202012);
-            return factory.getSchema(classPathResource.getURI());
-        } catch (IOException e) {
-            throw new SchemaConfigurationException(format("Problem reading JSON Schema from '%s'", filePath));
-        }
+        return schemaRegistry.getSchema(SchemaLocation.of("classpath:" + filePath));
     }
 }
