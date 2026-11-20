@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Proposed canonical Opal result parameter definitions",
+  "description": "Opal result_parameters authoring contract updated 2026-11-13 from V1_313 evidence and user decisions. Describes the parsed parameter array, not the API string wrapper or entered enforcement responses. Date parameters have numeric min=0 and max=0, meaning no date boundaries; mandatory independently controls requiredness. Final catalogue uses SUMM for manual and automatic summons; legacy SUMA is outside that catalogue. This parameter-only schema cannot enforce result IDs. Null publication semantics remain to be confirmed.",
+  "$comment": "Required fields, closed properties, conditional options/apidata and closed type/lookup lists are proposed authoring controls based on observed data, not existing database validation. Empty array is allowed pending agreement on null versus empty semantics. Do not load API-generated cy_ definitions back into the canonical catalogue. Unique names and normalized frontend identifier collisions require separate checks.",
+  "type": [
+    "array",
+    "null"
+  ],
+  "items": {
+    "$ref": "#/$defs/parameter"
+  },
+  "$defs": {
+    "parameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "prompt",
+        "type",
+        "mandatory",
+        "min",
+        "max",
+        "language_dependent"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Stable machine identifier, scoped to a result; preserve evidenced spellings. Not a closed enumeration."
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Display label; no supported maximum label length evidenced."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "text-60",
+            "text-100",
+            "text-1000",
+            "integer",
+            "decimal",
+            "date",
+            "menu-radio",
+            "menu-checkbox",
+            "menu-autocomplete"
+          ]
+        },
+        "mandatory": {
+          "type": "boolean",
+          "description": "Whether an entered response is required; distinct from whether this property is present."
+        },
+        "min": {
+          "type": "number",
+          "description": "For date, must be 0 (no earliest date). For other types, type-dependent bound; lookup semantics remain to be agreed. Independent of mandatory."
+        },
+        "max": {
+          "type": "number",
+          "description": "For date, must be 0 (no latest date). For other types, type-dependent bound. String sentinels and date-string boundaries are not part of this authoring contract."
+        },
+        "language_dependent": {
+          "type": "boolean",
+          "description": "Used by service Welsh companion generation; not an embedded translation dictionary."
+        },
+        "hint": {
+          "type": "string",
+          "description": "Optional guidance for every parameter type; does not control requiredness or validation. If omitted, the reviewed frontend supplies a default date hint."
+        },
+        "options": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": "Ordered literal options as evidenced; no separate stable option codes in V1_313."
+        },
+        "apidata": {
+          "type": "string",
+          "enum": [
+            "courts",
+            "enforcers",
+            "prisons"
+          ],
+          "description": "Logical reference dataset key, not an arbitrary URL. Lookup ID/value and filtering contracts remain to be agreed."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "date"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "min": {
+                "const": 0
+              },
+              "max": {
+                "const": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "menu-radio",
+                  "menu-checkbox"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "options"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "options"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "menu-autocomplete"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "apidata"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "apidata"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
