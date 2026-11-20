@@ -1,0 +1,127 @@
+{
+  "title": "Result parameter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "prompt": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "text-60",
+        "menu-radio",
+        "menu-checkbox",
+        "integer",
+        "date",
+        "text-1000",
+        "decimal",
+        "text-100",
+        "menu-autocomplete"
+      ]
+    },
+    "mandatory": {
+      "type": "boolean"
+    },
+    "min": {
+      "type": "integer"
+    },
+    "max": {
+      "type": "integer"
+    },
+    "language_dependent": {
+      "type": "boolean"
+    },
+    "hint": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    },
+    "apidata": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "courts",
+        "enforcers",
+        "prisons",
+        null
+      ]
+    },
+    "options": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "mandatory",
+    "prompt",
+    "language_dependent",
+    "name",
+    "min",
+    "max",
+    "type"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "menu-autocomplete"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "apidata"
+        ],
+        "properties": {
+          "apidata": {
+            "not": {
+              "type": "null"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "menu-radio",
+              "menu-checkbox"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "options"
+        ],
+        "properties": {
+          "options": {
+            "not": {
+              "type": "null"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

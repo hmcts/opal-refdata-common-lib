@@ -1,0 +1,72 @@
+{
+  "title": "Contact information",
+  "type": "object",
+  "properties": {
+    "contact_type": {
+      "type": "string",
+      "enum": [
+        "Mobile",
+        "Destination ID",
+        "Telephone",
+        "Fax",
+        "Email Address"
+      ]
+    },
+    "contact_value": {
+      "type": "string",
+      "maxLength": 254
+    }
+  },
+  "required": [
+    "contact_value",
+    "contact_type"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$comment": "Court:ContactInformation.ContactValueValidation",
+      "anyOf": [
+        {
+          "properties": {
+            "contact_type": {
+              "not": {
+                "enum": [
+                  "Email Address",
+                  "Telephone",
+                  "Fax"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "contact_type": {
+              "const": "Email Address"
+            },
+            "contact_value": {
+              "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+            }
+          }
+        },
+        {
+          "properties": {
+            "contact_type": {
+              "const": "Telephone"
+            }
+          }
+        },
+        {
+          "properties": {
+            "contact_type": {
+              "const": "Fax"
+            },
+            "contact_value": {
+              "maxLength": 14
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

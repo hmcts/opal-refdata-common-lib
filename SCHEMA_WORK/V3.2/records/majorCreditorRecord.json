@@ -1,0 +1,276 @@
+{
+  "title": "Major creditor record",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 35,
+      "x-unique-keys": [
+        {
+          "name": "MajorCreditorsUniqueKey"
+        }
+      ]
+    },
+    "welsh_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 4000
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "end_date": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "x-rules": [
+        {
+          "name": "EndDateNotEarlierThanStartDateValidation",
+          "op": ">=",
+          "right": "start_date",
+          "compare_as": "date"
+        }
+      ]
+    },
+    "publishing_status": {
+      "type": "string",
+      "enum": [
+        "Future",
+        "Error",
+        "Submitted",
+        "Inactive",
+        "Superseded",
+        "Active",
+        "Not Published",
+        "Added to Release Package"
+      ]
+    },
+    "business_unit": {
+      "type": "string",
+      "enum": [
+        "1234",
+        "5678"
+      ],
+      "$comment": "Organisation:Organisation.MajorCreditorBusinessUnitMandatory"
+    },
+    "account_name": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 18
+    },
+    "sort_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 6,
+      "$comment": "Organisation:Organisation.BankAccountSortCodeMustBe6",
+      "minLength": 6
+    },
+    "bank_account_number": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 10,
+      "$comment": "Organisation:Organisation.BankAccountNumberMustBe10",
+      "minLength": 10
+    },
+    "short_name": {
+      "type": "string",
+      "maxLength": 4,
+      "$comment": "Organisation:Organisation.MajorCreditorCodeValidation"
+    },
+    "addresses": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/orgAddress"
+      }
+    },
+    "contact_information": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/$defs/orgContactInformation"
+      }
+    }
+  },
+  "required": [
+    "name",
+    "publishing_status",
+    "start_date",
+    "business_unit",
+    "short_name"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$comment": "Organisation:Organisation.BankDataValidation",
+      "anyOf": [
+        {
+          "allOf": [
+            {
+              "not": {
+                "required": [
+                  "account_name"
+                ],
+                "properties": {
+                  "account_name": {
+                    "minLength": 1,
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "bank_account_number"
+                ],
+                "properties": {
+                  "bank_account_number": {
+                    "minLength": 1,
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "sort_code"
+                ],
+                "properties": {
+                  "sort_code": {
+                    "minLength": 1,
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "required": [
+            "account_name",
+            "bank_account_number",
+            "sort_code"
+          ],
+          "properties": {
+            "account_name": {
+              "minLength": 1,
+              "not": {
+                "type": "null"
+              }
+            },
+            "bank_account_number": {
+              "minLength": 1,
+              "not": {
+                "type": "null"
+              }
+            },
+            "sort_code": {
+              "minLength": 1,
+              "not": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "$comment": "Organisation:Organisation.BankAccountDetailsValidation",
+      "anyOf": [
+        {
+          "allOf": [
+            {
+              "not": {
+                "required": [
+                  "account_name"
+                ],
+                "properties": {
+                  "account_name": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "sort_code"
+                ],
+                "properties": {
+                  "sort_code": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "not": {
+                "required": [
+                  "bank_account_number"
+                ],
+                "properties": {
+                  "bank_account_number": {
+                    "not": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "required": [
+            "account_name",
+            "sort_code",
+            "bank_account_number"
+          ],
+          "properties": {
+            "account_name": {
+              "not": {
+                "type": "null"
+              }
+            },
+            "sort_code": {
+              "not": {
+                "type": "null"
+              }
+            },
+            "bank_account_number": {
+              "not": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
