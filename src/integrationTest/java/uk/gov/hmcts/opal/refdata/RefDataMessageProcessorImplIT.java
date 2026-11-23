@@ -1,6 +1,7 @@
 package uk.gov.hmcts.opal.refdata;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static uk.gov.hmcts.opal.refdata.fixture.DummyPrisonTestHandler.PRISON_CACHE;
 import static uk.gov.hmcts.opal.refdata.fixture.DummyPrisonTestHandler.PRISON_LOOKUP_CACHE;
@@ -143,6 +144,21 @@ class RefDataMessageProcessorImplIT {
             .hasMessage("A prison name cannot contain the letter X");
         assertThat(repository.findByName("X Prison")).isEmpty();
         assertThat(repository.count()).isEqualTo(1);
+    }
+
+    @Test
+    void processMessage_skipsRecordsWhenHandlerIsNotRelevantToDomain() {
+        assertThatCode(() -> process(message(
+            prisonRecord("Irrelevant Prison", "2 Court Road", "BS22BB"),
+            prisonRecord("Relevant Prison", "3 Court Road", "BS33CC"))))
+            .doesNotThrowAnyException();
+
+        DummyPrison unchanged = repository.findById(1234L).orElseThrow();
+        assertThat(unchanged.getName()).isEqualTo("Bristol Prison");
+        assertThat(unchanged.getAddressLine1()).isEqualTo("1 High Street");
+        assertThat(repository.findByName("Irrelevant Prison")).isEmpty();
+        assertThat(repository.findByName("Relevant Prison")).isPresent();
+        assertThat(repository.count()).isEqualTo(2);
     }
 
     @Test

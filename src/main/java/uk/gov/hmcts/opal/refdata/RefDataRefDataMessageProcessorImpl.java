@@ -50,6 +50,11 @@ public class RefDataRefDataMessageProcessorImpl implements RefDataMessageProcess
     private <T, E> void processDecodedMessageWithHandler(RefDataMessage<T> message,
         RefDataUpdateHandler<T, E> handler) {
         message.records().forEach(dto -> {
+            if (!handler.isRelevant(dto)) {
+                log.info("Skipping record: messageId={} type={} businessKey={} reason=not relevant to this domain",
+                    message.messageId(), message.refDataType(), handler.getBusinessKey(dto));
+                return;
+            }
             log.info("Processing record: messageId={} type={} businessKey={}",
                 message.messageId(), message.refDataType(), handler.getBusinessKey(dto));
             applyUpdate(handler, dto);

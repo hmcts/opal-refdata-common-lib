@@ -40,6 +40,7 @@ class RefDataRefDataMessageProcessorImplTest {
         doReturn(message).when(decoder).decode("payload");
         when(handlerRegistry.find("Prison"))
             .thenReturn(Optional.<RefDataUpdateHandler<?, ?>>of(handler));
+        when(handler.isRelevant(dto)).thenReturn(true);
         when(handler.getBusinessKey(dto)).thenReturn("Example");
         when(handler.findEntity(dto)).thenReturn(Optional.of(entity));
         when(handler.cachesToClear()).thenReturn(List.of("prisons", "prisons"));
@@ -66,6 +67,7 @@ class RefDataRefDataMessageProcessorImplTest {
         doReturn(message).when(decoder).decode("payload");
         when(handlerRegistry.find("Prison"))
             .thenReturn(Optional.<RefDataUpdateHandler<?, ?>>of(handler));
+        when(handler.isRelevant(dto)).thenReturn(true);
         when(handler.getBusinessKey(dto)).thenReturn("Example");
         when(handler.findEntity(dto)).thenReturn(Optional.of(entity));
         when(handler.cachesToClear()).thenReturn(List.of("prisons"));
@@ -96,6 +98,7 @@ class RefDataRefDataMessageProcessorImplTest {
             .when(decoder).decode("payload");
         when(handlerRegistry.find("Prison"))
             .thenReturn(Optional.<RefDataUpdateHandler<?, ?>>of(handler));
+        when(handler.isRelevant(dto)).thenReturn(true);
         when(handler.getBusinessKey(dto)).thenReturn("Example");
         when(handler.findEntity(dto)).thenReturn(Optional.empty());
         when(handler.createEntityFromDto(dto)).thenReturn(entity);
@@ -119,6 +122,34 @@ class RefDataRefDataMessageProcessorImplTest {
 
         // Then
         verify(handlerRegistry, never()).find(org.mockito.ArgumentMatchers.anyString());
+    }
+
+    @Test
+    void shouldSkipIrrelevantRecordAndProcessRelevantRecordInSameBatch() {
+        var irrelevantDto = new TestDto("Irrelevant");
+        var relevantDto = new TestDto("Relevant");
+        var entity = new TestEntity();
+        RefDataUpdateHandler<TestDto, TestEntity> handler = mock(RefDataUpdateHandler.class);
+        doReturn(new RefDataMessage<>("message-1", "Prison", 1, List.of(irrelevantDto, relevantDto)))
+            .when(decoder).decode("payload");
+        when(handlerRegistry.find("Prison"))
+            .thenReturn(Optional.<RefDataUpdateHandler<?, ?>>of(handler));
+        when(handler.isRelevant(irrelevantDto)).thenReturn(false);
+        when(handler.isRelevant(relevantDto)).thenReturn(true);
+        when(handler.getBusinessKey(relevantDto)).thenReturn("Relevant");
+        when(handler.findEntity(relevantDto)).thenReturn(Optional.of(entity));
+
+        processor.processMessage("payload");
+
+        verify(handler, never()).validateDto(irrelevantDto);
+        verify(handler, never()).findEntity(irrelevantDto);
+        verify(handler, never()).createEntityFromDto(irrelevantDto);
+        verify(handler, never()).updateEntityFromDto(org.mockito.ArgumentMatchers.eq(irrelevantDto),
+            org.mockito.ArgumentMatchers.any());
+        verify(handler, never()).saveEntity(org.mockito.ArgumentMatchers.any());
+        verify(handler).validateDto(relevantDto);
+        verify(handler).findEntity(relevantDto);
+        verify(handler).updateEntityFromDto(relevantDto, entity);
     }
 
     @Test
