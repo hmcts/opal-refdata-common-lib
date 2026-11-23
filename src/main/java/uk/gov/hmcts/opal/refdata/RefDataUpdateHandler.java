@@ -45,6 +45,8 @@ public interface RefDataUpdateHandler<T, E> {
 
     /**
      * Validates a decoded DTO before it is applied to an entity.
+     * Ensures the DTO has the values to successfully perform the upsert,
+     * so is aligned with db column constraints, not the schema.
      * Implementations should throw a runtime exception when validation fails.
      *
      * @param dto the decoded ref-data record
