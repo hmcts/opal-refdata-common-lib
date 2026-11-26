@@ -10,7 +10,6 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord
     public static final String PRISON_LOOKUP_CACHE = "prisonLookup";
 
     private final DummyPrisonRepository repository;
-
     public DummyPrisonTestHandler(DummyPrisonRepository repository) {
         this.repository = repository;
     }
@@ -18,6 +17,11 @@ public class DummyPrisonTestHandler implements RefDataUpdateHandler<PrisonRecord
     @Override
     public String refDataType() {
         return "Prison";
+    }
+
+    @Override
+    public boolean isRelevant(PrisonRecord dto) {
+        return !dto.name().equals("Irrelevant Prison");
     }
 
     @Override

@@ -34,7 +34,19 @@ public interface RefDataUpdateHandler<T, E> {
     Class<T> payloadType();
 
     /**
+     * Indicates whether this handler's records are relevant to the consuming domain.
+     *
+     * @param dto the decoded ref-data record
+     * @return {@code true} when records should be validated and applied
+     */
+    default boolean isRelevant(T dto) {
+        return true;
+    }
+
+    /**
      * Validates a decoded DTO before it is applied to an entity.
+     * Ensures the DTO has the values to successfully perform the upsert,
+     * so is aligned with db column constraints, not the schema.
      * Implementations should throw a runtime exception when validation fails.
      *
      * @param dto the decoded ref-data record
