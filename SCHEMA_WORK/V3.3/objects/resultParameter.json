@@ -1,0 +1,260 @@
+{
+  "title": "Result parameter",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "prompt": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "text-60",
+        "menu-radio",
+        "menu-checkbox",
+        "integer",
+        "date",
+        "text-1000",
+        "decimal",
+        "text-100",
+        "menu-autocomplete"
+      ]
+    },
+    "mandatory": {
+      "type": "boolean"
+    },
+    "min": {
+      "type": "integer"
+    },
+    "max": {
+      "type": "integer"
+    },
+    "language_dependent": {
+      "type": "boolean"
+    },
+    "hint": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 500
+    },
+    "apidata": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "courts",
+        "enforcers",
+        "prisons",
+        null
+      ]
+    },
+    "options": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "mandatory",
+    "prompt",
+    "language_dependent",
+    "name",
+    "min",
+    "max",
+    "type"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "menu-autocomplete"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "apidata"
+        ],
+        "properties": {
+          "apidata": {
+            "not": {
+              "type": "null"
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "menu-radio",
+              "menu-checkbox"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "options"
+        ],
+        "properties": {
+          "options": {
+            "not": {
+              "type": "null"
+            }
+          }
+        }
+      }
+    },
+    {
+      "$comment": "EnforcementParameter.SetDefaultParameterMinMax",
+      "if": {
+        "properties": {
+          "type": {
+            "enum": [
+              "menu-checkbox",
+              "menu-autocomplete",
+              "menu-radio",
+              "text-60",
+              "text-100",
+              "text-1000",
+              "date"
+            ]
+          }
+        }
+      },
+      "then": {
+        "oneOf": [
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "menu-checkbox",
+                  "menu-autocomplete",
+                  "menu-radio"
+                ]
+              },
+              "max": {
+                "const": 1
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "text-60"
+                ]
+              },
+              "max": {
+                "const": 60
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "text-100"
+                ]
+              },
+              "max": {
+                "const": 100
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "text-1000"
+                ]
+              },
+              "max": {
+                "const": 1000
+              }
+            }
+          },
+          {
+            "properties": {
+              "type": {
+                "enum": [
+                  "date"
+                ]
+              },
+              "max": {
+                "const": 0
+              },
+              "min": {
+                "const": 0
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "$comment": "EnforcementParameter.SetApiDataAndOptions",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "not": {
+                  "enum": [
+                    "menu-autocomplete"
+                  ]
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "apidata": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "not": {
+                  "enum": [
+                    "menu-checkbox",
+                    "menu-radio"
+                  ]
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "options": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
